@@ -1,5 +1,5 @@
-# T3 Stack入門！認証システムを構築しよう！
+# T3 Stack入門！ブログシステム(一覧、新規、編集、削除)を構築しよう！
 
-https://zenn.dev/hathle/books/t3-stack-auth-book
+https://zenn.dev/hathle/books/t3-stack-blog-book
 
-![](https://res.cloudinary.com/dhaciqd0v/image/upload/v1698386860/LINE/youtube_luy3uk.png)
+![](https://res.cloudinary.com/dhaciqd0v/image/upload/v1698567203/LINE/youtube_tz7vvl.png)

@@ -32,14 +32,22 @@ const UserNavigation = ({ user }: UserNavigationProps) => {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="bg-white p-2 w-[300px]" align="end">
-        <DropdownMenuItem className="cursor-pointer">
-          <div className="break-words min-w-0">
-            <div className="mb-2">{user.name || ""}</div>
-            <div className="text-gray-500">{user.email || ""}</div>
-          </div>
-        </DropdownMenuItem>
+        <Link href={`/author/${user.id}`}>
+          <DropdownMenuItem className="cursor-pointer">
+            <div className="break-words min-w-0">
+              <div className="mb-2">{user.name || ""}</div>
+              <div className="text-gray-500">{user.email || ""}</div>
+            </div>
+          </DropdownMenuItem>
+        </Link>
 
         <DropdownMenuSeparator />
+
+        <Link href="/post/new">
+          <DropdownMenuItem className="cursor-pointer">
+            新規投稿
+          </DropdownMenuItem>
+        </Link>
 
         <Link href="/settings/profile">
           <DropdownMenuItem className="cursor-pointer">
