@@ -18,9 +18,6 @@ const Navigation = ({ user }: NavigationProps) => {
         <Link href="/" className="cursor-pointer text-xl font-bold">
           T3Stack入門
         </Link>
-        <h1>{`https://${process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL}`}</h1>
-        <p>{`${getBaseUrl()}`}</p>
-        <br></br>
 
         {user ? (
           <UserNavigation user={user} />
