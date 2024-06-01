@@ -1,8 +1,9 @@
-# T3 Stack入門！ブログシステム(一覧、新規、編集、削除)を構築しよう！
+# [完全版] T3 Stack入門！デプロイまで実践するサブスクアプリ構築マスターガイド
 
-https://zenn.dev/hathle/books/t3-stack-blog-book
+https://zenn.dev/hathle/articles/t3-stack-introduction
 
-![](https://res.cloudinary.com/dhaciqd0v/image/upload/v1698567203/LINE/youtube_tz7vvl.png)
+![](https://res.cloudinary.com/dhaciqd0v/image/upload/v1699615511/LINE/youtube_qc6hjl.png)
+
 
 ```bash
 $ npm run dev

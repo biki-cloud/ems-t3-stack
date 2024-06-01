@@ -12,6 +12,10 @@ const items = [
     href: "/settings/profile",
   },
   {
+    title: "定期購入",
+    href: "/settings/billing",
+  },
+  {
     title: "パスワード変更",
     href: "/settings/password",
   },
