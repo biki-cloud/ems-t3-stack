@@ -4,7 +4,7 @@ export function getBaseUrl() {
   console.log('process.env.NEXT_PUBLIC_VERCEL_URL', process.env.NEXT_PUBLIC_VERCEL_URL)
   console.log('process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL', process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL)
   let url = '';
-  if (process.env.NEXT_PUBLIC_VERCEL_ENV === 'development') {
+  if (process.env.NEXT_PUBLIC_VERCEL_ENV === 'preview') {
     url = `https://${process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL}`;
   } else if (process.env.NEXT_PUBLIC_VERCEL_ENV === 'production') {
     url = `https://${process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL}`;
