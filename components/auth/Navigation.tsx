@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { User } from "@prisma/client"
 import UserNavigation from "@/components/auth/UserNavigation"
 import Link from "next/link"
+import { getBaseUrl } from "@/trpc/url"
 
 interface NavigationProps {
   user: User | null

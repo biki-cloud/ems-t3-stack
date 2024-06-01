@@ -12,3 +12,5 @@ $ npx prisma db push
 # マイグレーション
 $ npx prisma migrate dev
 ```
+
+https://vercel.com/docs/projects/environment-variables/system-environment-variables

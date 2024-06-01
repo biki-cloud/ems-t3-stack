@@ -4,6 +4,7 @@ import { useState } from "react"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { httpBatchLink } from "@trpc/client"
 import { trpc } from "@/trpc/react"
+import { getBaseUrl } from "@/trpc/url"
 
 interface TrpcProviderProps {
   children: React.ReactNode
@@ -16,7 +17,7 @@ const TrpcProvider = ({ children }: TrpcProviderProps) => {
     trpc.createClient({
       links: [
         httpBatchLink({
-          url: `${process.env.NEXT_PUBLIC_APP_URL}/api/trpc`,
+          url: `${getBaseUrl()}/api/trpc`,
         }),
       ],
     })

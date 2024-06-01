@@ -1,6 +1,7 @@
 import { sendEmail } from "@/actions/sendEmail"
 import { TRPCError } from "@trpc/server"
 import prisma from "@/lib/prisma"
+import { getBaseUrl } from "@/trpc/url"
 
 interface SendForgotPasswordOptions {
   userId: string
@@ -36,7 +37,7 @@ export const sendForgotPassword = async ({
   const token = user.PasswordResetToken[0].token
 
   // パスワード再設定リンク
-  const resetPasswordLink = `${process.env.NEXT_PUBLIC_APP_URL}/reset-password/${token}`
+  const resetPasswordLink = `${getBaseUrl()}/reset-password/${token}`
 
   // 件名
   const subject = "パスワード再設定のご案内"
