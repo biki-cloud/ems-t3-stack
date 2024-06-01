@@ -21,7 +21,6 @@ const Navigation = ({ user }: NavigationProps) => {
         <h1>{`https://${process.env.VERCEL_BRANCH_URL}`} - {`https://${process.env.VERCEL_URL}`} - {`${process.env.NEXT_PUBLIC_APP_URL}`}</h1>
         <p>{`${getBaseUrl()}`}</p>
         <br></br>
-        <h2>{`https://${process.env.NEXT_PUBLIC_VERCEL_URL}`} - {`https://${process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL}`}</h2>
 
         {user ? (
           <UserNavigation user={user} />
