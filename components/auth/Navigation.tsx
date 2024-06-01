@@ -18,7 +18,7 @@ const Navigation = ({ user }: NavigationProps) => {
         <Link href="/" className="cursor-pointer text-xl font-bold">
           T3Stack入門
         </Link>
-        <h1>{`https://${process.env.VERCEL_BRANCH_URL}`} - {`https://${process.env.VERCEL_URL}`} - {`${process.env.NEXT_PUBLIC_APP_URL}`}</h1>
+        <h1>{`https://${process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL}`}</h1>
         <p>{`${getBaseUrl()}`}</p>
         <br></br>
 
