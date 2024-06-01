@@ -1,17 +1,20 @@
 export function getBaseUrl() {
-  console.log('process.env.VERCEL_ENV', process.env.VERCEL_ENV)
+  console.log('process.env.NEXT_PUBLIC_VERCEL_ENV', process.env.NEXT_PUBLIC_VERCEL_ENV)
   console.log('process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL', process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL)
   console.log('process.env.NEXT_PUBLIC_VERCEL_URL', process.env.NEXT_PUBLIC_VERCEL_URL)
   console.log('process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL', process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL)
   console.log('process.env.VERCEL_URL', process.env.VERCEL_URL)
-  if (process.env.VERCEL_ENV === 'development') {
-    return `https://${process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL}`;
-  } else if (process.env.VERCEL_ENV === 'production') {
-    return `https://${process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL}`;
+  let url = '';
+  if (process.env.NEXT_PUBLIC_VERCEL_ENV === 'development') {
+    url = `https://${process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL}`;
+  } else if (process.env.NEXT_PUBLIC_VERCEL_ENV === 'production') {
+    url = `https://${process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL}`;
   } else {
     // ローカルの場合は、ローカルのURLを返す
-    return `${process.env.NEXT_PUBLIC_APP_URL}`;
+    url = `${process.env.NEXT_PUBLIC_APP_URL}`;
   }
+  console.log('selected url: ' + url)
+  return url;
   // //process.env.VERCEL_URLがセットされている場合は、そのURLを返す
   // if (process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL) return `https://${process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL}`;
   // if (process.env.NEXT_PUBLIC_VERCEL_URL) return `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
