@@ -14,3 +14,13 @@ $ npx prisma migrate dev
 ```
 
 https://vercel.com/docs/projects/environment-variables/system-environment-variables
+
+https://github.com/haruyasu
+
+supabase
+
+google認証(GCP?)
+
+stripe導入
+
+vercel
