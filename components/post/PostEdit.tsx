@@ -17,6 +17,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { Checkbox } from "@/components/ui/checkbox"
 import { Post } from "@prisma/client"
 import { trpc } from "@/trpc/react"
 import { Loader2 } from "lucide-react"
@@ -28,6 +29,7 @@ import toast from "react-hot-toast"
 const schema = z.object({
   title: z.string().min(3, { message: "3文字以上入力する必要があります" }),
   content: z.string().min(3, { message: "3文字以上入力する必要があります" }),
+  premium: z.boolean(),
 })
 
 // 入力データの型を定義
@@ -54,6 +56,7 @@ const PostEdit = ({ post }: PostEditProps) => {
     defaultValues: {
       title: post.title || "",
       content: post.content || "",
+      premium: post.premium || false,
     },
   })
 
@@ -87,6 +90,7 @@ const PostEdit = ({ post }: PostEditProps) => {
       title: data.title,
       content: data.content,
       base64Image,
+      premium: data.premium,
     })
   }
 
@@ -175,6 +179,27 @@ const PostEdit = ({ post }: PostEditProps) => {
                   <Textarea placeholder="投稿の内容" {...field} rows={15} />
                 </FormControl>
                 <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="premium"
+            render={({ field }) => (
+              <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-5 shadow-sm">
+                <FormControl>
+                  <Checkbox
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+                <div className="space-y-2 leading-none">
+                  <FormLabel>有料会員限定</FormLabel>
+                  <FormDescription>
+                    有料会員のみが閲覧できるようにする
+                  </FormDescription>
+                </div>
               </FormItem>
             )}
           />

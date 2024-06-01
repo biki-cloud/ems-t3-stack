@@ -13,12 +13,20 @@ export const postRouter = router({
         title: z.string(),
         content: z.string(),
         base64Image: z.string().optional(),
+        premium: z.boolean(),
       })
     )
     .mutation(async ({ input, ctx }) => {
       try {
-        const { title, content, base64Image } = input
+        const { title, content, base64Image, premium } = input
         const userId = ctx.user.id
+
+        if (!ctx.user.isAdmin) {
+          throw new TRPCError({
+            code: "BAD_REQUEST",
+            message: "投稿権限がありません",
+          })
+        }
 
         let image_url
 
@@ -34,6 +42,7 @@ export const postRouter = router({
             title,
             content,
             image: image_url,
+            premium,
           },
         })
 
@@ -55,33 +64,47 @@ export const postRouter = router({
       }
     }),
   // 投稿一覧取得
-  getPosts: publicProcedure.query(async () => {
-    try {
-      // 投稿一覧取得
-      const posts = await prisma.post.findMany({
-        orderBy: {
-          updatedAt: "desc",
-        },
-        include: {
-          user: {
-            select: {
-              id: true,
-              name: true,
-              image: true,
+  getPosts: publicProcedure
+    .input(
+      z.object({
+        limit: z.number(),
+        offset: z.number(),
+      })
+    )
+    .query(async ({ input }) => {
+      try {
+        const { offset, limit } = input
+
+        // 投稿一覧取得
+        const posts = await prisma.post.findMany({
+          skip: offset,
+          take: limit,
+          orderBy: {
+            updatedAt: "desc",
+          },
+          include: {
+            user: {
+              select: {
+                id: true,
+                name: true,
+                image: true,
+              },
             },
           },
-        },
-      })
+        })
 
-      return posts
-    } catch (error) {
-      console.log(error)
-      throw new TRPCError({
-        code: "INTERNAL_SERVER_ERROR",
-        message: "投稿一覧取得に失敗しました",
-      })
-    }
-  }),
+        // 投稿の総数を取得
+        const totalPosts = await prisma.post.count()
+
+        return { posts, totalPosts }
+      } catch (error) {
+        console.log(error)
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "投稿一覧取得に失敗しました",
+        })
+      }
+    }),
 
   // 投稿詳細取得
   getPostById: publicProcedure
@@ -126,13 +149,21 @@ export const postRouter = router({
         title: z.string(),
         content: z.string(),
         base64Image: z.string().optional(),
+        premium: z.boolean(),
       })
     )
     .mutation(async ({ input, ctx }) => {
       try {
-        const { postId, title, content, base64Image } = input
+        const { postId, title, content, base64Image, premium } = input
         const userId = ctx.user.id
         let image_url
+
+        if (!ctx.user.isAdmin) {
+          throw new TRPCError({
+            code: "BAD_REQUEST",
+            message: "編集権限がありません",
+          })
+        }
 
         if (base64Image) {
           const post = await prisma.post.findUnique({
@@ -178,6 +209,7 @@ export const postRouter = router({
           data: {
             title,
             content,
+            premium,
             ...(image_url && { image: image_url }),
           },
         })

@@ -77,14 +77,16 @@ export const userRouter = router({
     .input(
       z.object({
         userId: z.string().optional(),
+        limit: z.number(),
+        offset: z.number(),
       })
     )
     .query(async ({ input }) => {
       try {
-        const { userId } = input
+        const { userId, limit, offset } = input
 
         if (!userId) {
-          return null
+          return { user: null, totalPosts: 0 }
         }
 
         // ユーザー投稿詳細取得
@@ -92,6 +94,8 @@ export const userRouter = router({
           where: { id: userId },
           include: {
             posts: {
+              skip: offset,
+              take: limit,
               orderBy: {
                 updatedAt: "desc",
               },
@@ -100,10 +104,15 @@ export const userRouter = router({
         })
 
         if (!user) {
-          return null
+          return { user: null, totalPosts: 0 }
         }
 
-        return user
+        // 投稿の総数を取得
+        const totalPosts = await prisma.post.count({
+          where: { userId },
+        })
+
+        return { user, totalPosts }
       } catch (error) {
         console.log(error)
         throw new TRPCError({
