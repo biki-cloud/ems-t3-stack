@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { User } from "@prisma/client"
 import UserNavigation from "@/components/auth/UserNavigation"
 import Link from "next/link"
+import { getBaseUrl } from "@/trpc/url"
 
 interface NavigationProps {
   user: User | null
@@ -18,6 +19,7 @@ const Navigation = ({ user }: NavigationProps) => {
           T3Stack入門
         </Link>
         <h1>{`https://${process.env.VERCEL_BRANCH_URL}`} - {`https://${process.env.VERCEL_URL}`} - {`${process.env.NEXT_PUBLIC_APP_URL}`}</h1>
+        <p>{`https://${getBaseUrl()}`}</p>
 
         {user ? (
           <UserNavigation user={user} />
