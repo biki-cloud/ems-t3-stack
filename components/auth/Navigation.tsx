@@ -15,7 +15,7 @@ const Navigation = ({ user }: NavigationProps) => {
     <header className="shadow-lg shadow-gray-100 mb-10">
       <div className="container mx-auto flex max-w-screen-md items-center justify-between px-2 py-3">
         <Link href="/" className="cursor-pointer text-xl font-bold">
-          T3Stack入門 ${process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL} / ${process.env.NEXT_PUBLIC_VERCEL_URL}
+          T3Stack入門 https://{process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL} / https://{process.env.NEXT_PUBLIC_VERCEL_URL}
         </Link>
 
         {user ? (
