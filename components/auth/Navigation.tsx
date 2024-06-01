@@ -19,7 +19,7 @@ const Navigation = ({ user }: NavigationProps) => {
           T3Stack入門
         </Link>
         <h1>{`https://${process.env.VERCEL_BRANCH_URL}`} - {`https://${process.env.VERCEL_URL}`} - {`${process.env.NEXT_PUBLIC_APP_URL}`}</h1>
-        <p>{`https://${getBaseUrl()}`}</p>
+        <p>{`${getBaseUrl()}`}</p>
 
         {user ? (
           <UserNavigation user={user} />
