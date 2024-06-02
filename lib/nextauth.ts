@@ -71,12 +71,16 @@ export const getAuthSession = async () => {
     return null
   }
 
-  // 1件のレコードを取得、見つからない場合は例外を投げる
-  const user = await prisma.user.findFirstOrThrow({
+  // 1件のレコードを取得、見つからない場合はnullを返す
+  const user = await prisma.user.findFirst({
     where: {
       email: session.user.email,
     },
   })
+
+  if (!user) {
+    return null;
+  }
 
   return user
 }
