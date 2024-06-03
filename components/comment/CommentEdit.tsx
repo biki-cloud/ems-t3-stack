@@ -48,10 +48,10 @@ const CommentEdit = ({ comment }: CommentEditProps) => {
   // コメント編集
   const { mutate: updateComment, isLoading } =
     trpc.comment.updateComment.useMutation({
-      onSuccess: ({ postId }) => {
+      onSuccess: ({ eventId: eventId }) => {
         toast.success("コメントを編集しました")
         router.refresh()
-        router.push(`/post/${postId}`)
+        router.push(`/event/${eventId}`)
       },
       onError: (error) => {
         toast.error("コメントの編集に失敗しました")

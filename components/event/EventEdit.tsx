@@ -18,11 +18,12 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
+import { Event } from "@prisma/client"
 import { trpc } from "@/trpc/react"
 import { Loader2 } from "lucide-react"
-import toast from "react-hot-toast"
 import ImageUploading, { ImageListType } from "react-images-uploading"
 import Image from "next/image"
+import toast from "react-hot-toast"
 
 // 入力データの検証ルールを定義
 const schema = z.object({
@@ -34,10 +35,18 @@ const schema = z.object({
 // 入力データの型を定義
 type InputType = z.infer<typeof schema>
 
-// 新規投稿
-const PostNew = () => {
+interface EventEditProps {
+  event: Event
+}
+
+// 投稿編集
+const EventEdit = ({ event: event }: EventEditProps) => {
   const router = useRouter()
-  const [imageUpload, setImageUpload] = useState<ImageListType>([])
+  const [imageUpload, setImageUpload] = useState<ImageListType>([
+    {
+      dataURL: event.image || "/noImage.png",
+    },
+  ])
 
   // フォームの状態
   const form = useForm<InputType>({
@@ -45,18 +54,18 @@ const PostNew = () => {
     resolver: zodResolver(schema),
     // 初期値
     defaultValues: {
-      title: "",
-      content: "",
-      premium: false,
+      title: event.title || "",
+      content: event.content || "",
+      premium: event.premium || false,
     },
   })
 
-  // 新規投稿
-  const { mutate: createPost, isLoading } = trpc.post.createPost.useMutation({
-    onSuccess: ({ id }) => {
-      toast.success("投稿しました")
+  // 投稿編集
+  const { mutate: updateEdit, isLoading } = trpc.event.updateEvent.useMutation({
+    onSuccess: () => {
+      toast.success("投稿を編集しました")
       router.refresh()
-      router.push(`/post/${id}`)
+      router.push(`/event/${event.id}`)
     },
     onError: (error) => {
       toast.error(error.message)
@@ -68,12 +77,16 @@ const PostNew = () => {
   const onSubmit: SubmitHandler<InputType> = async (data) => {
     let base64Image
 
-    if (imageUpload.length) {
+    if (
+      imageUpload[0].dataURL &&
+      imageUpload[0].dataURL.startsWith("data:image")
+    ) {
       base64Image = imageUpload[0].dataURL
     }
 
-    // 新規投稿
-    createPost({
+    // 投稿編集
+    updateEdit({
+      eventId: event.id,
       title: data.title,
       content: data.content,
       base64Image,
@@ -97,9 +110,9 @@ const PostNew = () => {
 
   return (
     <div>
-      <div className="text-2xl font-bold text-center mb-5">新規投稿</div>
+      <div className="text-2xl font-bold text-center mb-5">投稿編集</div>
       <Form {...form}>
-        <div className="mb-3">
+        <div className="mb-5">
           <FormLabel>サムネイル</FormLabel>
           <div className="mt-2">
             <ImageUploading
@@ -108,26 +121,8 @@ const PostNew = () => {
               maxNumber={1}
               acceptType={["jpg", "png", "jpeg"]}
             >
-              {({ imageList, onImageUpload, onImageUpdate, dragProps }) => (
+              {({ imageList, onImageUpdate }) => (
                 <div className="w-full">
-                  {imageList.length == 0 && (
-                    <button
-                      onClick={onImageUpload}
-                      className="w-full border-2 border-dashed rounded-md h-32 hover:bg-gray-50 mb-3"
-                      {...dragProps}
-                    >
-                      <div className="text-gray-400 font-bold mb-2">
-                        ファイル選択またはドラッグ＆ドロップ
-                      </div>
-                      <div className="text-gray-400 text-xs">
-                        ファイル形式：jpg / jpeg / png
-                      </div>
-                      <div className="text-gray-400 text-xs">
-                        ファイルサイズ：5MBまで
-                      </div>
-                    </button>
-                  )}
-
                   {imageList.map((image, index) => (
                     <div key={index}>
                       {image.dataURL && (
@@ -211,7 +206,7 @@ const PostNew = () => {
 
           <Button disabled={isLoading} type="submit" className="w-full">
             {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            投稿
+            編集
           </Button>
         </form>
       </Form>
@@ -219,4 +214,4 @@ const PostNew = () => {
   )
 }
 
-export default PostNew
+export default EventEdit

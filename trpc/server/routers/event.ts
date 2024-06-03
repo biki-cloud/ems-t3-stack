@@ -5,9 +5,9 @@ import { createCloudImage, deleteCloudImage } from "@/actions/cloudImage"
 import { extractPublicId } from "cloudinary-build-url"
 import prisma from "@/lib/prisma"
 
-export const postRouter = router({
+export const eventRouter = router({
   // 新規投稿
-  createPost: privateProcedure
+  createEvent: privateProcedure
     .input(
       z.object({
         title: z.string(),
@@ -36,7 +36,7 @@ export const postRouter = router({
         }
 
         // 投稿保存
-        const post = await prisma.post.create({
+        const event = await prisma.event.create({
           data: {
             userId,
             title,
@@ -46,7 +46,7 @@ export const postRouter = router({
           },
         })
 
-        return post
+        return event
       } catch (error) {
         console.log(error)
 
@@ -64,7 +64,7 @@ export const postRouter = router({
       }
     }),
   // 投稿一覧取得
-  getPosts: publicProcedure
+  getEvents: publicProcedure
     .input(
       z.object({
         limit: z.number(),
@@ -76,7 +76,7 @@ export const postRouter = router({
         const { offset, limit } = input
 
         // 投稿一覧取得
-        const posts = await prisma.post.findMany({
+        const events = await prisma.event.findMany({
           skip: offset,
           take: limit,
           orderBy: {
@@ -94,9 +94,9 @@ export const postRouter = router({
         })
 
         // 投稿の総数を取得
-        const totalPosts = await prisma.post.count()
+        const totalEvents = await prisma.event.count()
 
-        return { posts, totalPosts }
+        return { events: events, totalEvents: totalEvents }
       } catch (error) {
         console.log(error)
         throw new TRPCError({
@@ -107,19 +107,19 @@ export const postRouter = router({
     }),
 
   // 投稿詳細取得
-  getPostById: publicProcedure
+  getEventById: publicProcedure
     .input(
       z.object({
-        postId: z.string(),
+        eventId: z.string(),
       })
     )
     .query(async ({ input }) => {
       try {
-        const { postId } = input
+        const { eventId: eventId } = input
 
         // 投稿詳細取得
-        const post = await prisma.post.findUnique({
-          where: { id: postId },
+        const event = await prisma.event.findUnique({
+          where: { id: eventId },
           include: {
             user: {
               select: {
@@ -131,7 +131,7 @@ export const postRouter = router({
           },
         })
 
-        return post
+        return event
       } catch (error) {
         console.log(error)
         throw new TRPCError({
@@ -142,10 +142,10 @@ export const postRouter = router({
     }),
 
   // 投稿編集
-  updatePost: privateProcedure
+  updateEvent: privateProcedure
     .input(
       z.object({
-        postId: z.string(),
+        eventId: z.string(),
         title: z.string(),
         content: z.string(),
         base64Image: z.string().optional(),
@@ -154,7 +154,7 @@ export const postRouter = router({
     )
     .mutation(async ({ input, ctx }) => {
       try {
-        const { postId, title, content, base64Image, premium } = input
+        const { eventId: eventId, title, content, base64Image, premium } = input
         const userId = ctx.user.id
         let image_url
 
@@ -166,8 +166,8 @@ export const postRouter = router({
         }
 
         if (base64Image) {
-          const post = await prisma.post.findUnique({
-            where: { id: postId },
+          const event = await prisma.event.findUnique({
+            where: { id: eventId },
             include: {
               user: {
                 select: {
@@ -177,14 +177,14 @@ export const postRouter = router({
             },
           })
 
-          if (!post) {
+          if (!event) {
             throw new TRPCError({
               code: "BAD_REQUEST",
               message: "投稿が見つかりませんでした",
             })
           }
 
-          if (userId !== post.user.id) {
+          if (userId !== event.user.id) {
             throw new TRPCError({
               code: "BAD_REQUEST",
               message: "投稿の編集権限がありません",
@@ -192,8 +192,8 @@ export const postRouter = router({
           }
 
           // 古い画像を削除
-          if (post.image) {
-            const publicId = extractPublicId(post.image)
+          if (event.image) {
+            const publicId = extractPublicId(event.image)
             await deleteCloudImage(publicId)
           }
 
@@ -202,9 +202,9 @@ export const postRouter = router({
         }
 
         // 投稿更新
-        await prisma.post.update({
+        await prisma.event.update({
           where: {
-            id: postId,
+            id: eventId,
           },
           data: {
             title,
@@ -230,19 +230,19 @@ export const postRouter = router({
       }
     }),
   // 投稿削除
-  deletePost: privateProcedure
+  deleteEvent: privateProcedure
     .input(
       z.object({
-        postId: z.string(),
+        eventId: z.string(),
       })
     )
     .mutation(async ({ input, ctx }) => {
       try {
-        const { postId } = input
+        const { eventId: eventId } = input
         const userId = ctx.user.id
 
-        const post = await prisma.post.findUnique({
-          where: { id: postId },
+        const event = await prisma.event.findUnique({
+          where: { id: eventId },
           include: {
             user: {
               select: {
@@ -252,14 +252,14 @@ export const postRouter = router({
           },
         })
 
-        if (!post) {
+        if (!event) {
           throw new TRPCError({
             code: "BAD_REQUEST",
             message: "投稿が見つかりませんでした",
           })
         }
 
-        if (userId !== post.user.id) {
+        if (userId !== event.user.id) {
           throw new TRPCError({
             code: "BAD_REQUEST",
             message: "投稿の削除権限がありません",
@@ -267,14 +267,14 @@ export const postRouter = router({
         }
 
         // 画像を削除
-        if (post.image) {
-          const publicId = extractPublicId(post.image)
+        if (event.image) {
+          const publicId = extractPublicId(event.image)
           await deleteCloudImage(publicId)
         }
 
-        await prisma.post.delete({
+        await prisma.event.delete({
           where: {
-            id: postId,
+            id: eventId,
           },
         })
       } catch (error) {

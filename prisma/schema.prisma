@@ -50,7 +50,7 @@ model User {
   accounts           Account[]
   sessions           Session[]
   PasswordResetToken PasswordResetToken[]
-  posts              Post[]
+  events              Event[]
   comments           Comment[]
   likes              CommentLike[]
   subscription       Subscription?
@@ -73,7 +73,7 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-model Post {
+model Event {
   id        String    @id @default(cuid())
   userId    String
   title     String
@@ -90,14 +90,14 @@ model Post {
 model Comment {
   id        String        @id @default(cuid())
   userId    String
-  postId    String
+  eventId    String
   content   String
   createdAt DateTime      @default(now())
   updatedAt DateTime      @updatedAt
   likes     CommentLike[]
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
 }
 
 model CommentLike {

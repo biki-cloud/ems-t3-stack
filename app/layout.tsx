@@ -11,8 +11,8 @@ import { getSubscription } from "@/actions/subscription"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "T3Stack入門",
-  description: "T3Stack入門",
+  title: "イベントマッチングサービス",
+  description: "イベントマッチングサービス",
 }
 
 interface RootLayoutProps {

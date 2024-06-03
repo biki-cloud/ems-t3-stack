@@ -1,17 +1,17 @@
 import { redirect } from "next/navigation"
 import { getAuthSession } from "@/lib/nextauth"
 import { trpc } from "@/trpc/client"
-import PostEdit from "@/components/post/PostEdit"
+import EventEdit from "@/components/event/EventEdit"
 
-interface PostEditPageProps {
+interface EventEditPageProps {
   params: {
-    postId: string
+    eventId: string
   }
 }
 
 // 投稿編集ページ
-const PostEditPage = async ({ params }: PostEditPageProps) => {
-  const { postId } = params
+const EventEditPage = async ({ params }: EventEditPageProps) => {
+  const { eventId: eventId } = params
 
   // 認証情報取得
   const user = await getAuthSession()
@@ -21,19 +21,19 @@ const PostEditPage = async ({ params }: PostEditPageProps) => {
   }
 
   // 投稿詳細取得
-  const post = await trpc.post.getPostById({ postId })
+  const event = await trpc.event.getEventById({ eventId: eventId })
 
-  if (!post) {
+  if (!event) {
     return (
       <div className="text-center text-sm text-gray-500">投稿はありません</div>
     )
   }
 
-  if (post.userId !== user.id) {
+  if (event.userId !== user.id) {
     return <div className="text-center">編集できません</div>
   }
 
-  return <PostEdit post={post} />
+  return <EventEdit event={event} />
 }
 
-export default PostEditPage
+export default EventEditPage

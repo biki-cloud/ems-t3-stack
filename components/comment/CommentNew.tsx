@@ -28,11 +28,11 @@ type InputType = z.infer<typeof schema>
 
 interface CommentNewProps {
   userId?: string
-  postId: string
+  eventId: string
 }
 
 // 新規コメント
-const CommentNew = ({ userId, postId }: CommentNewProps) => {
+const CommentNew = ({ userId, eventId: eventId }: CommentNewProps) => {
   const router = useRouter()
 
   // フォームの状態
@@ -63,7 +63,7 @@ const CommentNew = ({ userId, postId }: CommentNewProps) => {
   const onSubmit: SubmitHandler<InputType> = (data) => {
     // 新規コメント
     createComment({
-      postId,
+      eventId: eventId,
       content: data.content,
     })
   }

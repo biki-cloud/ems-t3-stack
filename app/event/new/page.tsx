@@ -1,9 +1,9 @@
 import { redirect } from "next/navigation"
 import { getAuthSession } from "@/lib/nextauth"
-import PostNew from "@/components/post/PostNew"
+import CreateEvent from "@/components/event/EventCreate"
 
 // 新規投稿ページ
-const PostNewPage = async () => {
+const EventNewPage = async () => {
   // 認証情報取得
   const user = await getAuthSession()
 
@@ -19,7 +19,7 @@ const PostNewPage = async () => {
     )
   }
 
-  return <PostNew />
+  return <CreateEvent />
 }
 
-export default PostNewPage
+export default EventNewPage
