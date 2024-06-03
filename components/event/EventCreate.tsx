@@ -28,13 +28,14 @@ import Image from "next/image"
 const schema = z.object({
   title: z.string().min(3, { message: "3文字以上入力する必要があります" }),
   content: z.string().min(3, { message: "3文字以上入力する必要があります" }),
+  location: z.string().min(3, { message: "3文字以上入力する必要があります" }),
   premium: z.boolean(),
 })
 
 // 入力データの型を定義
 type InputType = z.infer<typeof schema>
 
-// 新規投稿
+// イベント新規作成
 const CreateEvent = () => {
   const router = useRouter()
   const [imageUpload, setImageUpload] = useState<ImageListType>([])
@@ -47,11 +48,12 @@ const CreateEvent = () => {
     defaultValues: {
       title: "",
       content: "",
+      location: "",
       premium: false,
     },
   })
 
-  // 新規投稿
+  // イベント新規作成
   const { mutate: createEvent, isLoading } = trpc.event.createEvent.useMutation({
     onSuccess: ({ id }) => {
       toast.success("投稿しました")
@@ -72,10 +74,11 @@ const CreateEvent = () => {
       base64Image = imageUpload[0].dataURL
     }
 
-    // 新規投稿
+    // イベント新規作成
     createEvent({
       title: data.title,
       content: data.content,
+      location: data.location,
       base64Image,
       premium: data.premium,
     })
@@ -97,7 +100,7 @@ const CreateEvent = () => {
 
   return (
     <div>
-      <div className="text-2xl font-bold text-center mb-5">新規投稿</div>
+      <div className="text-2xl font-bold text-center mb-5">イベント作成</div>
       <Form {...form}>
         <div className="mb-3">
           <FormLabel>サムネイル</FormLabel>
@@ -182,6 +185,20 @@ const CreateEvent = () => {
                 <FormLabel>内容</FormLabel>
                 <FormControl>
                   <Textarea placeholder="投稿の内容" {...field} rows={15} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="location"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>イベント開催場所</FormLabel>
+                <FormControl>
+                  <Textarea placeholder="イベント開催場所" {...field} rows={15} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

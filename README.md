@@ -9,8 +9,9 @@ $ npm run dev
 $ npx prisma db push
 
 # DB初期化コマンド
-$ npx prisma db execute --file rm_data.sql && npx prisma db push
-$ npx prisma migrate dev --name init # これでも初期化できるかも
+$ npx prisma db execute --file rm_data.sql &&
+  npx prisma migrate dev --name init &&
+  npx prisma db push
 ```
 
 ## Supabase

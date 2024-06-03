@@ -46,7 +46,7 @@ const UserNavigation = ({ user }: UserNavigationProps) => {
         {user.isAdmin && (
           <Link href="/event/new">
             <DropdownMenuItem className="cursor-pointer">
-              新規投稿
+              イベント新規作成
             </DropdownMenuItem>
           </Link>
         )}
