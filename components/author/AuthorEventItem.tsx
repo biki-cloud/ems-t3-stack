@@ -13,7 +13,7 @@ interface AuthorEventItemProps {
 const AuthorEventItem = ({ event: event }: AuthorEventItemProps) => {
   return (
     <div className="border rounded-md relative">
-      <Link href={`/event${event.id}`} className="flex-grow">
+      <Link href={`/event/${event.id}`} className="flex-grow">
         {event.premium && (
           <div className="absolute top-0 z-10 bg-gradient-radial from-blue-500 to-sky-500 rounded-md text-white font-semibold px-3 py-1 text-xs">
             有料会員限定

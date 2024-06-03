@@ -26,7 +26,7 @@ const EventItem = ({ event: event }: EventItemProps) => {
   return (
     <div>
       <div className="grid grid-cols-1 sm:grid-cols-3 sm:gap-3 space-y-3 sm:space-y-0">
-        <Link href={`/event${event.id}`} className="relative">
+        <Link href={`/event/${event.id}`} className="relative">
           {event.premium && (
             <div className="absolute top-0 z-10 bg-gradient-radial from-blue-500 to-sky-500 rounded-md text-white font-semibold px-3 py-1 text-xs">
               有料会員限定
@@ -45,11 +45,11 @@ const EventItem = ({ event: event }: EventItemProps) => {
 
         <div className="col-span-1 sm:col-span-2 space-y-3 break-words">
           <div className="font-bold text-lg hover:underline">
-            <Link href={`/event${event.id}`}>{event.title}</Link>
+            <Link href={`/event/${event.id}`}>{event.title}</Link>
           </div>
 
           <div className="hover:underline">
-            <Link href={`/event${event.id}`}>{content}</Link>
+            <Link href={`/event/${event.id}`}>{content}</Link>
           </div>
 
           <div>

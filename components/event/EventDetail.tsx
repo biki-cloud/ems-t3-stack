@@ -114,7 +114,7 @@ const EventDetail = ({
 
       {userId === event.user.id && (
         <div className="flex items-center justify-end space-x-1">
-          <Link href={`/event${event.id}/edit`}>
+          <Link href={`/event/${event.id}/edit`}>
             <div className="hover:bg-gray-100 p-2 rounded-full">
               <Pencil className="w-5 h-5" />
             </div>

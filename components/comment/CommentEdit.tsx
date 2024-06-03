@@ -51,7 +51,7 @@ const CommentEdit = ({ comment }: CommentEditProps) => {
       onSuccess: ({ eventId: eventId }) => {
         toast.success("コメントを編集しました")
         router.refresh()
-        router.push(`/event${eventId}`)
+        router.push(`/event/${eventId}`)
       },
       onError: (error) => {
         toast.error("コメントの編集に失敗しました")

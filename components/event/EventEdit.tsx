@@ -65,7 +65,7 @@ const EventEdit = ({ event: event }: EventEditProps) => {
     onSuccess: () => {
       toast.success("投稿を編集しました")
       router.refresh()
-      router.push(`/event${event.id}`)
+      router.push(`/event/${event.id}`)
     },
     onError: (error) => {
       toast.error(error.message)

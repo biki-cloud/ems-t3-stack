@@ -56,7 +56,7 @@ const CreateEvent = () => {
     onSuccess: ({ id }) => {
       toast.success("投稿しました")
       router.refresh()
-      router.push(`/event${id}`)
+      router.push(`/event/${id}`)
     },
     onError: (error) => {
       toast.error(error.message)
