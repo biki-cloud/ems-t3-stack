@@ -8,19 +8,19 @@ export const commentRouter = router({
   createComment: privateProcedure
     .input(
       z.object({
-        postId: z.string(),
+        eventId: z.string(),
         content: z.string(),
       })
     )
     .mutation(async ({ input, ctx }) => {
       try {
-        const { postId, content } = input
+        const { eventId: eventId, content } = input
         const userId = ctx.user.id
 
         const comment = await prisma.comment.create({
           data: {
             userId,
-            postId,
+            eventId: eventId,
             content,
           },
         })
@@ -40,17 +40,17 @@ export const commentRouter = router({
     .input(
       z.object({
         userId: z.string().optional(),
-        postId: z.string(),
+        eventId: z.string(),
         limit: z.number(),
         offset: z.number(),
       })
     )
     .query(async ({ input }) => {
       try {
-        const { userId, postId, limit, offset } = input
+        const { userId, eventId: eventId, limit, offset } = input
 
         const comments = await prisma.comment.findMany({
-          where: { postId },
+          where: { eventId: eventId },
           skip: offset,
           take: limit,
           orderBy: {
@@ -82,7 +82,7 @@ export const commentRouter = router({
 
         // コメントの総数を取得
         const totalComments = await prisma.comment.count({
-          where: { postId },
+          where: { eventId: eventId },
         })
 
         return { comments: commentsWithLikesStatus, totalComments }

@@ -8,7 +8,7 @@ import PaginationButton from "@/components/pagers/PaginationButton"
 
 interface CommentDetailProps {
   userId?: string
-  postId: string
+  eventId: string
   comments: (Comment & { user: Pick<User, "id" | "name" | "image"> } & {
     hasLiked: boolean
     commentLikeId: string | null
@@ -20,14 +20,14 @@ interface CommentDetailProps {
 // コメント詳細
 const CommentDetail = ({
   userId,
-  postId,
+  eventId: eventId,
   comments,
   pageCount,
   totalComments,
 }: CommentDetailProps) => {
   return (
     <div className="space-y-5">
-      <CommentNew userId={userId} postId={postId} />
+      <CommentNew userId={userId} eventId={eventId} />
 
       <div className="border rounded-md">
         <div className="border-b bg-gray-50 rounded-t-xl p-2 sm:p-5 text-sm font-bold">

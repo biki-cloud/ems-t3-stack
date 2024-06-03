@@ -73,7 +73,7 @@ export const userRouter = router({
     }),
 
   // ユーザー投稿詳細取得
-  getUserByIdPost: publicProcedure
+  getUserByIdEvent: publicProcedure
     .input(
       z.object({
         userId: z.string().optional(),
@@ -86,14 +86,14 @@ export const userRouter = router({
         const { userId, limit, offset } = input
 
         if (!userId) {
-          return { user: null, totalPosts: 0 }
+          return { user: null, totalEvents: 0 }
         }
 
         // ユーザー投稿詳細取得
         const user = await prisma.user.findUnique({
           where: { id: userId },
           include: {
-            posts: {
+            events: {
               skip: offset,
               take: limit,
               orderBy: {
@@ -104,15 +104,15 @@ export const userRouter = router({
         })
 
         if (!user) {
-          return { user: null, totalPosts: 0 }
+          return { user: null, totalEvents: 0 }
         }
 
         // 投稿の総数を取得
-        const totalPosts = await prisma.post.count({
+        const totalEvents = await prisma.event.count({
           where: { userId },
         })
 
-        return { user, totalPosts }
+        return { user, totalEvents }
       } catch (error) {
         console.log(error)
         throw new TRPCError({
