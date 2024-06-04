@@ -43,7 +43,7 @@ export const authRouter = router({
         const hashedPassword = await bcrypt.hash(password, 12)
 
         // ユーザーの作成
-        await prisma.user.create({
+        let createdUser = await prisma.user.create({
           data: {
             email,
             role,
@@ -51,6 +51,17 @@ export const authRouter = router({
             hashedPassword,
           },
         })
+
+        // イベント主催者の作成
+        if (role == 'organizer') {
+          await prisma.organizer.create({
+            data: {
+              userId: createdUser.id,
+              // 一旦これを入れる
+              organizationName: "organizer-" + createdUser.id
+            },
+          })
+        }
       } catch (error) {
         console.log(error)
 
