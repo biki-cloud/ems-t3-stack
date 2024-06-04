@@ -108,9 +108,16 @@ const EventDetail = ({
         />
       </div>
 
+      <div className="font-bold text-2xl break-words">イベント内容</div>
       <div className="leading-relaxed break-words whitespace-pre-wrap">
         {content}
       </div>
+
+      <div className="font-bold text-2xl break-words">開催場所</div>
+      <div className="leading-relaxed break-words whitespace-pre-wrap">
+        {event.location}
+      </div>
+
 
       {userId === event.user.id && (
         <div className="flex items-center justify-end space-x-1">

@@ -191,7 +191,7 @@ const EventEdit = ({ event: event }: EventEditProps) => {
             name="location"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>内容</FormLabel>
+                <FormLabel>開催場所</FormLabel>
                 <FormControl>
                   <Textarea placeholder="投稿の内容" {...field} rows={15} />
                 </FormControl>
