@@ -18,13 +18,14 @@ export const authRouter = router({
     .input(
       z.object({
         name: z.string(),
+        role: z.string(),
         email: z.string().email(),
         password: z.string(),
       })
     )
     .mutation(async ({ input }) => {
       try {
-        const { name, email, password } = input
+        const { name, role, email, password } = input
 
         // メールアドレスの重複チェック
         const user = await prisma.user.findUnique({
@@ -45,6 +46,7 @@ export const authRouter = router({
         await prisma.user.create({
           data: {
             email,
+            role,
             name,
             hashedPassword,
           },
