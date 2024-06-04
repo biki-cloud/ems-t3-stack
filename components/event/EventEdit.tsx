@@ -29,6 +29,7 @@ import toast from "react-hot-toast"
 const schema = z.object({
   title: z.string().min(3, { message: "3文字以上入力する必要があります" }),
   content: z.string().min(3, { message: "3文字以上入力する必要があります" }),
+  location: z.string().min(3, { message: "3文字以上入力する必要があります" }),
   premium: z.boolean(),
 })
 
@@ -56,6 +57,7 @@ const EventEdit = ({ event: event }: EventEditProps) => {
     defaultValues: {
       title: event.title || "",
       content: event.content || "",
+      location: event.location || "",
       premium: event.premium || false,
     },
   })
@@ -89,6 +91,7 @@ const EventEdit = ({ event: event }: EventEditProps) => {
       eventId: event.id,
       title: data.title,
       content: data.content,
+      location: data.location,
       base64Image,
       premium: data.premium,
     })
@@ -175,6 +178,20 @@ const EventEdit = ({ event: event }: EventEditProps) => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>内容</FormLabel>
+                <FormControl>
+                  <Textarea placeholder="投稿の内容" {...field} rows={15} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="location"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>開催場所</FormLabel>
                 <FormControl>
                   <Textarea placeholder="投稿の内容" {...field} rows={15} />
                 </FormControl>

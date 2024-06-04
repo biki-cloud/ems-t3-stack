@@ -2,7 +2,7 @@ import { redirect } from "next/navigation"
 import { getAuthSession } from "@/lib/nextauth"
 import CreateEvent from "@/components/event/EventCreate"
 
-// 新規投稿ページ
+// イベント新規作成ページ
 const EventNewPage = async () => {
   // 認証情報取得
   const user = await getAuthSession()

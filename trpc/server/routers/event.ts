@@ -6,19 +6,20 @@ import { extractPublicId } from "cloudinary-build-url"
 import prisma from "@/lib/prisma"
 
 export const eventRouter = router({
-  // 新規投稿
+  // イベント新規作成
   createEvent: privateProcedure
     .input(
       z.object({
         title: z.string(),
         content: z.string(),
+        location: z.string(),
         base64Image: z.string().optional(),
         premium: z.boolean(),
       })
     )
     .mutation(async ({ input, ctx }) => {
       try {
-        const { title, content, base64Image, premium } = input
+        const { title, content, location, base64Image, premium } = input
         const userId = ctx.user.id
 
         if (!ctx.user.isAdmin) {
@@ -41,6 +42,7 @@ export const eventRouter = router({
             userId,
             title,
             content,
+            location,
             image: image_url,
             premium,
           },
@@ -148,13 +150,14 @@ export const eventRouter = router({
         eventId: z.string(),
         title: z.string(),
         content: z.string(),
+        location: z.string(),
         base64Image: z.string().optional(),
         premium: z.boolean(),
       })
     )
     .mutation(async ({ input, ctx }) => {
       try {
-        const { eventId: eventId, title, content, base64Image, premium } = input
+        const { eventId: eventId, title, content, location, base64Image, premium } = input
         const userId = ctx.user.id
         let image_url
 
@@ -209,6 +212,7 @@ export const eventRouter = router({
           data: {
             title,
             content,
+            location,
             premium,
             ...(image_url && { image: image_url }),
           },
