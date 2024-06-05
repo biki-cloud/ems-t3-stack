@@ -56,6 +56,7 @@ model User {
   likes              CommentLike[]
   subscription       Subscription?
   organizer          Organizer?
+  vendor             Vendor?
 }
 
 model PasswordResetToken {
@@ -137,6 +138,16 @@ model Organizer {
   id               String   @id @default(cuid())
   userId           String   @unique
   organizationName String
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Vendor {
+  id               String   @id @default(cuid())
+  userId           String   @unique
+  vendorName       String
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
 

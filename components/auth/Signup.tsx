@@ -144,6 +144,7 @@ const Signup = () => {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="organizer">イベント主催者</SelectItem>
+                      <SelectItem value="vendor">イベント出店者</SelectItem>
                     </SelectContent>
                   </Select>
                 </FormControl>
