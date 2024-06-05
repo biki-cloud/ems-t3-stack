@@ -61,6 +61,14 @@ export const authRouter = router({
               organizationName: "organizer-" + createdUser.id
             },
           })
+        } else if (role == 'vendor') {
+          await prisma.vendor.create({
+            data: {
+              userId: createdUser.id,
+              // 一旦これを入れる
+              vendorName: "vendor-" + createdUser.id
+            },
+          })
         }
       } catch (error) {
         console.log(error)
