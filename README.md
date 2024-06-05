@@ -12,6 +12,9 @@ $ npx prisma db push
 $ npx prisma db execute --file rm_data.sql &&
   npx prisma migrate dev --name init &&
   npx prisma db push
+
+# プリズマスタジオの起動
+$ npx prisma studio
 ```
 
 ## Supabase
@@ -51,6 +54,10 @@ google認証を追加する
 ## Cloudinary
 画像や動画の保存先。クラウド
 [【Web Library】Nextjs13で覚える便利なライブラリ【#１８Cloudinary SetUp】](https://zenn.dev/web_life_ch/articles/f3499dcfddba8b)
+
+## デザイン
+- https://ui.shadcn.com/docs/components
+- https://v0.dev/
 
 ## 参考GitHub
 - [haruyasu/t3-stack-deploy-tutorial](https://github.com/haruyasu/t3-stack-deploy-tutorial)

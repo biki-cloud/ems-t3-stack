@@ -20,10 +20,18 @@ import { Loader2 } from "lucide-react"
 import { signIn } from "next-auth/react"
 import toast from "react-hot-toast"
 import Link from "next/link"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 
 // 入力データの検証ルールを定義
 const schema = z.object({
   name: z.string().min(2, { message: "2文字以上入力する必要があります" }),
+  role: z.string(),
   email: z.string().email({ message: "メールアドレスの形式ではありません" }),
   password: z.string().min(8, { message: "8文字以上入力する必要があります" }),
 })
@@ -42,6 +50,7 @@ const Signup = () => {
     // 初期値
     defaultValues: {
       name: "",
+      role: "",
       email: "",
       password: "",
     },
@@ -114,6 +123,29 @@ const Signup = () => {
                 <FormLabel>名前</FormLabel>
                 <FormControl>
                   <Input placeholder="名前" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="role"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>ユーザ種別</FormLabel>
+                <FormControl>
+                  <Select 
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}>
+                    <SelectTrigger className="w-[180px]">
+                      <SelectValue placeholder=""/>
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="organizer">イベント主催者</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </FormControl>
                 <FormMessage />
               </FormItem>

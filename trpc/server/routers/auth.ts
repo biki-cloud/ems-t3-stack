@@ -18,13 +18,14 @@ export const authRouter = router({
     .input(
       z.object({
         name: z.string(),
+        role: z.string(),
         email: z.string().email(),
         password: z.string(),
       })
     )
     .mutation(async ({ input }) => {
       try {
-        const { name, email, password } = input
+        const { name, role, email, password } = input
 
         // メールアドレスの重複チェック
         const user = await prisma.user.findUnique({
@@ -42,13 +43,25 @@ export const authRouter = router({
         const hashedPassword = await bcrypt.hash(password, 12)
 
         // ユーザーの作成
-        await prisma.user.create({
+        let createdUser = await prisma.user.create({
           data: {
             email,
+            role,
             name,
             hashedPassword,
           },
         })
+
+        // イベント主催者の作成
+        if (role == 'organizer') {
+          await prisma.organizer.create({
+            data: {
+              userId: createdUser.id,
+              // 一旦これを入れる
+              organizationName: "organizer-" + createdUser.id
+            },
+          })
+        }
       } catch (error) {
         console.log(error)
 

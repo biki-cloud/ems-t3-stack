@@ -12,6 +12,10 @@ const items = [
     href: "/settings/profile",
   },
   {
+    title: "イベント出店者プロフィール",
+    href: "/settings/organizerProfile",
+  },
+  {
     title: "定期購入",
     href: "/settings/billing",
   },
