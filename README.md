@@ -15,6 +15,9 @@ $ npx prisma db execute --file rm_data.sql &&
 
 # プリズマスタジオの起動
 $ npx prisma studio
+
+# データを挿入
+$ npm run seed
 ```
 
 ## Supabase
@@ -62,3 +65,7 @@ google認証を追加する
 ## 参考GitHub
 - [haruyasu/t3-stack-deploy-tutorial](https://github.com/haruyasu/t3-stack-deploy-tutorial)
 - [[完全版] T3 Stack入門！デプロイまで実践するサブスクアプリ構築マスターガイド - YouTube](https://www.youtube.com/watch?v=EVjx7lAu0XQ&t=506s)
+
+
+# todo
+- vendorからイベントへの参加申請と参加確定の仕組みを作る
