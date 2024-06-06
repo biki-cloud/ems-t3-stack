@@ -290,7 +290,7 @@ const EventDetail = ({
 }
 export default EventDetail
 
-function CalendarIcon(props) {
+function CalendarIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
@@ -313,7 +313,7 @@ function CalendarIcon(props) {
 }
 
 
-function MapPinIcon(props) {
+function MapPinIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
@@ -334,7 +334,7 @@ function MapPinIcon(props) {
 }
 
 
-function XIcon(props) {
+function XIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
