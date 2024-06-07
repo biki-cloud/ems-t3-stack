@@ -84,7 +84,7 @@ async function main() {
     "organizer1@example.com",
     "悟空(イベント主催者)",
     "organizer",
-    "https://res.cloudinary.com/du8k76ffm/image/upload/v1717763104/t3stackblog/zztfp01ft3okcun69hyk.png",
+    "https://res.cloudinary.com/du8k76ffm/image/upload/v1717796891/t3stackblog/g1hovgwweezqr3uvfmjf.png",
     true
   );
   await createOrganizer(organizer1);
@@ -108,7 +108,7 @@ async function main() {
     "organizer2@example.com",
     "ベジータ(イベント主催者)",
     "organizer",
-    "https://res.cloudinary.com/du8k76ffm/image/upload/v1717763204/t3stackblog/bh7c3mnntuvnbccizepx.png",
+    "https://res.cloudinary.com/du8k76ffm/image/upload/v1717797012/t3stackblog/kx92sxq0rsnltkn4zykl.png",
     true
   );
   await createOrganizer(organizer2);
@@ -152,7 +152,7 @@ async function main() {
     "vendor1@example.com",
     "フリーザ(イベント出店者)",
     "vendor",
-    "https://res.cloudinary.com/du8k76ffm/image/upload/v1717763250/t3stackblog/v10o9hjrdhlip0itkjdy.jpg"
+    "https://res.cloudinary.com/du8k76ffm/image/upload/v1717797087/t3stackblog/gwh1k3feqjuxdf3sugpb.jpg"
   );
   await createVendor(vendor1);
 
@@ -160,7 +160,7 @@ async function main() {
     "vendor2@example.com",
     "ピッコロ(イベント出店者)",
     "vendor",
-    "https://res.cloudinary.com/du8k76ffm/image/upload/v1717767072/t3stackblog/mwylwmg459qk57jpqw8u.png"
+    "https://res.cloudinary.com/du8k76ffm/image/upload/v1717797134/t3stackblog/y8ylsaz3ixd451otrk9k.png"
   );
   await createVendor(vendor2);
 
