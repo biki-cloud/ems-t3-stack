@@ -82,7 +82,7 @@ async function createComment(user: User, event: Event, content: string) {
 async function main() {
   const organizer1 = await createUser(
     "organizer1@example.com",
-    "イベント主催者1",
+    "悟空(イベント主催者)",
     "organizer",
     "https://res.cloudinary.com/du8k76ffm/image/upload/v1717763104/t3stackblog/zztfp01ft3okcun69hyk.png",
     true
@@ -106,7 +106,7 @@ async function main() {
 
   const organizer2 = await createUser(
     "organizer2@example.com",
-    "イベント主催者2",
+    "ベジータ(イベント主催者)",
     "organizer",
     "https://res.cloudinary.com/du8k76ffm/image/upload/v1717763204/t3stackblog/bh7c3mnntuvnbccizepx.png",
     true
@@ -130,7 +130,7 @@ async function main() {
 
   const organizer3 = await createUser(
     "organizer3@example.com",
-    "イベント主催者3",
+    "セル(イベント主催者)",
     "organizer",
     "https://res.cloudinary.com/du8k76ffm/image/upload/v1717764286/t3stackblog/nsnyu06wavqme0haxxwj.jpg",
     true
@@ -149,8 +149,8 @@ async function main() {
   });
 
   const vendor1 = await createUser(
-    "vendor@example.com",
-    "イベント出店者1",
+    "vendor1@example.com",
+    "フリーザ(イベント出店者)",
     "vendor",
     "https://res.cloudinary.com/du8k76ffm/image/upload/v1717763250/t3stackblog/v10o9hjrdhlip0itkjdy.jpg"
   );
@@ -158,7 +158,7 @@ async function main() {
 
   const customer1 = await createUser(
     "customer1@example.com",
-    "イベント参加者1",
+    "亀仙人(イベント参加者)",
     "customer",
     "https://res.cloudinary.com/du8k76ffm/image/upload/v1717763285/t3stackblog/mk1kdovvoc7zbcocideo.jpg"
   );
