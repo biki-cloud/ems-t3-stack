@@ -97,7 +97,7 @@ async function main() {
   );
   const event2 = await createEvent(
     organizer1,
-    "天下一舞踏会やります。",
+    "天下一武闘会やります。",
     "サイヤ人に関わらず参加可能",
     "ナメック星",
     "https://res.cloudinary.com/du8k76ffm/image/upload/v1717763665/t3stackblog/tdhls4hoppcf85wifgxr.jpg",
@@ -181,26 +181,26 @@ async function main() {
   );
   await createCustomer(customer2);
 
-  await createComment(customer1, event1, "楽しみです！");
-  await createComment(vendor1, event1, "行きたいです！");
-  await createComment(customer1, event2, "天下一舞踏会、期待しています！");
-  await createComment(customer1, event3, "重力100倍の修行、挑戦してみたいです！");
-  await createComment(organizer2, event4, "ビルス様との修行、皆さん頑張ってください！");
-  await createComment(organizer1, event2, "多くの参加者をお待ちしています！");
-  await createComment(vendor1, event4, "ビルス様との修行、商品も準備しています！");
-  await createComment(customer1, event4, "ビルス様と修行できるなんて夢のようです！");
-  await createComment(organizer3, event5, "セルゲーム、是非参加してください！");
-  await createComment(vendor1, event5, "セルゲームのために特別な商品を用意しました！");
-  await createComment(customer2, event5, "セルゲーム、楽しみにしています！");
-  await createComment(customer2, event4, "ビルス様との修行、すごく楽しみです！");
-  await createComment(vendor2, event3, "商品の準備が整いました！");
-  await createComment(organizer1, event1, "イベントの成功を祈っています！");
-  await createComment(customer1, event5, "セルゲーム、勝つぞ！");
-  await createComment(vendor2, event2, "舞踏会のための特別なアイテムを用意しました！");
-  await createComment(organizer2, event3, "修行イベント、皆さんをお待ちしています！");
-  await createComment(customer2, event2, "舞踏会、ダンスの練習をしています！");
-  await createComment(vendor1, event2, "舞踏会での出店、楽しみにしています！");
-  await createComment(organizer3, event5, "セルゲーム、最高のイベントにします！");
+  await createComment(customer1, event1, "特訓開始！仙豆はどこ？");
+  await createComment(vendor1, event1, "仙豆売り場はこちらです！");
+  await createComment(customer1, event2, "天下一武道会、私が優勝する予定です！");
+  await createComment(customer1, event3, "100倍の重力でもへっちゃらです！");
+  await createComment(organizer2, event4, "ビルス様との修行、遅刻厳禁ですよ！");
+  await createComment(organizer1, event2, "参加者募集中！最強を決める時が来ました！");
+  await createComment(vendor1, event4, "ビルス様専用の特製グッズ、限定販売中！");
+  await createComment(customer1, event4, "ビルス様と修行、緊張してます！");
+  await createComment(organizer3, event5, "セルゲーム、観客席にもドラゴンレーダー配布中！");
+  await createComment(vendor1, event5, "セルゲーム記念、特製Tシャツ販売！");
+  await createComment(customer2, event5, "セルゲーム、勝つ自信満々！");
+  await createComment(customer2, event4, "ビルス様との修行、生き残れるかな？");
+  await createComment(vendor2, event3, "修行用品、全て半額です！");
+  await createComment(organizer1, event1, "特訓の成果、見せてください！");
+  await createComment(customer1, event5, "セルゲーム、最後まで生き残るぞ！");
+  await createComment(vendor2, event2, "武道会限定、飛び道具禁止の看板をご用意！");
+  await createComment(organizer2, event3, "修行イベント、サイヤ人のみなさん、お待ちしています！");
+  await createComment(customer2, event2, "ダンスの練習、毎日してます！");
+  await createComment(vendor1, event2, "武道会スペシャル、力の大会セット販売中！");
+  await createComment(organizer3, event5, "セルゲーム、最強の戦士を決めます！");
 }
 
 main()
