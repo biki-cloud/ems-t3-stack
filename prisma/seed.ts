@@ -90,12 +90,12 @@ async function main() {
   await createOrganizer(organizer1);
   const event1 = await createEvent(
     organizer1,
-    "スイーツパラダイス",
-    "スイーツが大好きな方、集まれ！",
-    "東京都渋谷区",
-    "https://res.cloudinary.com/du8k76ffm/image/upload/v1717750265/t3stackblog/wqvmtfc4cq2di7cbwz8c.jpg"
+    "一緒に特訓しませんか？",
+    "特訓し放題！！仙豆もあります！！",
+    "精神と時の部屋",
+    "https://res.cloudinary.com/du8k76ffm/image/upload/v1717764409/t3stackblog/sgiszgto0rtw1xbxfq8t.jpg"
   );
-  const event4 = await createEvent(
+  const event2 = await createEvent(
     organizer1,
     "天下一舞踏会やります。",
     "サイヤ人に関わらず参加可能",
@@ -112,21 +112,38 @@ async function main() {
     true
   );
   await createOrganizer(organizer2);
-  const event2 = await createEvent(
+  const event3 = await createEvent(
     organizer2,
-    "フラワー鑑賞",
-    "フラワーが大好きな方、集まれ！",
-    "千葉県",
-    "https://res.cloudinary.com/du8k76ffm/image/upload/v1717751149/t3stackblog/bjwk0ypuhpii2mc5bq6p.jpg"
+    "一緒に重力１００倍で修行しませんか？",
+    "サイヤ人限定！！",
+    "カプセルコーポレーション",
+    "https://res.cloudinary.com/du8k76ffm/image/upload/v1717764654/t3stackblog/wknh9ycgcm7kqhq8q6a3.jpg"
   );
-  const event3 = await prisma.event.create({
+  const event4 = await createEvent(
+    organizer2,
+    "ビルス様と修行！！",
+    "一緒にビルス様と修行しませんか？仙豆の配布はありません。",
+    "天王神界",
+    "https://res.cloudinary.com/du8k76ffm/image/upload/v1717765058/t3stackblog/u9alrwb1gilbrefxslk3.jpg",
+    true
+  );
+
+  const organizer3 = await createUser(
+    "organizer3@example.com",
+    "イベント主催者3",
+    "organizer",
+    "https://res.cloudinary.com/du8k76ffm/image/upload/v1717764286/t3stackblog/nsnyu06wavqme0haxxwj.jpg",
+    true
+  );
+  await createOrganizer(organizer3);
+  const event5 = await prisma.event.create({
     data: {
-      userId: organizer2.id,
-      title: "潮干狩り",
-      content: "潮干狩りを楽しもう！",
-      location: "千葉県木更津市",
+      userId: organizer3.id,
+      title: "セルゲーム開催します！！",
+      content: "ナメック星人参加可！！",
+      location: "荒野",
       image:
-        "https://res.cloudinary.com/du8k76ffm/image/upload/v1717750931/t3stackblog/oigdvvjw1fs9c1zdsysl.jpg",
+        "https://res.cloudinary.com/du8k76ffm/image/upload/v1717764045/t3stackblog/whptjxwerknywkla9siw.jpg",
       premium: true,
     },
   });

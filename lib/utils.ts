@@ -5,6 +5,6 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export const eventPerPage = 3
-export const userEventPerPage = 3
-export const commentPerPage = 3
+export const eventPerPage = 10
+export const userEventPerPage = 10
+export const commentPerPage = 10
