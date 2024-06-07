@@ -156,6 +156,15 @@ async function main() {
   );
   await createVendor(vendor1);
 
+  const vendor2 = await createUser(
+    "vendor2@example.com",
+    "ピッコロ(イベント出店者)",
+    "vendor",
+    "https://res.cloudinary.com/du8k76ffm/image/upload/v1717767072/t3stackblog/mwylwmg459qk57jpqw8u.png"
+  );
+  await createVendor(vendor2);
+
+
   const customer1 = await createUser(
     "customer1@example.com",
     "亀仙人(イベント参加者)",
@@ -163,8 +172,35 @@ async function main() {
     "https://res.cloudinary.com/du8k76ffm/image/upload/v1717763285/t3stackblog/mk1kdovvoc7zbcocideo.jpg"
   );
   await createCustomer(customer1);
-  createComment(customer1, event1, "楽しみです！");
-  createComment(vendor1, event1, "行きたいです！");
+  
+  const customer2 = await createUser(
+    "customer2@example.com",
+    "トランクス(イベント参加者)",
+    "customer",
+    "https://res.cloudinary.com/du8k76ffm/image/upload/v1717767214/t3stackblog/u5smgu6jqcvnavssbtb4.jpg"
+  );
+  await createCustomer(customer2);
+
+  await createComment(customer1, event1, "楽しみです！");
+  await createComment(vendor1, event1, "行きたいです！");
+  await createComment(customer1, event2, "天下一舞踏会、期待しています！");
+  await createComment(customer1, event3, "重力100倍の修行、挑戦してみたいです！");
+  await createComment(organizer2, event4, "ビルス様との修行、皆さん頑張ってください！");
+  await createComment(organizer1, event2, "多くの参加者をお待ちしています！");
+  await createComment(vendor1, event4, "ビルス様との修行、商品も準備しています！");
+  await createComment(customer1, event4, "ビルス様と修行できるなんて夢のようです！");
+  await createComment(organizer3, event5, "セルゲーム、是非参加してください！");
+  await createComment(vendor1, event5, "セルゲームのために特別な商品を用意しました！");
+  await createComment(customer2, event5, "セルゲーム、楽しみにしています！");
+  await createComment(customer2, event4, "ビルス様との修行、すごく楽しみです！");
+  await createComment(vendor2, event3, "商品の準備が整いました！");
+  await createComment(organizer1, event1, "イベントの成功を祈っています！");
+  await createComment(customer1, event5, "セルゲーム、勝つぞ！");
+  await createComment(vendor2, event2, "舞踏会のための特別なアイテムを用意しました！");
+  await createComment(organizer2, event3, "修行イベント、皆さんをお待ちしています！");
+  await createComment(customer2, event2, "舞踏会、ダンスの練習をしています！");
+  await createComment(vendor1, event2, "舞踏会での出店、楽しみにしています！");
+  await createComment(organizer3, event5, "セルゲーム、最高のイベントにします！");
 }
 
 main()
