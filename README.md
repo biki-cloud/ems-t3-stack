@@ -17,7 +17,7 @@ $ npx prisma db execute --file rm_data.sql &&
 $ npx prisma studio
 
 # データを挿入
-$ npm run seed
+$ npx prisma db seed
 ```
 
 ## Supabase
