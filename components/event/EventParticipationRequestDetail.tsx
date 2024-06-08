@@ -4,10 +4,10 @@ import Image from "next/image"
 import { EventParticipationRequest, Organizer, User, Vendor } from "@prisma/client";
 
 interface EventParticipationRequestDetailProps {
+    // 型安全性、自動補完を考慮し、interfaceを使う
+    //EventParticipationRequest.vendor.userなどの情報を扱う場合は下記のように型を定義する。定義した内容しか使用できない。 
     eventParticipationRequests: (EventParticipationRequest & { vendor: Pick<Vendor, "id" | "vendorName"> & { user: Pick<User, "name" | "image"> } })[]
 }
-// 表示するもの
-// vendor name, image, status
 
 const EventParticipationRequestDetail = ({
     eventParticipationRequests,
