@@ -5,7 +5,7 @@ import Link from "next/link"
 
 
 interface EventParticipationRequestItemProps {
-    eventParticipationRequest: (EventParticipationRequest & { vendor: Pick<Vendor, "id" | "vendorName"> & { user: Pick<User, "id" | "name" | "image"> } })
+    eventParticipationRequest: (EventParticipationRequest & { vendor: Vendor & { user: User } })
 }
 
 const EventParticipationRequestItem = ({
