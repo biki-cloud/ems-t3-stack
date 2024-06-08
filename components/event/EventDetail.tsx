@@ -32,8 +32,8 @@ import CommentDetail from "@/components/comment/CommentDetail"
 
 import { Button } from "@/components/ui/button"
 import { AvatarImage, AvatarFallback, Avatar } from "@/components/ui/avatar"
-import EventParticipationRequestDetail from "@/components/event/EventParticipationRequestDetail"
-import EventParticipationSettleDetail from "@/components/event/EventParticipationSettleDetail"
+import EventParticipationRequestDetail from "@/components/EventParticipation/EventParticipationRequestDetail"
+import EventParticipationSettleDetail from "@/components/EventParticipation/EventParticipationSettleDetail"
 
 interface EventDetailProps {
   event: Event & {
@@ -113,6 +113,24 @@ const EventDetail = ({
   // ユーザーがベンダーかどうか
   const isVendor = user?.role == 'vendor'
 
+  // pendingとapprovedに分ける
+  const pendingRequests = eventParticipationRequests.filter(
+    (request) => request.status === "pending"
+  )
+  const approvedRequests = eventParticipationRequests.filter(
+    (request) => request.status === "approved"
+  )
+
+  const isOrganizer = user?.role == 'organizer'
+
+  // ユーザーがイベントのオーガナイザーかどうか
+  const isEventAuthor = event.userId == user?.id
+
+  // vendorから見て申請中のイベントかどうか
+  const isVendorRequested = eventParticipationRequests.some(request => 
+    request.vendor.user.id === userId && request.status === "pending"
+  );
+
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="grid gap-8">
@@ -182,8 +200,8 @@ const EventDetail = ({
           </div>
         )}
         <div className="grid gap-6">
-          <EventParticipationRequestDetail eventParticipationRequests={eventParticipationRequests}/>
-          <EventParticipationSettleDetail />
+          {(isEventAuthor || isVendorRequested) && <EventParticipationRequestDetail eventParticipationRequests={pendingRequests}/>}
+          <EventParticipationSettleDetail eventParticipationRequests={approvedRequests}/>
           
           {userId === event.user.id && (
             <div className="flex items-center justify-end space-x-1">

@@ -15,12 +15,12 @@ const EventParticipationRequestDetail = ({
 }: EventParticipationRequestDetailProps) => {
     return (
         <div>
-            <h2 className="text-xl font-bold">参加リクエスト中(organizer用)</h2>
+            <h2 className="text-xl font-bold">参加リクエスト</h2>
             {eventParticipationRequests.map((eventParticipationRequest) => (
                 <div
                     key={eventParticipationRequest.id}
                 >
-                    <EventParticipationRequestItem eventParticipationRequest={eventParticipationRequest} />
+                    <EventParticipationRequestItem eventParticipationRequest={eventParticipationRequest}/>
                 </div>
             ))}
         </div>

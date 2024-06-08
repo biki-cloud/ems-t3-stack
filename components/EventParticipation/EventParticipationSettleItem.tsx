@@ -1,7 +1,8 @@
-import { EventParticipationRequest, User, Vendor } from "@prisma/client";
+import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import { Button } from "../ui/button";
+import Link from "next/link";
+import { EventParticipationRequest, User, Vendor } from "@prisma/client";
 import Image from "next/image"
-import Link from "next/link"
 import { format } from "date-fns";
 
 
@@ -9,10 +10,11 @@ interface EventParticipationRequestItemProps {
     eventParticipationRequest: (EventParticipationRequest & { vendor: Vendor & { user: User } })
 }
 
-const EventParticipationRequestItem = ({
+const EventParticipationSettleItem = ({
     eventParticipationRequest,
 }: EventParticipationRequestItemProps) => {
     return (
+
         <div>
             <ul className="grid gap-4 mt-4">
                 <li className="flex items-center justify-between">
@@ -34,22 +36,12 @@ const EventParticipationRequestItem = ({
                                 </div>
                             </div>
                         </Link>
-                        <div>
-                            <p className="text-gray-500">{eventParticipationRequest.status}</p>
-                        </div>
-                    </div>
-                    <div className="flex items-center gap-2">
-                        <Button size="sm" variant="outline">
-                            承認
-                        </Button>
-                        <Button size="sm" variant="ghost">
-                            拒否
-                        </Button>
                     </div>
                 </li>
             </ul>
         </div>
     )
-}
+};
 
-export default EventParticipationRequestItem;
+export default EventParticipationSettleItem;
+
