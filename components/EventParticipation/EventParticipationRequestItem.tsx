@@ -64,10 +64,10 @@ const EventParticipationRequestItem = ({
                     </div>
                     {isEventAuthor &&
                         <div className="flex items-center gap-2">
-                            <Button size="sm" variant="outline" onClick={() => handleUpdateStatus("approved")} disabled={isLoading}>
+                            <Button size="sm" variant="outline" onClick={() => handleUpdateStatus("approved")} disabled={isLoading} className="bg-green-500 hover:bg-green-700 text-white">
                                 承認
                             </Button>
-                            <Button size="sm" variant="outline" onClick={() => handleUpdateStatus("rejected")} disabled={isLoading}>
+                            <Button size="sm" variant="outline" onClick={() => handleUpdateStatus("rejected")} disabled={isLoading} className="bg-red-500 hover:bg-red-700 text-white">
                                 拒否
                             </Button>
                         </div>
