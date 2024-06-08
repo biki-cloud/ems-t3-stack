@@ -5,6 +5,8 @@ import Link from "next/link"
 import { format } from "date-fns";
 import { trpc } from "@/trpc/react";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation"
+
 
 interface EventParticipationRequestItemProps {
     eventParticipationRequest: (EventParticipationRequest & { vendor: Vendor & { user: User } })
@@ -13,6 +15,7 @@ interface EventParticipationRequestItemProps {
 const EventParticipationRequestItem = ({
     eventParticipationRequest,
 }: EventParticipationRequestItemProps) => {
+    const router = useRouter();
     const updateStatus = trpc.event.updateParticipationRequestStatus.useMutation();
 
     const handleApprove = () => {
@@ -21,6 +24,7 @@ const EventParticipationRequestItem = ({
             status: 'approved'
         });
         toast.success("リクエストを承認しました");
+        router.refresh(); // 画面をリロードして、リクエストを参加者リストに反映する
     };
 
     const handleReject = () => {
@@ -29,6 +33,7 @@ const EventParticipationRequestItem = ({
             status: 'rejected'
         });
         toast.success("リクエストを拒否しました");
+        router.refresh(); // 画面をリロードして、リクエストを参加者リストに削除する
     }
 
     return (
