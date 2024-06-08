@@ -26,6 +26,7 @@ const AuthorEventItem = ({ event: event }: AuthorEventItemProps) => {
             src={event.image || "/noImage.png"}
             alt="thumbnail"
             className="object-cover rounded-t-md transition-all hover:scale-105"
+            sizes="100px"
           />
         </div>
 

@@ -88,6 +88,7 @@ model Event {
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   Comment   Comment[]
+  EventParticipationRequest EventParticipationRequest[]
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
@@ -151,6 +152,7 @@ model Vendor {
   vendorName       String
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
+  EventParticipationRequest EventParticipationRequest[]
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
@@ -163,4 +165,16 @@ model Customer {
   updatedAt DateTime @updatedAt
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model EventParticipationRequest {
+  id        String   @id @default(uuid())
+  vendorId  String
+  eventId   String
+  status    String   @default("pending") // "approved", "rejected", "pending"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  vendor  Vendor @relation(fields: [vendorId], references: [id])
+  event   Event  @relation(fields: [eventId], references: [id])
 }

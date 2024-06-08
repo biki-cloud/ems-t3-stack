@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import { Event, PrismaClient, User } from "@prisma/client";
+import { Event, PrismaClient, User, Vendor } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -79,6 +79,15 @@ async function createComment(user: User, event: Event, content: string) {
   });
 }
 
+async function createParticipationRequest(vendor: Vendor, event: Event) {
+  return await prisma.eventParticipationRequest.create({
+    data: {
+      eventId: event.id,
+      vendorId: vendor.id,
+    },
+  });
+}
+
 async function main() {
   const organizer1 = await createUser(
     "organizer1@example.com",
@@ -152,7 +161,7 @@ async function main() {
     "vendor1@example.com",
     "フリーザ(イベント出店者)",
     "vendor",
-    "https://res.cloudinary.com/du8k76ffm/image/upload/v1717797087/t3stackblog/gwh1k3feqjuxdf3sugpb.jpg"
+    "https://res.cloudinary.com/du8k76ffm/image/upload/v1717803325/t3stackblog/p84dmirm48zyvecsosch.jpg"
   );
   await createVendor(vendor1);
 
@@ -201,6 +210,8 @@ async function main() {
   await createComment(customer2, event2, "ダンスの練習、毎日してます！");
   await createComment(vendor1, event2, "武道会スペシャル、力の大会セット販売中！");
   await createComment(organizer3, event5, "セルゲーム、最強の戦士を決めます！");
+
+  
 }
 
 main()

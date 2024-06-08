@@ -53,6 +53,7 @@ const CommentItem = ({ comment, userId }: CommentItemProps) => {
                 className="rounded-full object-cover"
                 alt={comment.user.name || "avatar"}
                 fill
+                sizes="24px"
               />
             </div>
             <div className="text-sm hover:underline">{comment.user.name}</div>

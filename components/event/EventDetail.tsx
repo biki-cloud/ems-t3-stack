@@ -28,6 +28,7 @@ import { trpc } from "@/trpc/react"
 import Image from "next/image"
 import Link from "next/link"
 import toast from "react-hot-toast"
+import { redirect } from "next/navigation"
 import CommentDetail from "@/components/comment/CommentDetail"
 
 import { Button } from "@/components/ui/button"
@@ -94,6 +95,17 @@ const EventDetail = ({
     })
   }
 
+  // 既存のコードに追加
+  const { mutate: sendParticipationRequest, isLoading: isRequestLoading } = trpc.event.createEventParticipationRequest.useMutation({
+    onSuccess: () => {
+      toast.success("参加リクエストを送りました");
+    },
+    onError: (error) => {
+      toast.error(`リクエスト送信エラー: ${error.message}`);
+    },
+  });
+  const isVendor = true
+
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="grid gap-8">
@@ -113,6 +125,7 @@ const EventDetail = ({
                     className="rounded-full object-cover"
                     alt={event.user.name || "avatar"}
                     fill
+                    sizes="24px"
                   />
                 </div>
                 <div className="text-sm hover:underline break-words min-w-0">
@@ -139,6 +152,7 @@ const EventDetail = ({
             src={event.image || "/noImage.png"}
             alt="thumbnail"
             className="object-cover rounded-md"
+            sizes="100%"
           />
         </div>
         <div className="font-bold text-2xl break-words">内容</div>
@@ -149,7 +163,17 @@ const EventDetail = ({
         <div className="leading-relaxed break-words whitespace-pre-wrap">
           {event.location}
         </div>
-        <Button className="w-full sm:w-auto">参加リクエスト(vendor用)</Button>
+        {isVendor && (
+          <div className="mt-4">
+            <Button
+              className="w-full sm:w-auto"
+              onClick={() => sendParticipationRequest({ eventId: event.id })}
+              disabled={isRequestLoading}
+            >
+              参加リクエストを送る
+            </Button>
+          </div>
+        )}
         <div className="grid gap-6">
           <div>
             <h2 className="text-xl font-bold">参加リクエスト中(organizer用)</h2>
@@ -353,3 +377,4 @@ function XIcon(props: React.SVGProps<SVGSVGElement>) {
     </svg>
   )
 }
+

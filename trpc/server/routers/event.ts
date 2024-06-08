@@ -297,4 +297,34 @@ export const eventRouter = router({
         }
       }
     }),
+
+  // 参加リクエストの作成
+  createEventParticipationRequest: privateProcedure
+    .input(z.object({
+      eventId: z.string(),
+    }))
+    .mutation(async ({ input, ctx }) => {
+      const { eventId } = input;
+      const vendorId = ctx.user.id; // ベンダーIDをセッションから取得
+
+      // ユーザからvendorを取得
+      const vendor = await prisma.vendor.findUnique({
+        where: { userId: vendorId },
+      });
+      if (!vendor) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "ベンダーが見つかりませんでした",
+        });
+      }
+
+      const request = await prisma.eventParticipationRequest.create({
+        data: {
+          eventId: eventId,
+          vendorId: vendor.id,
+        },
+      });
+
+      return request;
+    }),
 })
