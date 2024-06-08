@@ -46,6 +46,7 @@ interface EventDetailProps {
   pageCount: number
   totalComments: number
   isSubscribed: boolean
+  user: User | null
 }
 
 const EventDetail = ({
@@ -55,6 +56,7 @@ const EventDetail = ({
   pageCount,
   totalComments,
   isSubscribed,
+  user
 }: EventDetailProps) => {
 
   const router = useRouter()
@@ -104,7 +106,9 @@ const EventDetail = ({
       toast.error(`リクエスト送信エラー: ${error.message}`);
     },
   });
-  const isVendor = true
+
+  // ユーザーがベンダーかどうか
+  const isVendor = user?.role == 'vendor'
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

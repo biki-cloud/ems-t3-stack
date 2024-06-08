@@ -59,6 +59,7 @@ const EventDetailPage = async ({
       pageCount={pageCount}
       totalComments={totalComments}
       isSubscribed={isSubscribed}
+      user={user}
     />
   )
 }
