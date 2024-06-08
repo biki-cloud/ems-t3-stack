@@ -23,6 +23,14 @@ const EventParticipationRequestItem = ({
         toast.success("リクエストを承認しました");
     };
 
+    const handleReject = () => {
+        updateStatus.mutate({
+            requestId: eventParticipationRequest.id,
+            status: 'rejected'
+        });
+        toast.success("リクエストを拒否しました");
+    }
+
     return (
         <div>
             <ul className="grid gap-4 mt-4">
@@ -50,7 +58,7 @@ const EventParticipationRequestItem = ({
                         <Button size="sm" variant="outline" onClick={handleApprove}>
                             承認
                         </Button>
-                        <Button size="sm" variant="ghost">
+                        <Button size="sm" variant="outline" onClick={handleReject}>
                             拒否
                         </Button>
                     </div>
