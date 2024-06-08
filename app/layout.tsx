@@ -7,6 +7,8 @@ import TrpcProvider from "@/components/providers/TrpcProvider"
 import ToastProvider from "@/components/providers/ToastProvider"
 import Navigation from "@/components/auth/Navigation"
 import { getSubscription } from "@/actions/subscription"
+import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Analytics } from "@vercel/analytics/react"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -37,6 +39,8 @@ const RootLayout = async ({ children }: RootLayoutProps) => {
 
               <main className="container mx-auto max-w-screen-md flex-1 px-2">
                 {children}
+                <SpeedInsights />
+                <Analytics />
               </main>
 
               {/* フッター */}
