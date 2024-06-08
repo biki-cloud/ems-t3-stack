@@ -48,7 +48,7 @@ interface EventDetailProps {
   totalComments: number
   isSubscribed: boolean
   user: User | null
-  eventParticipationRequests: (EventParticipationRequest & { vendor: Pick<Vendor, "id" | "vendorName"> & { user: Pick<User, "name" | "image"> } })[]
+  eventParticipationRequests: (EventParticipationRequest & { vendor: Vendor & { user: User } })[]
 }
 
 const EventDetail = ({

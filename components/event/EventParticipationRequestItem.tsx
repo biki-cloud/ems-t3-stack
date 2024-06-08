@@ -2,6 +2,7 @@ import { EventParticipationRequest, User, Vendor } from "@prisma/client";
 import { Button } from "../ui/button";
 import Image from "next/image"
 import Link from "next/link"
+import { format } from "date-fns";
 
 
 interface EventParticipationRequestItemProps {
@@ -27,7 +28,10 @@ const EventParticipationRequestItem = ({
                                         sizes="24px"
                                     />
                                 </div>
-                                <div className="text-sm hover:underline">{eventParticipationRequest.vendor.user.name}</div>
+                                <div className="text-sm hover:underline break-words min-w-0">
+                                    {eventParticipationRequest.vendor.user.name} |{" "}
+                                    {format(new Date(eventParticipationRequest.createdAt), "yyyy/MM/dd HH:mm")}
+                                </div>
                             </div>
                         </Link>
                         <div>
