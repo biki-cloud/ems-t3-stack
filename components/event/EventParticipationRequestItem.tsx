@@ -3,15 +3,28 @@ import { Button } from "../ui/button";
 import Image from "next/image"
 import Link from "next/link"
 import { format } from "date-fns";
-
+import { trpc } from "@/trpc/react";
+import toast from "react-hot-toast";
 
 interface EventParticipationRequestItemProps {
     eventParticipationRequest: (EventParticipationRequest & { vendor: Vendor & { user: User } })
+    isOrganizer: boolean
 }
 
 const EventParticipationRequestItem = ({
     eventParticipationRequest,
+    isOrganizer, // Added this prop to check if the current user is the organizer
 }: EventParticipationRequestItemProps) => {
+    const updateStatus = trpc.event.updateParticipationRequestStatus.useMutation();
+
+    const handleApprove = () => {
+        updateStatus.mutate({
+            requestId: eventParticipationRequest.id,
+            status: 'approved'
+        });
+        toast.success("リクエストを承認しました");
+    };
+
     return (
         <div>
             <ul className="grid gap-4 mt-4">
@@ -39,9 +52,11 @@ const EventParticipationRequestItem = ({
                         </div>
                     </div>
                     <div className="flex items-center gap-2">
-                        <Button size="sm" variant="outline">
-                            承認
-                        </Button>
+                        {isOrganizer && (
+                            <Button size="sm" variant="outline" onClick={handleApprove}>
+                                承認
+                            </Button>
+                        )}
                         <Button size="sm" variant="ghost">
                             拒否
                         </Button>

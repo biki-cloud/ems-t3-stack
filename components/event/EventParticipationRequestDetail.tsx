@@ -20,7 +20,7 @@ const EventParticipationRequestDetail = ({
                 <div
                     key={eventParticipationRequest.id}
                 >
-                    <EventParticipationRequestItem eventParticipationRequest={eventParticipationRequest} />
+                    <EventParticipationRequestItem eventParticipationRequest={eventParticipationRequest} isOrganizer={true}/>
                 </div>
             ))}
         </div>

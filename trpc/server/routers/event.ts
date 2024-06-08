@@ -380,4 +380,20 @@ export const eventRouter = router({
 
       return requests;
     }),
+
+  // 参加リクエストのステータスを更新
+  updateParticipationRequestStatus: privateProcedure
+    .input(
+      z.object({
+        requestId: z.string(),
+        status: z.string(),
+      })
+    )
+    .mutation(async ({ input }) => {
+      const { requestId, status } = input;
+      return await prisma.eventParticipationRequest.update({
+        where: { id: requestId },
+        data: { status },
+      });
+    }),
 });
