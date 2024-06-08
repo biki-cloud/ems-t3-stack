@@ -126,6 +126,11 @@ const EventDetail = ({
   // ユーザーがイベントのオーガナイザーかどうか
   const isEventAuthor = event.userId == user?.id
 
+  // vendorから見て申請中のイベントかどうか
+  const isVendorRequested = eventParticipationRequests.some(request => 
+    request.vendor.user.id === userId && request.status === "pending"
+  );
+
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="grid gap-8">
@@ -195,7 +200,7 @@ const EventDetail = ({
           </div>
         )}
         <div className="grid gap-6">
-          {isEventAuthor && <EventParticipationRequestDetail eventParticipationRequests={pendingRequests}/>}
+          {(isEventAuthor || isVendorRequested) && <EventParticipationRequestDetail eventParticipationRequests={pendingRequests}/>}
           <EventParticipationSettleDetail eventParticipationRequests={approvedRequests}/>
           
           {userId === event.user.id && (

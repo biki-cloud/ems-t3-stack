@@ -92,7 +92,7 @@ async function createEventParticipationRequest(vendor: Vendor, event: Event, sta
 async function main() {
   const organizer1 = await createUser(
     "organizer1@example.com",
-    "悟空(イベント主催者)",
+    "悟空(イベント主催者1)",
     "organizer",
     "https://res.cloudinary.com/du8k76ffm/image/upload/v1717796891/t3stackblog/g1hovgwweezqr3uvfmjf.png",
     true
@@ -116,7 +116,7 @@ async function main() {
 
   const organizer2 = await createUser(
     "organizer2@example.com",
-    "ベジータ(イベント主催者)",
+    "ベジータ(イベント主催者2)",
     "organizer",
     "https://res.cloudinary.com/du8k76ffm/image/upload/v1717797012/t3stackblog/kx92sxq0rsnltkn4zykl.png",
     true
@@ -140,7 +140,7 @@ async function main() {
 
   const organizer3 = await createUser(
     "organizer3@example.com",
-    "セル(イベント主催者)",
+    "セル(イベント主催者3)",
     "organizer",
     "https://res.cloudinary.com/du8k76ffm/image/upload/v1717764286/t3stackblog/nsnyu06wavqme0haxxwj.jpg",
     true
@@ -160,7 +160,7 @@ async function main() {
 
   const vendor1 = await createUser(
     "vendor1@example.com",
-    "フリーザ(イベント出店者)",
+    "フリーザ(イベント出店者1)",
     "vendor",
     "https://res.cloudinary.com/du8k76ffm/image/upload/v1717803325/t3stackblog/p84dmirm48zyvecsosch.jpg"
   );
@@ -168,7 +168,7 @@ async function main() {
 
   const vendor2 = await createUser(
     "vendor2@example.com",
-    "ピッコロ(イベント出店者)",
+    "ピッコロ(イベント出店者2)",
     "vendor",
     "https://res.cloudinary.com/du8k76ffm/image/upload/v1717797134/t3stackblog/y8ylsaz3ixd451otrk9k.png"
   );
@@ -177,7 +177,7 @@ async function main() {
 
   const customer1 = await createUser(
     "customer1@example.com",
-    "亀仙人(イベント参加者)",
+    "亀仙人(イベント参加者1)",
     "customer",
     "https://res.cloudinary.com/du8k76ffm/image/upload/v1717763285/t3stackblog/mk1kdovvoc7zbcocideo.jpg"
   );
@@ -185,7 +185,7 @@ async function main() {
   
   const customer2 = await createUser(
     "customer2@example.com",
-    "トランクス(イベント参加者)",
+    "トランクス(イベント参加者2)",
     "customer",
     "https://res.cloudinary.com/du8k76ffm/image/upload/v1717767214/t3stackblog/u5smgu6jqcvnavssbtb4.jpg"
   );

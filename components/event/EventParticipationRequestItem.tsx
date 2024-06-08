@@ -45,9 +45,6 @@ const EventParticipationRequestItem = ({
                                 </div>
                             </div>
                         </Link>
-                        <div>
-                            <p className="text-gray-500">{eventParticipationRequest.status}</p>
-                        </div>
                     </div>
                     <div className="flex items-center gap-2">
                         <Button size="sm" variant="outline" onClick={handleApprove}>

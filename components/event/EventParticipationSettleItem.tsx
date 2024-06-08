@@ -36,9 +36,6 @@ const EventParticipationSettleItem = ({
                                 </div>
                             </div>
                         </Link>
-                        <div>
-                            <p className="text-gray-500">{eventParticipationRequest.status}</p>
-                        </div>
                     </div>
                 </li>
             </ul>
