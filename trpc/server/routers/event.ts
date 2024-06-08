@@ -375,6 +375,7 @@ export const eventRouter = router({
               user: true,
             },
           },
+          event: true,
         },
       });
 
