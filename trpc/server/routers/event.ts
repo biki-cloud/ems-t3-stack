@@ -328,6 +328,20 @@ export const eventRouter = router({
         });
       }
 
+      // vendor がすでにリクエストを送っているか確認
+      const existingRequest = await prisma.eventParticipationRequest.findFirst({
+        where: {
+          eventId: eventId,
+          vendorId: vendor.id,
+        },
+      });
+      if (existingRequest) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "すでにリクエストがあります",
+        });
+      }
+
       const request = await prisma.eventParticipationRequest.create({
         data: {
           eventId: eventId,
