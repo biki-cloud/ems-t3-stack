@@ -1,10 +1,11 @@
 import { EventParticipationRequest, User, Vendor } from "@prisma/client";
 import { Button } from "../ui/button";
 import Image from "next/image"
+import Link from "next/link"
 
 
 interface EventParticipationRequestItemProps {
-    eventParticipationRequest: (EventParticipationRequest & { vendor: Pick<Vendor, "id" | "vendorName"> & { user: Pick<User, "name" | "image"> } })
+    eventParticipationRequest: (EventParticipationRequest & { vendor: Pick<Vendor, "id" | "vendorName"> & { user: Pick<User, "id" | "name" | "image"> } })
 }
 
 const EventParticipationRequestItem = ({
@@ -15,17 +16,21 @@ const EventParticipationRequestItem = ({
             <ul className="grid gap-4 mt-4">
                 <li className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
-                        <div className="relative w-10 h-10 flex-shrink-0">
-                            <Image
-                                src={eventParticipationRequest.vendor.user.image || "/default.png"}
-                                className="rounded-full object-cover"
-                                alt={eventParticipationRequest.vendor.user.name || "avatar"}
-                                fill
-                                sizes="40px"
-                            />
-                        </div>
+                        <Link href={`/author/${eventParticipationRequest.vendor.user.id}`}>
+                            <div className="flex items-center space-x-1">
+                                <div className="relative w-6 h-6 flex-shrink-0">
+                                    <Image
+                                        src={eventParticipationRequest.vendor.user.image || "/default.png"}
+                                        className="rounded-full object-cover"
+                                        alt={eventParticipationRequest.vendor.user.name || "avatar"}
+                                        fill
+                                        sizes="24px"
+                                    />
+                                </div>
+                                <div className="text-sm hover:underline">{eventParticipationRequest.vendor.user.name}</div>
+                            </div>
+                        </Link>
                         <div>
-                            <p className="font-medium">{eventParticipationRequest.vendor.user.name}</p>
                             <p className="text-gray-500">{eventParticipationRequest.status}</p>
                         </div>
                     </div>
