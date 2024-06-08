@@ -104,6 +104,7 @@ const EventDetail = ({
   const { mutate: sendParticipationRequest, isLoading: isRequestLoading } = trpc.event.createEventParticipationRequest.useMutation({
     onSuccess: () => {
       toast.success("参加リクエストを送りました");
+      router.refresh();
     },
     onError: (error) => {
       toast.error(`リクエスト送信エラー: ${error.message}`);
@@ -200,7 +201,7 @@ const EventDetail = ({
           </div>
         )}
         <div className="grid gap-6">
-          {(isEventAuthor || isVendorRequested) && <EventParticipationRequestDetail eventParticipationRequests={pendingRequests}/>}
+          {(isEventAuthor || isVendorRequested) && <EventParticipationRequestDetail eventParticipationRequests={pendingRequests} isEventAuthor={isEventAuthor}/>}
           <EventParticipationSettleDetail eventParticipationRequests={approvedRequests}/>
           
           {userId === event.user.id && (

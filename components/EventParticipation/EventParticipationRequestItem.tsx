@@ -9,11 +9,13 @@ import { useRouter } from "next/navigation"
 
 
 interface EventParticipationRequestItemProps {
-    eventParticipationRequest: (EventParticipationRequest & { vendor: Vendor & { user: User } })
+    eventParticipationRequest: (EventParticipationRequest & { vendor: Vendor & { user: User }})
+    isEventAuthor: boolean
 }
 
 const EventParticipationRequestItem = ({
     eventParticipationRequest,
+    isEventAuthor
 }: EventParticipationRequestItemProps) => {
     const router = useRouter();
     const updateStatus = trpc.event.updateParticipationRequestStatus.useMutation();
@@ -59,14 +61,16 @@ const EventParticipationRequestItem = ({
                             </div>
                         </Link>
                     </div>
-                    <div className="flex items-center gap-2">
-                        <Button size="sm" variant="outline" onClick={handleApprove}>
-                            承認
-                        </Button>
-                        <Button size="sm" variant="outline" onClick={handleReject}>
-                            拒否
-                        </Button>
-                    </div>
+                    {isEventAuthor &&
+                        <div className="flex items-center gap-2">
+                            <Button size="sm" variant="outline" onClick={handleApprove}>
+                                承認
+                            </Button>
+                            <Button size="sm" variant="outline" onClick={handleReject}>
+                                拒否
+                            </Button>
+                        </div>
+                    }
                 </li>
             </ul>
         </div>

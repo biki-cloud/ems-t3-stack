@@ -8,10 +8,12 @@ interface EventParticipationRequestDetailProps {
     // 型安全性、自動補完を考慮し、interfaceを使う
     //EventParticipationRequest.vendor.userなどの情報を扱う場合は下記のように型を定義する。定義した内容しか使用できない。 
     eventParticipationRequests: (EventParticipationRequest & { vendor: Vendor & { user: User } })[]
+    isEventAuthor: boolean
 }
 
 const EventParticipationRequestDetail = ({
     eventParticipationRequests,
+    isEventAuthor
 }: EventParticipationRequestDetailProps) => {
     return (
         <div>
@@ -20,7 +22,7 @@ const EventParticipationRequestDetail = ({
                 <div
                     key={eventParticipationRequest.id}
                 >
-                    <EventParticipationRequestItem eventParticipationRequest={eventParticipationRequest}/>
+                    <EventParticipationRequestItem eventParticipationRequest={eventParticipationRequest} isEventAuthor={isEventAuthor}/>
                 </div>
             ))}
         </div>
