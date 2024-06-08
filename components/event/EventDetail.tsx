@@ -32,8 +32,8 @@ import CommentDetail from "@/components/comment/CommentDetail"
 
 import { Button } from "@/components/ui/button"
 import { AvatarImage, AvatarFallback, Avatar } from "@/components/ui/avatar"
-import EventParticipationRequestDetail from "@/components/event/EventParticipationRequestDetail"
-import EventParticipationSettleDetail from "@/components/event/EventParticipationSettleDetail"
+import EventParticipationRequestDetail from "@/components/EventParticipation/EventParticipationRequestDetail"
+import EventParticipationSettleDetail from "@/components/EventParticipation/EventParticipationSettleDetail"
 
 interface EventDetailProps {
   event: Event & {
