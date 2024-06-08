@@ -53,9 +53,6 @@ const EventDetailPage = async ({
   const eventParticipationRequests = await trpc.event.getParticipationRequests({
     eventId: eventId,
   })
-  eventParticipationRequests.map((eventParticipationRequest) => {
-    console.log(eventParticipationRequest)
-  })
 
   const pageCount = Math.ceil(totalComments / limit)
 
