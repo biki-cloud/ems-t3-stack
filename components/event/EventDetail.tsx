@@ -127,9 +127,9 @@ const EventDetail = ({
   // ユーザーがイベントのオーガナイザーかどうか
   const isEventAuthor = event.userId == user?.id
 
-  // vendorから見て申請中のイベントかどうか
+  // 申請リスト一覧にログインしているvendorがいるか
   const isVendorRequested = eventParticipationRequests.some(request => 
-    request.vendor.user.id === userId && request.status === "pending"
+    request.vendor.user.id === userId
   );
 
   return (
@@ -196,7 +196,7 @@ const EventDetail = ({
               onClick={() => sendParticipationRequest({ eventId: event.id, status: "pending" })}
               disabled={isRequestLoading}
             >
-              参加リクエストを送る
+              {isVendorRequested && '参加リクエスト送信済み' || '参加リクエストを送る'}
             </Button>
           </div>
         )}
