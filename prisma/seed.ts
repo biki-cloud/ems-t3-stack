@@ -79,11 +79,12 @@ async function createComment(user: User, event: Event, content: string) {
   });
 }
 
-async function createParticipationRequest(vendor: Vendor, event: Event) {
+async function createEventParticipationRequest(vendor: Vendor, event: Event, status: string) {
   return await prisma.eventParticipationRequest.create({
     data: {
       eventId: event.id,
       vendorId: vendor.id,
+      status: status
     },
   });
 }
@@ -163,7 +164,7 @@ async function main() {
     "vendor",
     "https://res.cloudinary.com/du8k76ffm/image/upload/v1717803325/t3stackblog/p84dmirm48zyvecsosch.jpg"
   );
-  await createVendor(vendor1);
+  const vendor_obj1 = await createVendor(vendor1);
 
   const vendor2 = await createUser(
     "vendor2@example.com",
@@ -171,7 +172,7 @@ async function main() {
     "vendor",
     "https://res.cloudinary.com/du8k76ffm/image/upload/v1717797134/t3stackblog/y8ylsaz3ixd451otrk9k.png"
   );
-  await createVendor(vendor2);
+  const vendor_obj2 = await createVendor(vendor2);
 
 
   const customer1 = await createUser(
@@ -211,6 +212,11 @@ async function main() {
   await createComment(vendor1, event2, "武道会スペシャル、力の大会セット販売中！");
   await createComment(organizer3, event5, "セルゲーム、最強の戦士を決めます！");
 
+  await createEventParticipationRequest(vendor_obj1, event5, "pending");
+  await createEventParticipationRequest(vendor_obj1, event1, "approved");
+  await createEventParticipationRequest(vendor_obj1, event3, "pending");
+  await createEventParticipationRequest(vendor_obj2, event3, "approved");
+  await createEventParticipationRequest(vendor_obj2, event2, "pending");
   
 }
 

@@ -12,7 +12,7 @@ const EventParticipationSettleDetail = ({
 }: EventParticipationRequestDetailProps) => {
     return (
         <div>
-            <h2 className="text-xl font-bold">参加確定(organizer用)</h2>
+            <h2 className="text-xl font-bold">参加者</h2>
             {eventParticipationRequests.map((eventParticipationRequest) => (
                 <div
                     key={eventParticipationRequest.id}
