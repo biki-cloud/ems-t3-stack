@@ -1,9 +1,9 @@
-import { publicProcedure, privateProcedure, router } from "@/trpc/server/trpc"
-import { z } from "zod"
-import { TRPCError } from "@trpc/server"
-import { createCloudImage, deleteCloudImage } from "@/actions/cloudImage"
-import { extractPublicId } from "cloudinary-build-url"
-import prisma from "@/lib/prisma"
+import { publicProcedure, privateProcedure, router } from "@/trpc/server/trpc";
+import { z } from "zod";
+import { TRPCError } from "@trpc/server";
+import { createCloudImage, deleteCloudImage } from "@/actions/cloudImage";
+import { extractPublicId } from "cloudinary-build-url";
+import prisma from "@/lib/prisma";
 
 export const eventRouter = router({
   // イベント新規作成
@@ -19,21 +19,21 @@ export const eventRouter = router({
     )
     .mutation(async ({ input, ctx }) => {
       try {
-        const { title, content, location, base64Image, premium } = input
-        const userId = ctx.user.id
+        const { title, content, location, base64Image, premium } = input;
+        const userId = ctx.user.id;
 
         if (!ctx.user.isAdmin) {
           throw new TRPCError({
             code: "BAD_REQUEST",
             message: "投稿権限がありません",
-          })
+          });
         }
 
-        let image_url
+        let image_url;
 
         // 画像をアップロードした場合はCloudinaryに保存
         if (base64Image) {
-          image_url = await createCloudImage(base64Image)
+          image_url = await createCloudImage(base64Image);
         }
 
         // 投稿保存
@@ -46,22 +46,22 @@ export const eventRouter = router({
             image: image_url,
             premium,
           },
-        })
+        });
 
-        return event
+        return event;
       } catch (error) {
-        console.log(error)
+        console.log(error);
 
         if (error instanceof TRPCError && error.code === "BAD_REQUEST") {
           throw new TRPCError({
             code: "BAD_REQUEST",
             message: error.message,
-          })
+          });
         } else {
           throw new TRPCError({
             code: "INTERNAL_SERVER_ERROR",
             message: "投稿に失敗しました",
-          })
+          });
         }
       }
     }),
@@ -75,7 +75,7 @@ export const eventRouter = router({
     )
     .query(async ({ input }) => {
       try {
-        const { offset, limit } = input
+        const { offset, limit } = input;
 
         // 投稿一覧取得
         const events = await prisma.event.findMany({
@@ -93,18 +93,18 @@ export const eventRouter = router({
               },
             },
           },
-        })
+        });
 
         // 投稿の総数を取得
-        const totalEvents = await prisma.event.count()
+        const totalEvents = await prisma.event.count();
 
-        return { events: events, totalEvents: totalEvents }
+        return { events: events, totalEvents: totalEvents };
       } catch (error) {
-        console.log(error)
+        console.log(error);
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
           message: "投稿一覧取得に失敗しました",
-        })
+        });
       }
     }),
 
@@ -117,7 +117,7 @@ export const eventRouter = router({
     )
     .query(async ({ input }) => {
       try {
-        const { eventId: eventId } = input
+        const { eventId: eventId } = input;
 
         // 投稿詳細取得
         const event = await prisma.event.findUnique({
@@ -131,15 +131,15 @@ export const eventRouter = router({
               },
             },
           },
-        })
+        });
 
-        return event
+        return event;
       } catch (error) {
-        console.log(error)
+        console.log(error);
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
           message: "投稿詳細取得に失敗しました",
-        })
+        });
       }
     }),
 
@@ -157,15 +157,22 @@ export const eventRouter = router({
     )
     .mutation(async ({ input, ctx }) => {
       try {
-        const { eventId: eventId, title, content, location, base64Image, premium } = input
-        const userId = ctx.user.id
-        let image_url
+        const {
+          eventId: eventId,
+          title,
+          content,
+          location,
+          base64Image,
+          premium,
+        } = input;
+        const userId = ctx.user.id;
+        let image_url;
 
         if (!ctx.user.isAdmin) {
           throw new TRPCError({
             code: "BAD_REQUEST",
             message: "編集権限がありません",
-          })
+          });
         }
 
         if (base64Image) {
@@ -178,30 +185,30 @@ export const eventRouter = router({
                 },
               },
             },
-          })
+          });
 
           if (!event) {
             throw new TRPCError({
               code: "BAD_REQUEST",
               message: "投稿が見つかりませんでした",
-            })
+            });
           }
 
           if (userId !== event.user.id) {
             throw new TRPCError({
               code: "BAD_REQUEST",
               message: "投稿の編集権限がありません",
-            })
+            });
           }
 
           // 古い画像を削除
           if (event.image) {
-            const publicId = extractPublicId(event.image)
-            await deleteCloudImage(publicId)
+            const publicId = extractPublicId(event.image);
+            await deleteCloudImage(publicId);
           }
 
           // 新しい画像をアップロード
-          image_url = await createCloudImage(base64Image)
+          image_url = await createCloudImage(base64Image);
         }
 
         // 投稿更新
@@ -216,20 +223,20 @@ export const eventRouter = router({
             premium,
             ...(image_url && { image: image_url }),
           },
-        })
+        });
       } catch (error) {
-        console.log(error)
+        console.log(error);
 
         if (error instanceof TRPCError && error.code === "BAD_REQUEST") {
           throw new TRPCError({
             code: "BAD_REQUEST",
             message: error.message,
-          })
+          });
         } else {
           throw new TRPCError({
             code: "INTERNAL_SERVER_ERROR",
             message: "投稿の編集に失敗しました",
-          })
+          });
         }
       }
     }),
@@ -242,8 +249,8 @@ export const eventRouter = router({
     )
     .mutation(async ({ input, ctx }) => {
       try {
-        const { eventId: eventId } = input
-        const userId = ctx.user.id
+        const { eventId: eventId } = input;
+        const userId = ctx.user.id;
 
         const event = await prisma.event.findUnique({
           where: { id: eventId },
@@ -254,57 +261,60 @@ export const eventRouter = router({
               },
             },
           },
-        })
+        });
 
         if (!event) {
           throw new TRPCError({
             code: "BAD_REQUEST",
             message: "投稿が見つかりませんでした",
-          })
+          });
         }
 
         if (userId !== event.user.id) {
           throw new TRPCError({
             code: "BAD_REQUEST",
             message: "投稿の削除権限がありません",
-          })
+          });
         }
 
         // 画像を削除
         if (event.image) {
-          const publicId = extractPublicId(event.image)
-          await deleteCloudImage(publicId)
+          const publicId = extractPublicId(event.image);
+          await deleteCloudImage(publicId);
         }
 
         await prisma.event.delete({
           where: {
             id: eventId,
           },
-        })
+        });
       } catch (error) {
-        console.log(error)
+        console.log(error);
 
         if (error instanceof TRPCError && error.code === "BAD_REQUEST") {
           throw new TRPCError({
             code: "BAD_REQUEST",
             message: error.message,
-          })
+          });
         } else {
           throw new TRPCError({
             code: "INTERNAL_SERVER_ERROR",
             message: "投稿の削除に失敗しました",
-          })
+          });
         }
       }
     }),
 
   // 参加リクエストの作成
   createEventParticipationRequest: privateProcedure
-    .input(z.object({
-      eventId: z.string(),
-    }))
+    .input(
+      z.object({
+        eventId: z.string(),
+        status: z.string(),
+      })
+    )
     .mutation(async ({ input, ctx }) => {
-      const { eventId } = input;
+      const { eventId, status } = input;
       const vendorId = ctx.user.id; // ベンダーIDをセッションから取得
 
       // ユーザからvendorを取得
@@ -322,9 +332,38 @@ export const eventRouter = router({
         data: {
           eventId: eventId,
           vendorId: vendor.id,
+          status: status,
         },
       });
 
       return request;
     }),
-})
+
+  // 参加リクエストの一覧取得
+  getParticipationRequests: privateProcedure
+    .input(
+      z.object({
+        eventId: z.string(),
+      })
+    )
+    .query(async ({ input }) => {
+      const { eventId } = input;
+
+      const requests = await prisma.eventParticipationRequest.findMany({
+        where: {
+          eventId: eventId,
+        },
+        // eventParticipationRequestに紐ずくvendor情報も取得
+        // vendor情報に紐ずくuser情報も取得 
+        include: {
+          vendor: {
+            include: {
+              user: true,
+            },
+          },
+        },
+      });
+
+      return requests;
+    }),
+});

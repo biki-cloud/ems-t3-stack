@@ -49,6 +49,14 @@ const EventDetailPage = async ({
     offset,
   })
 
+  // イベント参加リクエスト一覧取得
+  const eventParticipationRequests = await trpc.event.getParticipationRequests({
+    eventId: eventId,
+  })
+  eventParticipationRequests.map((eventParticipationRequest) => {
+    console.log(eventParticipationRequest)
+  })
+
   const pageCount = Math.ceil(totalComments / limit)
 
   return (
@@ -60,6 +68,7 @@ const EventDetailPage = async ({
       totalComments={totalComments}
       isSubscribed={isSubscribed}
       user={user}
+      eventParticipationRequests={eventParticipationRequests}
     />
   )
 }
