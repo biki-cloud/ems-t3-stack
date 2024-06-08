@@ -123,6 +123,7 @@ const Profile = ({ user }: ProfileProps) => {
                           src={image.dataURL}
                           alt={user.name || "avatar"}
                           className="rounded-full object-cover"
+                          sizes="100px"
                         />
                       </div>
                     )}

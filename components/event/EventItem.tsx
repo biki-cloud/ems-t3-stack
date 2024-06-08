@@ -39,6 +39,7 @@ const EventItem = ({ event: event }: EventItemProps) => {
               src={event.image || "/noImage.png"}
               alt="thumbnail"
               className="object-cover rounded-md transition-all hover:scale-105"
+              sizes="100px"
             />
           </div>
         </Link>
@@ -61,6 +62,7 @@ const EventItem = ({ event: event }: EventItemProps) => {
                     className="rounded-full object-cover"
                     alt={event.user.name || "avatar"}
                     fill
+                    sizes="24px"
                   />
                 </div>
                 <div className="text-sm hover:underline break-words min-w-0">

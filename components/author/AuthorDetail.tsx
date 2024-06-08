@@ -25,6 +25,7 @@ const AuthorDetail = ({ user, pageCount, totalEvents }: AuthorDetailProps) => {
             className="rounded-full object-cover"
             alt={user.name || "avatar"}
             fill
+            sizes="100px"
           />
         </div>
       </div>

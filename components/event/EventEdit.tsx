@@ -135,6 +135,7 @@ const EventEdit = ({ event: event }: EventEditProps) => {
                             src={image.dataURL}
                             alt="thumbnail"
                             className="object-cover rounded-md"
+                            sizes="100px"
                           />
                         </div>
                       )}

@@ -140,6 +140,7 @@ const CreateEvent = () => {
                             src={image.dataURL}
                             alt="thumbnail"
                             className="object-cover rounded-md"
+                            sizes="100px"
                           />
                         </div>
                       )}

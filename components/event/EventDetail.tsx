@@ -20,7 +20,7 @@ To read more about using these font, please visit the Next.js documentation:
 'use client'
 import { getAuthSession } from "@/lib/nextauth"
 
-import { Event, User, Comment, CommentLike } from "@prisma/client"
+import { Event, User, Comment, CommentLike, EventParticipationRequest, Vendor } from "@prisma/client"
 import { format } from "date-fns"
 import { useRouter } from "next/navigation"
 import { Pencil, Trash2 } from "lucide-react"
@@ -32,6 +32,8 @@ import CommentDetail from "@/components/comment/CommentDetail"
 
 import { Button } from "@/components/ui/button"
 import { AvatarImage, AvatarFallback, Avatar } from "@/components/ui/avatar"
+import EventParticipationRequestDetail from "@/components/event/EventParticipationRequestDetail"
+import EventParticipationSettleDetail from "@/components/event/EventParticipationSettleDetail"
 
 interface EventDetailProps {
   event: Event & {
@@ -45,6 +47,8 @@ interface EventDetailProps {
   pageCount: number
   totalComments: number
   isSubscribed: boolean
+  user: User | null
+  eventParticipationRequests: (EventParticipationRequest & { vendor: Vendor & { user: User } })[]
 }
 
 const EventDetail = ({
@@ -54,6 +58,8 @@ const EventDetail = ({
   pageCount,
   totalComments,
   isSubscribed,
+  user,
+  eventParticipationRequests,
 }: EventDetailProps) => {
 
   const router = useRouter()
@@ -94,6 +100,19 @@ const EventDetail = ({
     })
   }
 
+  // 既存のコードに追加
+  const { mutate: sendParticipationRequest, isLoading: isRequestLoading } = trpc.event.createEventParticipationRequest.useMutation({
+    onSuccess: () => {
+      toast.success("参加リクエストを送りました");
+    },
+    onError: (error) => {
+      toast.error(`リクエスト送信エラー: ${error.message}`);
+    },
+  });
+
+  // ユーザーがベンダーかどうか
+  const isVendor = user?.role == 'vendor'
+
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="grid gap-8">
@@ -113,6 +132,7 @@ const EventDetail = ({
                     className="rounded-full object-cover"
                     alt={event.user.name || "avatar"}
                     fill
+                    sizes="24px"
                   />
                 </div>
                 <div className="text-sm hover:underline break-words min-w-0">
@@ -139,6 +159,7 @@ const EventDetail = ({
             src={event.image || "/noImage.png"}
             alt="thumbnail"
             className="object-cover rounded-md"
+            sizes="100%"
           />
         </div>
         <div className="font-bold text-2xl break-words">内容</div>
@@ -149,90 +170,21 @@ const EventDetail = ({
         <div className="leading-relaxed break-words whitespace-pre-wrap">
           {event.location}
         </div>
-        <Button className="w-full sm:w-auto">参加リクエスト(vendor用)</Button>
+        {isVendor && (
+          <div className="mt-4">
+            <Button
+              className="w-full sm:w-auto"
+              onClick={() => sendParticipationRequest({ eventId: event.id, status: "pending" })}
+              disabled={isRequestLoading}
+            >
+              参加リクエストを送る
+            </Button>
+          </div>
+        )}
         <div className="grid gap-6">
-          <div>
-            <h2 className="text-xl font-bold">参加リクエスト中(organizer用)</h2>
-            <ul className="grid gap-4 mt-4">
-              <li className="flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <Avatar>
-                    <AvatarImage alt="Avatar" src="/placeholder-user.jpg" />
-                    <AvatarFallback>JD</AvatarFallback>
-                  </Avatar>
-                  <div>
-                    <p className="font-medium">John Doe</p>
-                    <p className="text-gray-500">Acme Inc.</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Button size="sm" variant="outline">
-                    Approve
-                  </Button>
-                  <Button size="sm" variant="ghost">
-                    Decline
-                  </Button>
-                </div>
-              </li>
-              <li className="flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <Avatar>
-                    <AvatarImage alt="Avatar" src="/placeholder-user.jpg" />
-                    <AvatarFallback>JA</AvatarFallback>
-                  </Avatar>
-                  <div>
-                    <p className="font-medium">Jane Appleseed</p>
-                    <p className="text-gray-500">Widgets Inc.</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Button size="sm" variant="outline">
-                    Approve
-                  </Button>
-                  <Button size="sm" variant="ghost">
-                    Decline
-                  </Button>
-                </div>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h2 className="text-xl font-bold">参加確定</h2>
-            <ul className="grid gap-4 mt-4">
-              <li className="flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <Avatar>
-                    <AvatarImage alt="Avatar" src="/placeholder-user.jpg" />
-                    <AvatarFallback>SM</AvatarFallback>
-                  </Avatar>
-                  <div>
-                    <p className="font-medium">Sarah Miller</p>
-                    <p className="text-gray-500">Acme Inc.</p>
-                  </div>
-                </div>
-                <Button size="sm" variant="ghost">
-                  <XIcon className="w-5 h-5" />
-                  <span className="sr-only">Remove</span>
-                </Button>
-              </li>
-              <li className="flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <Avatar>
-                    <AvatarImage alt="Avatar" src="/placeholder-user.jpg" />
-                    <AvatarFallback>TW</AvatarFallback>
-                  </Avatar>
-                  <div>
-                    <p className="font-medium">Tom Wilson</p>
-                    <p className="text-gray-500">Widgets Inc.</p>
-                  </div>
-                </div>
-                <Button size="sm" variant="ghost">
-                  <XIcon className="w-5 h-5" />
-                  <span className="sr-only">Remove</span>
-                </Button>
-              </li>
-            </ul>
-          </div>
+          <EventParticipationRequestDetail eventParticipationRequests={eventParticipationRequests}/>
+          <EventParticipationSettleDetail />
+          
           {userId === event.user.id && (
             <div className="flex items-center justify-end space-x-1">
               <Link href={`/event/${event.id}/edit`}>
@@ -334,22 +286,3 @@ function MapPinIcon(props: React.SVGProps<SVGSVGElement>) {
 }
 
 
-function XIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M18 6 6 18" />
-      <path d="m6 6 12 12" />
-    </svg>
-  )
-}
