@@ -354,7 +354,7 @@ export const eventRouter = router({
     }),
 
   // 参加リクエストの一覧取得
-  getParticipationRequests: privateProcedure
+  getParticipationRequests: publicProcedure
     .input(
       z.object({
         eventId: z.string(),
