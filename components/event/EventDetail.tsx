@@ -104,6 +104,7 @@ const EventDetail = ({
   const { mutate: sendParticipationRequest, isLoading: isRequestLoading } = trpc.event.createEventParticipationRequest.useMutation({
     onSuccess: () => {
       toast.success("参加リクエストを送りました");
+      router.refresh();
     },
     onError: (error) => {
       toast.error(`リクエスト送信エラー: ${error.message}`);
@@ -126,9 +127,9 @@ const EventDetail = ({
   // ユーザーがイベントのオーガナイザーかどうか
   const isEventAuthor = event.userId == user?.id
 
-  // vendorから見て申請中のイベントかどうか
+  // 申請リスト一覧にログインしているvendorがいるか
   const isVendorRequested = eventParticipationRequests.some(request => 
-    request.vendor.user.id === userId && request.status === "pending"
+    request.vendor.user.id === userId
   );
 
   return (
@@ -195,12 +196,12 @@ const EventDetail = ({
               onClick={() => sendParticipationRequest({ eventId: event.id, status: "pending" })}
               disabled={isRequestLoading}
             >
-              参加リクエストを送る
+              {isVendorRequested && '参加リクエスト送信済み' || '参加リクエストを送る'}
             </Button>
           </div>
         )}
         <div className="grid gap-6">
-          {(isEventAuthor || isVendorRequested) && <EventParticipationRequestDetail eventParticipationRequests={pendingRequests}/>}
+          {(isEventAuthor || isVendorRequested) && <EventParticipationRequestDetail eventParticipationRequests={pendingRequests} isEventAuthor={isEventAuthor}/>}
           <EventParticipationSettleDetail eventParticipationRequests={approvedRequests}/>
           
           {userId === event.user.id && (

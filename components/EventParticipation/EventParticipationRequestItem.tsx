@@ -9,31 +9,34 @@ import { useRouter } from "next/navigation"
 
 
 interface EventParticipationRequestItemProps {
-    eventParticipationRequest: (EventParticipationRequest & { vendor: Vendor & { user: User } })
+    eventParticipationRequest: (EventParticipationRequest & { vendor: Vendor & { user: User }})
+    isEventAuthor: boolean
 }
 
 const EventParticipationRequestItem = ({
     eventParticipationRequest,
+    isEventAuthor
 }: EventParticipationRequestItemProps) => {
     const router = useRouter();
     const updateStatus = trpc.event.updateParticipationRequestStatus.useMutation();
 
-    const handleApprove = () => {
-        updateStatus.mutate({
-            requestId: eventParticipationRequest.id,
-            status: 'approved'
-        });
-        toast.success("リクエストを承認しました");
-        router.refresh(); // 画面をリロードして、リクエストを参加者リストに反映する
-    };
+    const {mutate: updateParticipationRequestStatus, isLoading} = trpc.event.updateParticipationRequestStatus.useMutation({
+        onSuccess: () => {
+            toast.success("更新しました");
+            router.refresh(); // 画面をリロードして、リクエストを参加者リストに反映する
+        },
+        onError: (error) => {
+            toast.error("更新に失敗しました");
+            console.error(error);
+        }
+    });
 
-    const handleReject = () => {
-        updateStatus.mutate({
+    const handleUpdateStatus = (status: string) => {
+        updateParticipationRequestStatus({
             requestId: eventParticipationRequest.id,
-            status: 'rejected'
+            status,
         });
-        toast.success("リクエストを拒否しました");
-        router.refresh(); // 画面をリロードして、リクエストを参加者リストに削除する
+        router.refresh()
     }
 
     return (
@@ -59,14 +62,16 @@ const EventParticipationRequestItem = ({
                             </div>
                         </Link>
                     </div>
-                    <div className="flex items-center gap-2">
-                        <Button size="sm" variant="outline" onClick={handleApprove}>
-                            承認
-                        </Button>
-                        <Button size="sm" variant="outline" onClick={handleReject}>
-                            拒否
-                        </Button>
-                    </div>
+                    {isEventAuthor &&
+                        <div className="flex items-center gap-2">
+                            <Button size="sm" variant="outline" onClick={() => handleUpdateStatus("approved")} disabled={isLoading} className="bg-green-500 hover:bg-green-700 text-white">
+                                承認
+                            </Button>
+                            <Button size="sm" variant="outline" onClick={() => handleUpdateStatus("rejected")} disabled={isLoading} className="bg-red-500 hover:bg-red-700 text-white">
+                                拒否
+                            </Button>
+                        </div>
+                    }
                 </li>
             </ul>
         </div>
