@@ -2,6 +2,8 @@ import { trpc } from "@/trpc/client"
 import { eventPerPage as eventPerPage } from "@/lib/utils"
 import EventItem from "@/components/event/EventItem"
 import PaginationButton from "@/components/pagers/PaginationButton"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
 
 interface HomeProps {
   searchParams: {
@@ -31,6 +33,10 @@ const Home = async ({ searchParams }: HomeProps) => {
 
   return (
     <div className="space-y-5">
+      <div className="flex mb-4">
+        <Input className="flex-1 mr-2" placeholder="イベント名" />
+        <Button variant="default" >検索</Button>
+      </div>
       <div className="space-y-5">
         {events.map((event) => (
           <EventItem key={event.id} event={event} />
