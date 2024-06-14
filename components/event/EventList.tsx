@@ -46,9 +46,7 @@ const EventList = ({ limit, offset }: props) => {
             </div>
             {isLoading && <div>検索中です</div>}
             <div className="space-y-5">
-                {!events || events.events.length === 0 ? (
-                    <div className="text-center text-sm text-gray-500">投稿はありません</div>
-                ) : (
+                {events && events.events.length > 0 ? (
                     events.events.map((event) => (
                         <EventItem
                             key={event.id}
@@ -59,9 +57,10 @@ const EventList = ({ limit, offset }: props) => {
                             }}
                         />
                     ))
+                ) : (
+                    <div className="text-center text-sm text-gray-500">投稿はありません</div>
                 )}
             </div>
-            {/* eventsがnullでないかつ、totalEventsがnullでない場合、pageNationを表示する */}
             {events && totalEvents && events.events.length > 0 && (
                 <PaginationButton pageCount={Math.ceil(totalEvents / limit)} displayPerPage={eventPerPage} />
             )}
