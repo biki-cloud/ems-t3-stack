@@ -25,11 +25,11 @@ $ ./init_db.sh
 ### アーキテクチャ: T3 Stack
 - [Create T3 App](https://create.t3.gg/)
 
-### 言語(フロントエンド&バックエンド): NextJs & Typescript
+### 言語(フロントエンド&バックエンド): NextJS & Typescript
 - [Next.js by Vercel - The React Framework](https://nextjs.org/)
 - [TypeScript: JavaScript With Syntax For Types.](https://www.typescriptlang.org/)
 
-### デザイン: tailwindcss & shadcn
+### デザイン: Tailwind CSS & Shadcn
 - https://ui.shadcn.com/docs/components
 - https://v0.dev/
 
