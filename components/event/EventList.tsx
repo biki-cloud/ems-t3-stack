@@ -15,24 +15,27 @@ interface props {
 
 const EventList = ({ limit, offset }: props) => {
     const [searchTerm, setSearchTerm] = useState('');
+    const [query, setQuery] = useState('');
+
     const { data: events, isLoading, refetch } = trpc.event.getEvents.useQuery({
         limit,
         offset,
-        query: searchTerm,
+        query: query,
     }, {
-        keepPreviousData: true,
+        keepPreviousData: true, // 前のデータを保持しながら新しいクエリデータを取得
     });
 
     const handleSearch = () => {
-        refetch();
+        setQuery(searchTerm); // 検索ボタンが押された時にクエリを設定
+        refetch(); // クエリを手動で再実行
     };
 
     const totalEvents = events?.totalEvents
-    if (!totalEvents) return null
+    // if (!totalEvents) return null
+    const pageCount = 5;
 
-    const pageCount = Math.ceil(totalEvents / limit)
+    // const pageCount = Math.ceil(totalEvents / limit)
 
-    if (isLoading) return <div>Loading...</div>;
     if (!events) return <div>No events found.</div>;
 
     return (
@@ -46,20 +49,22 @@ const EventList = ({ limit, offset }: props) => {
                 />
                 <Button variant="default" onClick={handleSearch}>検索</Button>
             </div>
+            {isLoading && <div>検索中です</div>}
             <div className="space-y-5">
-                {events.events.length === 0 && (
+                {events.events.length === 0 ? (
                     <div className="text-center text-sm text-gray-500">投稿はありません</div>
+                ) : (
+                    events.events.map((event) => (
+                        <EventItem
+                            key={event.id}
+                            event={{
+                                ...event,
+                                createdAt: new Date(event.createdAt),
+                                updatedAt: new Date(event.updatedAt)
+                            }}
+                        />
+                    ))
                 )}
-                {events.events.map((event) => (
-                    <EventItem
-                        key={event.id}
-                        event={{
-                            ...event,
-                            createdAt: new Date(event.createdAt),
-                            updatedAt: new Date(event.updatedAt)
-                        }}
-                    />
-                ))}
             </div>
 
             {events.events.length !== 0 && (
