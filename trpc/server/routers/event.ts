@@ -71,11 +71,12 @@ export const eventRouter = router({
       z.object({
         limit: z.number(),
         offset: z.number(),
+        query: z.string().optional(),
       })
     )
     .query(async ({ input }) => {
       try {
-        const { offset, limit } = input;
+        const { offset, limit, query } = input;
 
         // 投稿一覧取得
         const events = await prisma.event.findMany({
@@ -83,6 +84,22 @@ export const eventRouter = router({
           take: limit,
           orderBy: {
             updatedAt: "desc",
+          },
+          where: {
+            OR: [
+              {
+                title: {
+                  contains: query,
+                  mode: 'insensitive',
+                },
+              },
+              {
+                content: {
+                  contains: query,
+                  mode: 'insensitive',
+                },
+              },
+            ],
           },
           include: {
             user: {

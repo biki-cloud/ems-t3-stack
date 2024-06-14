@@ -1,11 +1,12 @@
 'use client'
-// import { trpc } from "@/trpc/client"
+
 import { trpc } from "@/trpc/react"
 import PaginationButton from "../pagers/PaginationButton"
 import { Button } from "../ui/button"
 import { Input } from "../ui/input"
 import EventItem from "./EventItem"
 import { eventPerPage } from "@/lib/utils"
+import { useState } from 'react';
 
 interface props {
     limit: number
@@ -13,10 +14,18 @@ interface props {
 }
 
 const EventList = ({ limit, offset }: props) => {
-    const { data: events, isLoading } = trpc.event.getEvents.useQuery({
+    const [searchTerm, setSearchTerm] = useState('');
+    const { data: events, isLoading, refetch } = trpc.event.getEvents.useQuery({
         limit,
         offset,
-    })
+        query: searchTerm,
+    }, {
+        keepPreviousData: true,
+    });
+
+    const handleSearch = () => {
+        refetch();
+    };
 
     // 投稿がない場合
     if (events?.events.length === 0) {
@@ -36,8 +45,13 @@ const EventList = ({ limit, offset }: props) => {
     return (
         <div className="space-y-5">
             <div className="flex mb-4">
-                <Input className="flex-1 mr-2" placeholder="イベント名" />
-                <Button variant="default" >検索</Button>
+                <Input
+                    className="flex-1 mr-2"
+                    placeholder="イベント名"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
+                <Button variant="default" onClick={handleSearch}>検索</Button>
             </div>
             <div className="space-y-5">
                 {events.events.map((event) => (
