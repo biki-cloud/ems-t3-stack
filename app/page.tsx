@@ -1,9 +1,5 @@
-import { trpc } from "@/trpc/client"
 import { eventPerPage as eventPerPage } from "@/lib/utils"
-import EventItem from "@/components/event/EventItem"
-import PaginationButton from "@/components/pagers/PaginationButton"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
+import EventList from "@/components/event/EventList"
 
 interface HomeProps {
   searchParams: {
@@ -17,36 +13,8 @@ const Home = async ({ searchParams }: HomeProps) => {
   const limit = typeof perPage === "string" ? parseInt(perPage) : eventPerPage
   const offset = typeof page === "string" ? (parseInt(page) - 1) * limit : 0
 
-  const { events: events, totalEvents: totalEvents } = await trpc.event.getEvents({
-    limit,
-    offset,
-  })
-
-  // 投稿がない場合
-  if (events.length === 0) {
-    return (
-      <div className="text-center text-sm text-gray-500">投稿はありません</div>
-    )
-  }
-
-  const pageCount = Math.ceil(totalEvents / limit)
-
   return (
-    <div className="space-y-5">
-      <div className="flex mb-4">
-        <Input className="flex-1 mr-2" placeholder="イベント名" />
-        <Button variant="default" >検索</Button>
-      </div>
-      <div className="space-y-5">
-        {events.map((event) => (
-          <EventItem key={event.id} event={event} />
-        ))}
-      </div>
-
-      {events.length !== 0 && (
-        <PaginationButton pageCount={pageCount} displayPerPage={eventPerPage} />
-      )}
-    </div>
+    <EventList limit={limit} offset={offset} />
   )
 }
 
