@@ -27,13 +27,6 @@ const EventList = ({ limit, offset }: props) => {
         refetch();
     };
 
-    // 投稿がない場合
-    if (events?.events.length === 0) {
-        return (
-            <div className="text-center text-sm text-gray-500">投稿はありません</div>
-        )
-    }
-
     const totalEvents = events?.totalEvents
     if (!totalEvents) return null
 
@@ -54,6 +47,9 @@ const EventList = ({ limit, offset }: props) => {
                 <Button variant="default" onClick={handleSearch}>検索</Button>
             </div>
             <div className="space-y-5">
+                {events.events.length === 0 && (
+                    <div className="text-center text-sm text-gray-500">投稿はありません</div>
+                )}
                 {events.events.map((event) => (
                     <EventItem
                         key={event.id}
