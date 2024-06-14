@@ -22,7 +22,8 @@ const EventList = ({ limit, offset }: props) => {
         offset,
         query: query,
     }, {
-        keepPreviousData: true, // 前のデータを保持しながら新しいクエリデータを取得
+        //  オプションにより、新しいデータがロードされる間、前のデータが表示され続けます。
+        keepPreviousData: true,
     });
 
     const handleSearch = () => {
@@ -31,12 +32,6 @@ const EventList = ({ limit, offset }: props) => {
     };
 
     const totalEvents = events?.totalEvents
-    // if (!totalEvents) return null
-    const pageCount = 5;
-
-    // const pageCount = Math.ceil(totalEvents / limit)
-
-    if (!events) return <div>No events found.</div>;
 
     return (
         <div className="space-y-5">
@@ -51,7 +46,7 @@ const EventList = ({ limit, offset }: props) => {
             </div>
             {isLoading && <div>検索中です</div>}
             <div className="space-y-5">
-                {events.events.length === 0 ? (
+                {!events || events.events.length === 0 ? (
                     <div className="text-center text-sm text-gray-500">投稿はありません</div>
                 ) : (
                     events.events.map((event) => (
@@ -67,8 +62,8 @@ const EventList = ({ limit, offset }: props) => {
                 )}
             </div>
 
-            {events.events.length !== 0 && (
-                <PaginationButton pageCount={pageCount} displayPerPage={eventPerPage} />
+            {!events || !totalEvents || events.events.length !== 0 && (
+                <PaginationButton pageCount={Math.ceil(totalEvents / limit)} displayPerPage={eventPerPage} />
             )}
         </div>
     )
