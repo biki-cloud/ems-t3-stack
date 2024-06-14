@@ -61,8 +61,8 @@ const EventList = ({ limit, offset }: props) => {
                     ))
                 )}
             </div>
-
-            {!events || !totalEvents || events.events.length !== 0 && (
+            {/* eventsがnullでないかつ、totalEventsがnullでない場合、pageNationを表示する */}
+            {events && totalEvents && events.events.length > 0 && (
                 <PaginationButton pageCount={Math.ceil(totalEvents / limit)} displayPerPage={eventPerPage} />
             )}
         </div>
