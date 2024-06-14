@@ -31,8 +31,6 @@ const EventList = ({ limit, offset }: props) => {
         refetch(); // クエリを手動で再実行
     };
 
-    const totalEvents = events?.totalEvents
-
     return (
         <div className="space-y-5">
             <div className="flex mb-4">
@@ -61,8 +59,8 @@ const EventList = ({ limit, offset }: props) => {
                     <div className="text-center text-sm text-gray-500">投稿はありません</div>
                 )}
             </div>
-            {events && totalEvents && events.events.length > 0 && (
-                <PaginationButton pageCount={Math.ceil(totalEvents / limit)} displayPerPage={eventPerPage} />
+            {events && events.totalEvents && events.events.length > 0 && (
+                <PaginationButton pageCount={Math.ceil(events.totalEvents / limit)} displayPerPage={eventPerPage} />
             )}
         </div>
     )
