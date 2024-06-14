@@ -414,34 +414,4 @@ export const eventRouter = router({
         data: { status },
       });
     }),
-
-  // 検索機能
-  searchEvents: publicProcedure
-    .input(z.object({
-      query: z.string(),
-    }))
-    .query(async ({ input, ctx }) => {
-      const { query } = input;
-      return await prisma.event.findMany({
-        where: {
-          OR: [
-            {
-              title: {
-                contains: query,
-                mode: 'insensitive',
-              },
-            },
-            {
-              content: {
-                contains: query,
-                mode: 'insensitive',
-              },
-            },
-          ],
-        },
-        include: {
-          user: true
-        },
-      });
-    }),
 });

@@ -69,7 +69,9 @@ google認証を追加する
 
 ### メディアファイル保存: Cloudinary
 クラウドに画像や動画を保存する
-[【Web Library】Nextjs13で覚える便利なライブラリ【#１８Cloudinary SetUp】](https://zenn.dev/web_life_ch/articles/f3499dcfddba8b)
+
+#### ドキュメント
+- [【Web Library】Nextjs13で覚える便利なライブラリ【#１８Cloudinary SetUp】](https://zenn.dev/web_life_ch/articles/f3499dcfddba8b)
 
 ## 参考GitHub
 - [haruyasu/t3-stack-deploy-tutorial](https://github.com/haruyasu/t3-stack-deploy-tutorial)
@@ -85,6 +87,8 @@ google認証を追加する
     - ユーザプロフィールへのリンクになっているアイコン + 名前
     - 情報入力,編集(名前:入力欄)
     - 情報表示(名前：値)
+- 継続的にER図更新: https://dev.classmethod.jp/articles/prisma_er_diagram_auto_generation/
+- ダークモード: https://qiita.com/gnash/items/02316467739c537701d4
 
 ## Next JS お勉強
 ### クライアントコンポーネント
@@ -92,6 +96,7 @@ google認証を追加する
 - クライアントサイドで実行される: クライアントコンポーネントはブラウザ上で実行され、ユーザーインターフェイスのインタラクティブな部分を担当します。
 - クライアントコンポーネントでのみReact Hookを使用できる。
 - サーバーサイドのコード実行不可: サーバーサイド専用のコード（例えば、データベースクエリやファイルシステム操作など）は実行できません。
+- クライアントコンポーネントではtrpc.event.getEvents.useQueryやtrpc.event.getEvents.useMutationをReact Hooksとともに利用するとよき！！
 
 ### サーバサイドコンポーネント
 - サーバーサイドのデータフェッチ: データベースクエリや外部APIの呼び出しなど、サーバーサイドの処理を直接行うことができます。
