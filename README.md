@@ -32,6 +32,7 @@ $ ./init_db.sh
 ### デザイン: Tailwind CSS & Shadcn
 - https://ui.shadcn.com/docs/components
 - https://v0.dev/
+- shadcnを使用したFigmaのデザイン: https://www.figma.com/community/file/1203061493325953101
 
 ### デプロイメント: Vercel
 デプロイに使用する
@@ -88,7 +89,7 @@ google認証を追加する
     - 情報入力,編集(名前:入力欄)
     - 情報表示(名前：値)
 - 継続的にER図更新: https://dev.classmethod.jp/articles/prisma_er_diagram_auto_generation/
-- ダークモード: https://qiita.com/gnash/items/02316467739c537701d4
+- ESlintを導入
 
 ## Next JS お勉強
 ### クライアントコンポーネント

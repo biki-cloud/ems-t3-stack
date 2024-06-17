@@ -9,6 +9,8 @@ import Navigation from "@/components/auth/Navigation"
 import { getSubscription } from "@/actions/subscription"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/react"
+import { ThemeProvider } from "@/components/ui/theme-provider"
+import { ThemeModeToggle } from "@/components/ui/theme"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -29,37 +31,48 @@ const RootLayout = async ({ children }: RootLayoutProps) => {
   const { isSubscribed } = await getSubscription({ userId: user?.id })
 
   return (
-    <html lang="ja">
+    <html lang="ja" suppressHydrationWarning={true}>
       <body className={inter.className}>
-        <div className="flex min-h-screen flex-col">
-          <AuthProvider>
-            <TrpcProvider>
-              <Navigation user={user} isSubscribed={isSubscribed} />
-              <ToastProvider />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="flex min-h-screen flex-col">
+            <AuthProvider>
+              <TrpcProvider>
+                <Navigation user={user} isSubscribed={isSubscribed} />
+                <ToastProvider />
 
-              <main className="container mx-auto max-w-screen-md flex-1 px-2">
-                {children}
-                <SpeedInsights />
-                <Analytics />
-              </main>
 
-              {/* フッター */}
-              <footer className="py-5">
-                <div className="text-center text-sm">
-                  Copyright © All rights reserved |{" "}
-                  <a
-                    href="https://www.youtube.com/@fullstackchannel"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="underline"
-                  >
-                    FullStackChannel
-                  </a>
-                </div>
-              </footer>
-            </TrpcProvider>
-          </AuthProvider>
-        </div>
+                <main className="container mx-auto max-w-screen-md flex-1 px-2">
+
+                  {children}
+                  <SpeedInsights />
+                  <Analytics />
+                </main>
+
+
+                {/* フッター */}
+                <footer className="py-5">
+                  <div className="text-center text-sm">
+                    Copyright © All rights reserved |{" "}
+                    <a
+                      href="https://www.youtube.com/@fullstackchannel"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline"
+                    >
+                      FullStackChannel
+                    </a>
+                  </div>
+                </footer>
+              </TrpcProvider>
+            </AuthProvider>
+          </div>
+
+        </ThemeProvider>
       </body>
     </html>
   )
