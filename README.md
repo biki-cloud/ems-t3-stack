@@ -91,7 +91,6 @@ google認証を追加する
     - ユーザプロフィールへのリンクになっているアイコン + 名前
     - 情報入力,編集(名前:入力欄)
     - 情報表示(名前：値)
-- 継続的にER図更新: https://dev.classmethod.jp/articles/prisma_er_diagram_auto_generation/
 - ESlintを導入
 
 ## Next JS お勉強
