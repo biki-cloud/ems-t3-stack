@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { User } from "@prisma/client"
 import UserNavigation from "@/components/auth/UserNavigation"
 import Link from "next/link"
+import { ThemeModeToggle } from "../ui/theme"
 
 interface NavigationProps {
   user: User | null
@@ -16,7 +17,7 @@ const Navigation = ({ user, isSubscribed }: NavigationProps) => {
     <header className="shadow-lg shadow-gray-100 mb-10">
       <div className="container mx-auto flex max-w-screen-md items-center justify-between px-2 py-3">
         <Link href="/" className="cursor-pointer text-xl font-bold">
-          イベントマッチングサービス 
+          イベントマッチングサービス
         </Link>
 
         {user ? (
@@ -39,6 +40,8 @@ const Navigation = ({ user, isSubscribed }: NavigationProps) => {
             </Button>
           </div>
         )}
+
+        <ThemeModeToggle />
       </div>
     </header>
   )
