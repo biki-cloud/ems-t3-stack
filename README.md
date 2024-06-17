@@ -18,6 +18,9 @@ $ stripe listen --forward-to localhost:3000/api/webhook
 
 # DBデータを初期化&リセット
 $ ./init_db.sh
+
+# docs/ERD.pngを更新
+$ ./node_modules/.bin/mmdc -i docs/ERD.md -o docs/ERD.png
 ```
 
 ## 技術スタック

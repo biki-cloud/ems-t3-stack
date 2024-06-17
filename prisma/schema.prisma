@@ -8,6 +8,14 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
+// ER図生成用途で追加
+generator erd {
+  provider = "prisma-erd-generator"
+  theme = "forest"
+  output = "../docs/ERD.md"
+  includeRelationFromFields = true
+}
+
 model Account {
   id                String  @id @default(cuid())
   userId            String
