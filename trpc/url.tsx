@@ -7,7 +7,8 @@ export function getBaseUrl() {
   if (process.env.NEXT_PUBLIC_VERCEL_ENV === 'preview') {
     url = `https://${process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL}`;
   } else if (process.env.NEXT_PUBLIC_VERCEL_ENV === 'production') {
-    url = `https://${process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL}`;
+    url = `https://www.sunnybe.online`;
+    // url = `https://${process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL}`;
   } else {
     // ローカルの場合は、ローカルのURLを返す
     url = `${process.env.NEXT_PUBLIC_APP_URL}`;
