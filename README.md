@@ -21,6 +21,9 @@ $ ./init_db.sh
 
 # docs/ERD.pngを更新
 $ ./node_modules/.bin/mmdc -i docs/ERD.md -o docs/ERD.png
+
+# npmのリセット
+$ npm cache clean --force && rm -rf node_modules package-lock.json && npm install
 ```
 
 ## 技術スタック
@@ -91,8 +94,18 @@ google認証を追加する
     - ユーザプロフィールへのリンクになっているアイコン + 名前
     - 情報入力,編集(名前:入力欄)
     - 情報表示(名前：値)
-- 継続的にER図更新: https://dev.classmethod.jp/articles/prisma_er_diagram_auto_generation/
 - ESlintを導入
+- イベントの並べ方はもう少しかっこよくできないか？
+リリースまでやること
+- イベントにジャンルを追加。ジャンルで検索できるようにする
+- 出店者検索
+- 消費者検索
+- サイドバー
+- 消費者は一旦省く.データから削除する。
+- 出店者と主催者のプロフィールページ
+- ドメイン取得
+  - [Vercelにお名前.comで取得したドメインをカスタムドメインとして設定する | ZUMA Lab](https://zuma-lab.com/posts/vercel-onamae-domain-settings)
+- 自前でsupabaseのバックアップ機能を作成 
 
 ## Next JS お勉強
 ### クライアントコンポーネント
