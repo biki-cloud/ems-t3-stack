@@ -84,6 +84,9 @@ google認証を追加する
 - [haruyasu/t3-stack-deploy-tutorial](https://github.com/haruyasu/t3-stack-deploy-tutorial)
 - [[完全版] T3 Stack入門！デプロイまで実践するサブスクアプリ構築マスターガイド - YouTube](https://www.youtube.com/watch?v=EVjx7lAu0XQ&t=506s)
 
+## ドメイン設定
+- [Vercelにお名前.comで取得したドメインをカスタムドメインとして設定する | ZUMA Lab](https://zuma-lab.com/posts/vercel-onamae-domain-settings)
+
 
 # TODO
 - プロジェクトの理解
@@ -106,9 +109,6 @@ google認証を追加する
 - 消費者はログインだけ
 - 出店者プロフィールページ
 - 主催者プロフィールページ
-- 独自ドメイン設定
-  - [Vercelにお名前.comで取得したドメインをカスタムドメインとして設定する | ZUMA Lab](https://zuma-lab.com/posts/vercel-onamae-domain-settings)
-  - https://www.sunnybe.online でCORSエラーを修正する
 - 自前でsupabaseのバックアップ機能を作成 
 
 ## Next JS お勉強
