@@ -64,9 +64,9 @@ erDiagram
     String location 
     String image "❓"
     Boolean premium 
+    String genre 
     DateTime createdAt 
     DateTime updatedAt 
-    String genre 
     }
   
 
