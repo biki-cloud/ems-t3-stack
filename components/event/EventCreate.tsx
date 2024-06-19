@@ -227,12 +227,12 @@ const CreateEvent = () => {
                 <FormControl>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                      <Button variant="outline">{genreMapping[field.value as keyof typeof genreMapping]}</Button>
+                      <Button variant="outline">{genreMapping[field.value]}</Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
                       {Object.keys(genreMapping).map((genre) => (
                         <DropdownMenuItem key={genre} onClick={() => field.onChange(genre)}>
-                          {genreMapping[genre as keyof typeof genreMapping]}
+                          {genreMapping[genre]}
                         </DropdownMenuItem>
                       ))}
                     </DropdownMenuContent>

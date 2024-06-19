@@ -1,5 +1,9 @@
 // ジャンルのマッピングを定義
-const genreMapping = {
+type GenreMapping = {
+  [key: string]: string
+}
+
+const genreMapping: GenreMapping = {
     MUSIC: "音楽",
     SPORTS: "スポーツ",
     EDUCATION: "教育",
