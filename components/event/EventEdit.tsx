@@ -30,6 +30,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { genres } from "../objects/mapping"
 import genreMapping from "../objects/mapping"
 
 // 入力データの検証ルールを定義
@@ -38,7 +39,7 @@ const schema = z.object({
   content: z.string().min(3, { message: "3文字以上入力する必要があります" }),
   location: z.string().min(3, { message: "3文字以上入力する必要があります" }),
   premium: z.boolean(),
-  genre: z.string().optional(),
+  genre: z.enum(["MUSIC", "SPORTS", "EDUCATION", "ENTERTAINMENT", "OTHER"]),
 })
 
 // 入力データの型を定義
@@ -223,11 +224,11 @@ const EventEdit = ({ event: event }: EventEditProps) => {
                       <Button variant="outline">{genreMapping[field.value as keyof typeof genreMapping]}</Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
-                      <DropdownMenuItem onClick={() => field.onChange("MUSIC")}>音楽</DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => field.onChange("SPORTS")}>スポーツ</DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => field.onChange("EDUCATION")}>教育</DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => field.onChange("ENTERTAINMENT")}>エンターテインメント</DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => field.onChange("OTHER")}>その他</DropdownMenuItem>
+                      {genres.map((genre) => (
+                        <DropdownMenuItem key={genre} onClick={() => field.onChange(genre)}>
+                          {genreMapping[genre as keyof typeof genreMapping]}
+                        </DropdownMenuItem>
+                      ))}
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </FormControl>

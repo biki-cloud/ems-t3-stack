@@ -29,15 +29,16 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import genres from "../objects/mapping"
 import genreMapping from "../objects/mapping"
 
 // 入力データの検証ルールを定義
 const schema = z.object({
   title: z.string().min(3, { message: "3文字以上入力する必要があります" }),
-  content: z.string().min(3, { message: "3文字以上入力する必要があります" }),
+  content: z.string().min(3, { message: "3文字��上入力する必要があります" }),
   location: z.string().min(3, { message: "3文字以上入力する必要があります" }),
   premium: z.boolean(),
-  genre: z.enum(["MUSIC", "SPORTS", "EDUCATION", "ENTERTAINMENT", "OTHER"]),
+  genre: z.enum(Object.keys(genres) as [string, ...string[]]),
 })
 
 // 入力データの型を定義
@@ -58,7 +59,7 @@ const CreateEvent = () => {
       content: "",
       location: "",
       premium: false,
-      genre: "OTHER",
+      genre: "OTHER" as keyof typeof genres,
     },
   })
 
@@ -83,18 +84,18 @@ const CreateEvent = () => {
       base64Image = imageUpload[0].dataURL
     }
 
-    // イベント新規作成
+    // イベント新規作��
     createEvent({
       title: data.title,
       content: data.content,
       location: data.location,
       base64Image,
       premium: data.premium,
-      genre: data.genre,
+      genre: data.genre as keyof typeof genres,
     })
   }
 
-  // 画像アップロード
+  // 画像アプロード
   const onChangeImage = (imageList: ImageListType) => {
     const file = imageList[0]?.file
     const maxFileSize = 5 * 1024 * 1024
@@ -130,7 +131,7 @@ const CreateEvent = () => {
                       {...dragProps}
                     >
                       <div className="text-gray-400 font-bold mb-2">
-                        ファイル選択またはドラッグ＆ドロップ
+                        ァイル選またはドラッグ＆ドロップ
                       </div>
                       <div className="text-gray-400 text-xs">
                         ファイル形式：jpg / jpeg / png
@@ -163,7 +164,7 @@ const CreateEvent = () => {
                         variant="outline"
                         onClick={() => onImageUpdate(0)}
                       >
-                        画像を変更
+                        像を変
                       </Button>
                     </div>
                   )}
@@ -228,11 +229,11 @@ const CreateEvent = () => {
                       <Button variant="outline">{genreMapping[field.value as keyof typeof genreMapping]}</Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
-                      <DropdownMenuItem onClick={() => field.onChange("MUSIC")}>音楽</DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => field.onChange("SPORTS")}>スポーツ</DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => field.onChange("EDUCATION")}>教育</DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => field.onChange("ENTERTAINMENT")}>エンターテインメント</DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => field.onChange("OTHER")}>その他</DropdownMenuItem>
+                      {Object.keys(genres).map((genre) => (
+                        <DropdownMenuItem key={genre} onClick={() => field.onChange(genre)}>
+                          {genreMapping[genre as keyof typeof genreMapping]}
+                        </DropdownMenuItem>
+                      ))}
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </FormControl>
