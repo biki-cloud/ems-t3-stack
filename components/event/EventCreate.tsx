@@ -23,6 +23,12 @@ import { Loader2 } from "lucide-react"
 import toast from "react-hot-toast"
 import ImageUploading, { ImageListType } from "react-images-uploading"
 import Image from "next/image"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
 // 入力データの検証ルールを定義
 const schema = z.object({
@@ -30,6 +36,7 @@ const schema = z.object({
   content: z.string().min(3, { message: "3文字以上入力する必要があります" }),
   location: z.string().min(3, { message: "3文字以上入力する必要があります" }),
   premium: z.boolean(),
+  genre: z.enum(["MUSIC", "SPORTS", "EDUCATION", "ENTERTAINMENT", "OTHER"]),
 })
 
 // 入力データの型を定義
@@ -50,6 +57,7 @@ const CreateEvent = () => {
       content: "",
       location: "",
       premium: false,
+      genre: "OTHER",
     },
   })
 
@@ -81,6 +89,7 @@ const CreateEvent = () => {
       location: data.location,
       base64Image,
       premium: data.premium,
+      genre: data.genre,
     })
   }
 
@@ -200,6 +209,31 @@ const CreateEvent = () => {
                 <FormLabel>イベント開催場所</FormLabel>
                 <FormControl>
                   <Textarea placeholder="イベント開催場所" {...field} rows={15} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="genre"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>ジャンル</FormLabel>
+                <FormControl>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="outline">{field.value}</Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <DropdownMenuItem onClick={() => field.onChange("MUSIC")}>音楽</DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => field.onChange("SPORTS")}>スポーツ</DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => field.onChange("EDUCATION")}>教育</DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => field.onChange("ENTERTAINMENT")}>エンターテインメント</DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => field.onChange("OTHER")}>その他</DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                 </FormControl>
                 <FormMessage />
               </FormItem>

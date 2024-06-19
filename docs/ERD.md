@@ -1,6 +1,14 @@
 ```mermaid
 erDiagram
 
+        Genre {
+            MUSIC MUSIC
+SPORTS SPORTS
+EDUCATION EDUCATION
+ENTERTAINMENT ENTERTAINMENT
+OTHER OTHER
+        }
+    
   "Account" {
     String id "🗝️"
     String userId 
@@ -66,6 +74,7 @@ erDiagram
     Boolean premium 
     DateTime createdAt 
     DateTime updatedAt 
+    Genre genre 
     }
   
 
@@ -154,6 +163,7 @@ erDiagram
     "PasswordResetToken" o|--|| "User" : "User"
     "Event" o{--}o "Comment" : "Comment"
     "Event" o{--}o "EventParticipationRequest" : "EventParticipationRequest"
+    "Event" o|--|| "Genre" : "enum:genre"
     "Event" o|--|| "User" : "user"
     "Comment" o{--}o "CommentLike" : "likes"
     "Comment" o|--|| "User" : "user"

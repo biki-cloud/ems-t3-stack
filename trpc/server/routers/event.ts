@@ -4,6 +4,7 @@ import { TRPCError } from "@trpc/server";
 import { createCloudImage, deleteCloudImage } from "@/actions/cloudImage";
 import { extractPublicId } from "cloudinary-build-url";
 import prisma from "@/lib/prisma";
+import Genre from "@prisma/client";
 
 export const eventRouter = router({
   // イベント新規作成
@@ -15,11 +16,12 @@ export const eventRouter = router({
         location: z.string(),
         base64Image: z.string().optional(),
         premium: z.boolean(),
+        genre: z.enum(["MUSIC", "SPORTS", "EDUCATION", "ENTERTAINMENT", "OTHER"]),
       })
     )
     .mutation(async ({ input, ctx }) => {
       try {
-        const { title, content, location, base64Image, premium } = input;
+        const { title, content, location, base64Image, premium, genre } = input;
         const userId = ctx.user.id;
 
         if (!ctx.user.isAdmin) {
@@ -45,6 +47,7 @@ export const eventRouter = router({
             location,
             image: image_url,
             premium,
+            genre: genre as any,
           },
         });
 
@@ -170,6 +173,7 @@ export const eventRouter = router({
         location: z.string(),
         base64Image: z.string().optional(),
         premium: z.boolean(),
+        genre: z.enum(["MUSIC", "SPORTS", "EDUCATION", "ENTERTAINMENT", "OTHER"]),
       })
     )
     .mutation(async ({ input, ctx }) => {
@@ -181,6 +185,7 @@ export const eventRouter = router({
           location,
           base64Image,
           premium,
+          genre,
         } = input;
         const userId = ctx.user.id;
         let image_url;
@@ -238,6 +243,7 @@ export const eventRouter = router({
             content,
             location,
             premium,
+            genre,
             ...(image_url && { image: image_url }),
           },
         });
