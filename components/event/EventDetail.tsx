@@ -188,7 +188,7 @@ const EventDetail = ({
         </div>
         <div className="font-bold text-2xl break-words">ジャンル</div>
         <div className="leading-relaxed break-words whitespace-pre-wrap">
-          <p>{genreMapping[event.genre as keyof typeof genreMapping]}</p>
+          <p>{genreMapping[event.genre]}</p>
         </div>
         <div className="font-bold text-2xl break-words">開催場所</div>
         <div className="leading-relaxed break-words whitespace-pre-wrap">
@@ -246,7 +246,7 @@ const EventDetail = ({
                 )}
               </div>
 
-              <div className="text-xs">※いつでも解約可です</div>
+              <div className="text-xs">※いつでも解約可能です</div>
               <div className="font-bold">有料会員特典</div>
               <div className="text-sm">有料記事が読み放題</div>
             </div>

@@ -67,7 +67,7 @@ export const eventRouter = router({
         } else {
           throw new TRPCError({
             code: "INTERNAL_SERVER_ERROR",
-            message: "投稿に失��しました",
+            message: "投稿に失敗しました",
           });
         }
       }
@@ -334,7 +334,7 @@ export const eventRouter = router({
       }
     }),
 
-  // 参加リクエスト���成
+  // 参加リクエストの作成
   createEventParticipationRequest: privateProcedure
     .input(
       z.object({
@@ -382,7 +382,7 @@ export const eventRouter = router({
       return request;
     }),
 
-  // 参加リクエスト��一覧取得
+  // 参加リクエストの一覧取得
   getParticipationRequests: publicProcedure
     .input(
       z.object({

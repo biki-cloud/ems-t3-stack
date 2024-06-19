@@ -34,7 +34,7 @@ import genreMapping from "../objects/mapping"
 // 入力データの検証ルールを定義
 const schema = z.object({
   title: z.string().min(3, { message: "3文字以上入力する必要があります" }),
-  content: z.string().min(3, { message: "3文字上入力する必要があります" }),
+  content: z.string().min(3, { message: "3文字以上入力する必要があります" }),
   location: z.string().min(3, { message: "3文字以上入力する必要があります" }),
   premium: z.boolean(),
   genre: z.string().refine((val) => Object.keys(genreMapping).includes(val), {
@@ -85,7 +85,7 @@ const CreateEvent = () => {
       base64Image = imageUpload[0].dataURL
     }
 
-    // イベント新規作
+    // イベント新規作成
     createEvent({
       title: data.title,
       content: data.content,
@@ -96,7 +96,7 @@ const CreateEvent = () => {
     })
   }
 
-  // 画像アプロード
+  // 画像アップロード
   const onChangeImage = (imageList: ImageListType) => {
     const file = imageList[0]?.file
     const maxFileSize = 5 * 1024 * 1024
@@ -132,7 +132,7 @@ const CreateEvent = () => {
                       {...dragProps}
                     >
                       <div className="text-gray-400 font-bold mb-2">
-                        ァイル選またはドラッグ＆ドロップ
+                        ファイル選択またはドラッグ＆ドロップ
                       </div>
                       <div className="text-gray-400 text-xs">
                         ファイル形式：jpg / jpeg / png
@@ -165,7 +165,7 @@ const CreateEvent = () => {
                         variant="outline"
                         onClick={() => onImageUpdate(0)}
                       >
-                        像を変
+                        画像を変更
                       </Button>
                     </div>
                   )}
@@ -209,7 +209,7 @@ const CreateEvent = () => {
             name="location"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>イント開催場所</FormLabel>
+                <FormLabel>イベント開催場所</FormLabel>
                 <FormControl>
                   <Textarea placeholder="イベント開催場所" {...field} rows={15} />
                 </FormControl>
