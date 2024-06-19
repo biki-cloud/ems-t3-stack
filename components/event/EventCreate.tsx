@@ -29,7 +29,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import genres from "../objects/mapping"
 import genreMapping from "../objects/mapping"
 
 // 入力データの検証ルールを定義
@@ -61,7 +60,7 @@ const CreateEvent = () => {
       content: "",
       location: "",
       premium: false,
-      genre: "OTHER" as keyof typeof genres,
+      genre: "OTHER",
     },
   })
 
@@ -93,7 +92,7 @@ const CreateEvent = () => {
       location: data.location,
       base64Image,
       premium: data.premium,
-      genre: data.genre as keyof typeof genres,
+      genre: data.genre,
     })
   }
 

@@ -6,6 +6,8 @@ import { extractPublicId } from "cloudinary-build-url";
 import prisma from "@/lib/prisma";
 import genreMapping from "@/components/objects/mapping";
 
+const genreKeys = Object.keys(genreMapping);
+
 export const eventRouter = router({
   // イベント新規作成
   createEvent: privateProcedure
@@ -16,7 +18,9 @@ export const eventRouter = router({
         location: z.string(),
         base64Image: z.string().optional(),
         premium: z.boolean(),
-        genre: z.string()
+        genre: z.string().refine((val) => genreKeys.includes(val), {
+          message: "無効なジャンルです",
+        }),
       })
     )
     .mutation(async ({ input, ctx }) => {
@@ -63,7 +67,7 @@ export const eventRouter = router({
         } else {
           throw new TRPCError({
             code: "INTERNAL_SERVER_ERROR",
-            message: "投稿に失敗しました",
+            message: "投稿に失��しました",
           });
         }
       }
@@ -173,7 +177,9 @@ export const eventRouter = router({
         location: z.string(),
         base64Image: z.string().optional(),
         premium: z.boolean(),
-        genre: z.string(),
+        genre: z.string().refine((val) => genreKeys.includes(val), {
+          message: "無効なジャンルです",
+        }),
       })
     )
     .mutation(async ({ input, ctx }) => {
@@ -328,7 +334,7 @@ export const eventRouter = router({
       }
     }),
 
-  // 参加リクエストの���成
+  // 参加リクエスト���成
   createEventParticipationRequest: privateProcedure
     .input(
       z.object({
@@ -376,7 +382,7 @@ export const eventRouter = router({
       return request;
     }),
 
-  // 参加リクエストの一覧取得
+  // 参加リクエスト��一覧取得
   getParticipationRequests: publicProcedure
     .input(
       z.object({
