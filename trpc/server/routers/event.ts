@@ -4,7 +4,7 @@ import { TRPCError } from "@trpc/server";
 import { createCloudImage, deleteCloudImage } from "@/actions/cloudImage";
 import { extractPublicId } from "cloudinary-build-url";
 import prisma from "@/lib/prisma";
-import Genre from "@prisma/client";
+import genreMapping from "@/components/objects/mapping";
 
 export const eventRouter = router({
   // イベント新規作成
@@ -16,7 +16,7 @@ export const eventRouter = router({
         location: z.string(),
         base64Image: z.string().optional(),
         premium: z.boolean(),
-        genre: z.enum(["MUSIC", "SPORTS", "EDUCATION", "ENTERTAINMENT", "OTHER"]),
+        genre: z.string()
       })
     )
     .mutation(async ({ input, ctx }) => {
@@ -47,7 +47,7 @@ export const eventRouter = router({
             location,
             image: image_url,
             premium,
-            genre: genre as any,
+            genre,
           },
         });
 
@@ -173,7 +173,7 @@ export const eventRouter = router({
         location: z.string(),
         base64Image: z.string().optional(),
         premium: z.boolean(),
-        genre: z.enum(["MUSIC", "SPORTS", "EDUCATION", "ENTERTAINMENT", "OTHER"]),
+        genre: z.string(),
       })
     )
     .mutation(async ({ input, ctx }) => {
@@ -328,7 +328,7 @@ export const eventRouter = router({
       }
     }),
 
-  // 参加リクエストの作成
+  // 参加リクエストの���成
   createEventParticipationRequest: privateProcedure
     .input(
       z.object({

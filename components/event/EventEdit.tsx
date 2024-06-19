@@ -18,7 +18,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
-import { Event, Genre } from "@prisma/client"
+import { Event } from "@prisma/client"
 import { trpc } from "@/trpc/react"
 import { Loader2 } from "lucide-react"
 import ImageUploading, { ImageListType } from "react-images-uploading"
@@ -30,7 +30,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { genres } from "../objects/mapping"
 import genreMapping from "../objects/mapping"
 
 // 入力データの検証ルールを定義
@@ -39,7 +38,9 @@ const schema = z.object({
   content: z.string().min(3, { message: "3文字以上入力する必要があります" }),
   location: z.string().min(3, { message: "3文字以上入力する必要があります" }),
   premium: z.boolean(),
-  genre: z.enum(["MUSIC", "SPORTS", "EDUCATION", "ENTERTAINMENT", "OTHER"]),
+  genre: z.string().refine((val) => Object.keys(genreMapping).includes(val), {
+    message: "無効なジャンルです",
+  }),
 })
 
 // 入力データの型を定義
@@ -104,7 +105,7 @@ const EventEdit = ({ event: event }: EventEditProps) => {
       location: data.location,
       base64Image,
       premium: data.premium,
-      genre: data.genre as Genre,
+      genre: data.genre,
     })
   }
 
@@ -224,7 +225,7 @@ const EventEdit = ({ event: event }: EventEditProps) => {
                       <Button variant="outline">{genreMapping[field.value as keyof typeof genreMapping]}</Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
-                      {genres.map((genre) => (
+                      {Object.keys(genreMapping).map((genre) => (
                         <DropdownMenuItem key={genre} onClick={() => field.onChange(genre)}>
                           {genreMapping[genre as keyof typeof genreMapping]}
                         </DropdownMenuItem>

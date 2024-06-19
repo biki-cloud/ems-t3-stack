@@ -35,10 +35,12 @@ import genreMapping from "../objects/mapping"
 // 入力データの検証ルールを定義
 const schema = z.object({
   title: z.string().min(3, { message: "3文字以上入力する必要があります" }),
-  content: z.string().min(3, { message: "3文字��上入力する必要があります" }),
+  content: z.string().min(3, { message: "3文字上入力する必要があります" }),
   location: z.string().min(3, { message: "3文字以上入力する必要があります" }),
   premium: z.boolean(),
-  genre: z.enum(Object.keys(genres) as [string, ...string[]]),
+  genre: z.string().refine((val) => Object.keys(genreMapping).includes(val), {
+    message: "無効なジャンルです",
+  }),
 })
 
 // 入力データの型を定義
@@ -84,7 +86,7 @@ const CreateEvent = () => {
       base64Image = imageUpload[0].dataURL
     }
 
-    // イベント新規作��
+    // イベント新規作
     createEvent({
       title: data.title,
       content: data.content,
@@ -208,7 +210,7 @@ const CreateEvent = () => {
             name="location"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>イベント開催場所</FormLabel>
+                <FormLabel>イント開催場所</FormLabel>
                 <FormControl>
                   <Textarea placeholder="イベント開催場所" {...field} rows={15} />
                 </FormControl>
@@ -229,7 +231,7 @@ const CreateEvent = () => {
                       <Button variant="outline">{genreMapping[field.value as keyof typeof genreMapping]}</Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
-                      {Object.keys(genres).map((genre) => (
+                      {Object.keys(genreMapping).map((genre) => (
                         <DropdownMenuItem key={genre} onClick={() => field.onChange(genre)}>
                           {genreMapping[genre as keyof typeof genreMapping]}
                         </DropdownMenuItem>

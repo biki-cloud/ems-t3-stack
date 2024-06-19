@@ -16,13 +16,6 @@ generator erd {
   includeRelationFromFields = true
 }
 
-enum Genre {
-  MUSIC
-  SPORTS
-  EDUCATION
-  ENTERTAINMENT
-  OTHER
-}
 
 model Account {
   id                String  @id @default(cuid())
@@ -101,11 +94,11 @@ model Event {
   location  String
   image     String?
   premium   Boolean   @default(false)
+  genre     String
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   Comment   Comment[]
   EventParticipationRequest EventParticipationRequest[]
-  genre     Genre
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
