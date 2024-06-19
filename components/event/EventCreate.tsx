@@ -29,6 +29,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import genreMapping from "../objects/mapping"
 
 // 入力データの検証ルールを定義
 const schema = z.object({
@@ -224,7 +225,7 @@ const CreateEvent = () => {
                 <FormControl>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                      <Button variant="outline">{field.value}</Button>
+                      <Button variant="outline">{genreMapping[field.value as keyof typeof genreMapping]}</Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
                       <DropdownMenuItem onClick={() => field.onChange("MUSIC")}>音楽</DropdownMenuItem>

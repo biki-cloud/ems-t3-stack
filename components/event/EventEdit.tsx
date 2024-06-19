@@ -18,12 +18,19 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
-import { Event } from "@prisma/client"
+import { Event, Genre } from "@prisma/client"
 import { trpc } from "@/trpc/react"
 import { Loader2 } from "lucide-react"
 import ImageUploading, { ImageListType } from "react-images-uploading"
 import Image from "next/image"
 import toast from "react-hot-toast"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import genreMapping from "../objects/mapping"
 
 // 入力データの検証ルールを定義
 const schema = z.object({
@@ -31,6 +38,7 @@ const schema = z.object({
   content: z.string().min(3, { message: "3文字以上入力する必要があります" }),
   location: z.string().min(3, { message: "3文字以上入力する必要があります" }),
   premium: z.boolean(),
+  genre: z.string().optional(),
 })
 
 // 入力データの型を定義
@@ -59,6 +67,7 @@ const EventEdit = ({ event: event }: EventEditProps) => {
       content: event.content || "",
       location: event.location || "",
       premium: event.premium || false,
+      genre: event.genre || "",
     },
   })
 
@@ -94,6 +103,7 @@ const EventEdit = ({ event: event }: EventEditProps) => {
       location: data.location,
       base64Image,
       premium: data.premium,
+      genre: data.genre as Genre,
     })
   }
 
@@ -195,6 +205,31 @@ const EventEdit = ({ event: event }: EventEditProps) => {
                 <FormLabel>開催場所</FormLabel>
                 <FormControl>
                   <Textarea placeholder="投稿の内容" {...field} rows={15} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="genre"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>ジャンル</FormLabel>
+                <FormControl>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="outline">{genreMapping[field.value as keyof typeof genreMapping]}</Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <DropdownMenuItem onClick={() => field.onChange("MUSIC")}>音楽</DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => field.onChange("SPORTS")}>スポーツ</DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => field.onChange("EDUCATION")}>教育</DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => field.onChange("ENTERTAINMENT")}>エンターテインメント</DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => field.onChange("OTHER")}>その他</DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                 </FormControl>
                 <FormMessage />
               </FormItem>
