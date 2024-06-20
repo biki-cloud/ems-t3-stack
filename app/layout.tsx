@@ -57,15 +57,6 @@ const RootLayout = async ({ children }: RootLayoutProps) => {
                 {/* フッター */}
                 <footer className="py-5">
                   <div className="text-center text-sm">
-                    Copyright © All rights reserved |{" "}
-                    <a
-                      href="https://www.youtube.com/@fullstackchannel"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="underline"
-                    >
-                      FullStackChannel
-                    </a>
                   </div>
                 </footer>
               </TrpcProvider>

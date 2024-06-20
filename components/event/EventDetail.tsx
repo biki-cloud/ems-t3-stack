@@ -152,16 +152,6 @@ const EventDetail = ({
               </div>
             </Link>
           </div>
-          <div className="flex items-center gap-4 mt-2 text-gray-500">
-            <div className="flex items-center gap-2">
-              <CalendarIcon className="w-5 h-5" />
-              <span>June 15, 2023 - 6:00 PM</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <MapPinIcon className="w-5 h-5" />
-              <span>123 Main St, Anytown USA</span>
-            </div>
-          </div>
         </div>
         <div className="aspect-[16/9] relative">
           <Image
