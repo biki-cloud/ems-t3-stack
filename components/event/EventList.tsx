@@ -7,6 +7,8 @@ import { Input } from "../ui/input"
 import EventItem from "./EventItem"
 import { eventPerPage } from "@/lib/utils"
 import { useState } from 'react';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu";
+import genreMapping from "../objects/mapping";
 
 interface props {
     limit: number
@@ -16,11 +18,13 @@ interface props {
 const EventList = ({ limit, offset }: props) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [query, setQuery] = useState('');
+    const [selectedGenre, setSelectedGenre] = useState('');
 
     const { data: events, isLoading, refetch } = trpc.event.getEvents.useQuery({
         limit,
         offset,
         query: query,
+        genre: selectedGenre,
     }, {
         //  オプションにより、新しいデータがロードされる間、前のデータが表示され続けます。
         keepPreviousData: true,
@@ -41,7 +45,23 @@ const EventList = ({ limit, offset }: props) => {
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />
                 <Button variant="default" onClick={handleSearch}>検索</Button>
+
             </div>
+            <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                    <Button variant="outline">{selectedGenre ? genreMapping[selectedGenre] : "ジャンルを選択"}</Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                    <DropdownMenuItem key="none" onClick={() => setSelectedGenre('')}>
+                        ジャンル選択なし
+                    </DropdownMenuItem>
+                    {Object.keys(genreMapping).map((genre) => (
+                        <DropdownMenuItem key={genre} onClick={() => setSelectedGenre(genre)}>
+                            {genreMapping[genre]}
+                        </DropdownMenuItem>
+                    ))}
+                </DropdownMenuContent>
+            </DropdownMenu>
             {isLoading && <div>検索中です</div>}
             <div className="space-y-5">
                 {events && events.events.length > 0 ? (

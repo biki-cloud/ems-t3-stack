@@ -55,6 +55,7 @@ async function createEvent(
   content: string,
   location: string,
   image: string,
+  genre: string,
   premium = false
 ) {
   return await prisma.event.create({
@@ -65,6 +66,7 @@ async function createEvent(
       location,
       image,
       premium,
+      genre: genre,
     },
   });
 }
@@ -103,7 +105,8 @@ async function main() {
     "一緒に特訓しませんか？",
     "特訓し放題！！仙豆もあります！！",
     "精神と時の部屋",
-    "https://res.cloudinary.com/du8k76ffm/image/upload/v1717764409/t3stackblog/sgiszgto0rtw1xbxfq8t.jpg"
+    "https://res.cloudinary.com/du8k76ffm/image/upload/v1717764409/t3stackblog/sgiszgto0rtw1xbxfq8t.jpg",
+    "MUSIC"
   );
   const event2 = await createEvent(
     organizer1,
@@ -111,6 +114,7 @@ async function main() {
     "サイヤ人に関わらず参加可能",
     "ナメック星",
     "https://res.cloudinary.com/du8k76ffm/image/upload/v1717763665/t3stackblog/tdhls4hoppcf85wifgxr.jpg",
+    "SPORTS"
   );
 
 
@@ -127,7 +131,8 @@ async function main() {
     "一緒に重力１００倍で修行しませんか？",
     "サイヤ人限定！！",
     "カプセルコーポレーション",
-    "https://res.cloudinary.com/du8k76ffm/image/upload/v1717764654/t3stackblog/wknh9ycgcm7kqhq8q6a3.jpg"
+    "https://res.cloudinary.com/du8k76ffm/image/upload/v1717764654/t3stackblog/wknh9ycgcm7kqhq8q6a3.jpg",
+    "SPORTS"
   );
   const event4 = await createEvent(
     organizer2,
@@ -135,7 +140,8 @@ async function main() {
     "一緒にビルス様と修行しませんか？仙豆の配布はありません。",
     "天王神界",
     "https://res.cloudinary.com/du8k76ffm/image/upload/v1717765058/t3stackblog/u9alrwb1gilbrefxslk3.jpg",
-    true
+    "ENTERTAINMENT",
+    true,
   );
 
   const organizer3 = await createUser(
@@ -154,6 +160,7 @@ async function main() {
       location: "荒野",
       image:
         "https://res.cloudinary.com/du8k76ffm/image/upload/v1717764045/t3stackblog/whptjxwerknywkla9siw.jpg",
+      genre: "ENTERTAINMENT",
       premium: true,
     },
   });

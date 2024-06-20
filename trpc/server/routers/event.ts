@@ -4,6 +4,9 @@ import { TRPCError } from "@trpc/server";
 import { createCloudImage, deleteCloudImage } from "@/actions/cloudImage";
 import { extractPublicId } from "cloudinary-build-url";
 import prisma from "@/lib/prisma";
+import genreMapping from "@/components/objects/mapping";
+
+const genreKeys = Object.keys(genreMapping);
 
 export const eventRouter = router({
   // イベント新規作成
@@ -15,11 +18,14 @@ export const eventRouter = router({
         location: z.string(),
         base64Image: z.string().optional(),
         premium: z.boolean(),
+        genre: z.string().refine((val) => genreKeys.includes(val), {
+          message: "無効なジャンルです",
+        }),
       })
     )
     .mutation(async ({ input, ctx }) => {
       try {
-        const { title, content, location, base64Image, premium } = input;
+        const { title, content, location, base64Image, premium, genre } = input;
         const userId = ctx.user.id;
 
         if (!ctx.user.isAdmin) {
@@ -45,6 +51,7 @@ export const eventRouter = router({
             location,
             image: image_url,
             premium,
+            genre,
           },
         });
 
@@ -72,11 +79,12 @@ export const eventRouter = router({
         limit: z.number(),
         offset: z.number(),
         query: z.string().optional(),
+        genre: z.string().optional(),
       })
     )
     .query(async ({ input }) => {
       try {
-        const { offset, limit, query } = input;
+        const { offset, limit, query, genre } = input;
 
         // 投稿一覧取得
         const events = await prisma.event.findMany({
@@ -100,6 +108,7 @@ export const eventRouter = router({
                 },
               },
             ],
+            ...(genre && { genre }),
           },
           include: {
             user: {
@@ -170,6 +179,9 @@ export const eventRouter = router({
         location: z.string(),
         base64Image: z.string().optional(),
         premium: z.boolean(),
+        genre: z.string().refine((val) => genreKeys.includes(val), {
+          message: "無効なジャンルです",
+        }),
       })
     )
     .mutation(async ({ input, ctx }) => {
@@ -181,6 +193,7 @@ export const eventRouter = router({
           location,
           base64Image,
           premium,
+          genre,
         } = input;
         const userId = ctx.user.id;
         let image_url;
@@ -238,6 +251,7 @@ export const eventRouter = router({
             content,
             location,
             premium,
+            genre,
             ...(image_url && { image: image_url }),
           },
         });

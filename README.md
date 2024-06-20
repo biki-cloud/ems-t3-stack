@@ -84,6 +84,9 @@ google認証を追加する
 - [haruyasu/t3-stack-deploy-tutorial](https://github.com/haruyasu/t3-stack-deploy-tutorial)
 - [[完全版] T3 Stack入門！デプロイまで実践するサブスクアプリ構築マスターガイド - YouTube](https://www.youtube.com/watch?v=EVjx7lAu0XQ&t=506s)
 
+## ドメイン設定
+- [Vercelにお名前.comで取得したドメインをカスタムドメインとして設定する | ZUMA Lab](https://zuma-lab.com/posts/vercel-onamae-domain-settings)
+
 
 # TODO
 - プロジェクトの理解
@@ -95,10 +98,11 @@ google認証を追加する
     - 情報入力,編集(名前:入力欄)
     - 情報表示(名前：値)
 - ESlintを導入
-リリースまでやること
+## リリースまでやること
 - イベントの並べ方はもう少しかっこよくできないか？
-  - youtubeみたいな感じが良さそう
-- サイドバー
+  - youtubeみたいな感じが良さそう, スマホとPCを真似る
+  - PCの場合はサイドバー
+    - [react-device-detectでPC/モバイル判定を行う](https://sunday-morning.app/posts/2021-05-13-react-device-detect-pc-mobile)
 - 有料会員部分のUIを削除する
 - イベントにジャンルを追加。ジャンルで検索できるようにする
 - 出店者検索
@@ -106,9 +110,6 @@ google認証を追加する
 - 消費者はログインだけ
 - 出店者プロフィールページ
 - 主催者プロフィールページ
-- 独自ドメイン設定
-  - [Vercelにお名前.comで取得したドメインをカスタムドメインとして設定する | ZUMA Lab](https://zuma-lab.com/posts/vercel-onamae-domain-settings)
-  - https://www.sunnybe.online でCORSエラーを修正する
 - 自前でsupabaseのバックアップ機能を作成 
 
 ## Next JS お勉強

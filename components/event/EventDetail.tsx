@@ -34,6 +34,7 @@ import { Button } from "@/components/ui/button"
 import { AvatarImage, AvatarFallback, Avatar } from "@/components/ui/avatar"
 import EventParticipationRequestDetail from "@/components/EventParticipation/EventParticipationRequestDetail"
 import EventParticipationSettleDetail from "@/components/EventParticipation/EventParticipationSettleDetail"
+import genreMapping from "@/components/objects/mapping"
 
 interface EventDetailProps {
   event: Event & {
@@ -185,6 +186,10 @@ const EventDetail = ({
         <div className="leading-relaxed break-words whitespace-pre-wrap">
           <p>{event.content}</p>
         </div>
+        <div className="font-bold text-2xl break-words">ジャンル</div>
+        <div className="leading-relaxed break-words whitespace-pre-wrap">
+          <p>{genreMapping[event.genre]}</p>
+        </div>
         <div className="font-bold text-2xl break-words">開催場所</div>
         <div className="leading-relaxed break-words whitespace-pre-wrap">
           {event.location}
@@ -303,5 +308,3 @@ function MapPinIcon(props: React.SVGProps<SVGSVGElement>) {
     </svg>
   )
 }
-
-
