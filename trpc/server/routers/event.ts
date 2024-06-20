@@ -79,11 +79,12 @@ export const eventRouter = router({
         limit: z.number(),
         offset: z.number(),
         query: z.string().optional(),
+        genre: z.string().optional(),
       })
     )
     .query(async ({ input }) => {
       try {
-        const { offset, limit, query } = input;
+        const { offset, limit, query, genre } = input;
 
         // 投稿一覧取得
         const events = await prisma.event.findMany({
@@ -107,6 +108,7 @@ export const eventRouter = router({
                 },
               },
             ],
+            ...(genre && { genre }),
           },
           include: {
             user: {
