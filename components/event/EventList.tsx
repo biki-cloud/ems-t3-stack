@@ -52,6 +52,9 @@ const EventList = ({ limit, offset }: props) => {
                     <Button variant="outline">{selectedGenre ? genreMapping[selectedGenre] : "ジャンルを選択"}</Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
+                    <DropdownMenuItem key="none" onClick={() => setSelectedGenre('')}>
+                        ジャンル選択なし
+                    </DropdownMenuItem>
                     {Object.keys(genreMapping).map((genre) => (
                         <DropdownMenuItem key={genre} onClick={() => setSelectedGenre(genre)}>
                             {genreMapping[genre]}
