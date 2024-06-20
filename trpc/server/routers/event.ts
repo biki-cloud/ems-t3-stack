@@ -440,10 +440,7 @@ export const eventRouter = router({
       });
 
       if (!user) {
-        throw new TRPCError({
-          code: "BAD_REQUEST",
-          message: "ユーザーが見つかりませんでした",
-        });
+        return null;
       }
 
       if (user.role === "organizer") {
@@ -456,6 +453,11 @@ export const eventRouter = router({
           where: { userId: userId },
         });
         return vendor;
+      } else if (user.role == "customer") {
+        const customer = await prisma.customer.findUnique({
+          where: { userId: userId },
+        });
+        return customer
       } else {
         throw new TRPCError({
           code: "BAD_REQUEST",

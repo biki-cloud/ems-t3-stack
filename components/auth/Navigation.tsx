@@ -21,10 +21,6 @@ const Navigation = ({ user, isSubscribed }: NavigationProps) => {
     keepPreviousData: true,
   });
 
-  if (user_role == null && !isLoading) {
-    // ログインしていない場合、何もしない
-    return null
-  }
   // user_role の createdAt と updatedAt を Date 型に変換
   const formattedUserRole = user_role ? {
     ...user_role,
@@ -39,12 +35,10 @@ const Navigation = ({ user, isSubscribed }: NavigationProps) => {
           イベントマッチングサービス
         </Link>
 
-        {user ? (
+        {user && formattedUserRole ? (
           <div className="flex items-center justify-center space-x-3">
 
-            {formattedUserRole && (
-              <UserNavigation user={user} user_role={formattedUserRole} />
-            )}
+            <UserNavigation user={user} user_role={formattedUserRole} />
           </div>
         ) : (
           <div className="flex items-center space-x-1">
