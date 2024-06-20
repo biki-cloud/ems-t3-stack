@@ -111,6 +111,9 @@ google認証を追加する
 - 自前でsupabaseのバックアップ機能を作成 
 - 開発用と本番用のDBを用意
 - isSubscribedとか削除する
+- 下記みたいなアクセスできると楽
+  - user.role
+  - user.role_type
 
 ## Next JS お勉強
 ### クライアントコンポーネント
