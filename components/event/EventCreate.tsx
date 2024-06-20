@@ -36,7 +36,6 @@ const schema = z.object({
   title: z.string().min(3, { message: "3文字以上入力する必要があります" }),
   content: z.string().min(3, { message: "3文字以上入力する必要があります" }),
   location: z.string().min(3, { message: "3文字以上入力する必要があります" }),
-  premium: z.boolean(),
   genre: z.string().refine((val) => Object.keys(genreMapping).includes(val), {
     message: "無効なジャンルです",
   }),
@@ -59,7 +58,6 @@ const CreateEvent = () => {
       title: "",
       content: "",
       location: "",
-      premium: false,
       genre: "OTHER",
     },
   })
@@ -91,7 +89,6 @@ const CreateEvent = () => {
       content: data.content,
       location: data.location,
       base64Image,
-      premium: data.premium,
       genre: data.genre,
     })
   }
