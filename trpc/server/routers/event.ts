@@ -423,4 +423,44 @@ export const eventRouter = router({
         data: { status },
       });
     }),
+
+  // ユーザー情報取得
+  getUserRoleInfo: publicProcedure
+    .input(
+      z.object({
+        userId: z.string(),
+      })
+    )
+    .query(async ({ input }) => {
+      const { userId } = input;
+
+      // ユーザー情報取得
+      const user = await prisma.user.findUnique({
+        where: { id: userId },
+      });
+
+      if (!user) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "ユーザーが見つかりませんでした",
+        });
+      }
+
+      if (user.role === "organizer") {
+        const organizer = await prisma.organizer.findUnique({
+          where: { userId: userId },
+        });
+        return organizer;
+      } else if (user.role === "vendor") {
+        const vendor = await prisma.vendor.findUnique({
+          where: { userId: userId },
+        });
+        return vendor;
+      } else {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "無効なユーザー役割です",
+        });
+      }
+    }),
 });
