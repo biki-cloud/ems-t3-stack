@@ -56,7 +56,6 @@ async function createEvent(
   location: string,
   image: string,
   genre: string,
-  premium = false
 ) {
   return await prisma.event.create({
     data: {
@@ -65,7 +64,6 @@ async function createEvent(
       content,
       location,
       image,
-      premium,
       genre: genre,
     },
   });
@@ -141,7 +139,6 @@ async function main() {
     "天王神界",
     "https://res.cloudinary.com/du8k76ffm/image/upload/v1717765058/t3stackblog/u9alrwb1gilbrefxslk3.jpg",
     "ENTERTAINMENT",
-    true,
   );
 
   const organizer3 = await createUser(
@@ -161,7 +158,6 @@ async function main() {
       image:
         "https://res.cloudinary.com/du8k76ffm/image/upload/v1717764045/t3stackblog/whptjxwerknywkla9siw.jpg",
       genre: "ENTERTAINMENT",
-      premium: true,
     },
   });
 

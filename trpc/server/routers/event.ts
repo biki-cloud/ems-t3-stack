@@ -17,7 +17,6 @@ export const eventRouter = router({
         content: z.string(),
         location: z.string(),
         base64Image: z.string().optional(),
-        premium: z.boolean(),
         genre: z.string().refine((val) => genreKeys.includes(val), {
           message: "無効なジャンルです",
         }),
@@ -25,7 +24,7 @@ export const eventRouter = router({
     )
     .mutation(async ({ input, ctx }) => {
       try {
-        const { title, content, location, base64Image, premium, genre } = input;
+        const { title, content, location, base64Image, genre } = input;
         const userId = ctx.user.id;
 
         if (!ctx.user.isAdmin) {
@@ -50,7 +49,6 @@ export const eventRouter = router({
             content,
             location,
             image: image_url,
-            premium,
             genre,
           },
         });
@@ -178,7 +176,6 @@ export const eventRouter = router({
         content: z.string(),
         location: z.string(),
         base64Image: z.string().optional(),
-        premium: z.boolean(),
         genre: z.string().refine((val) => genreKeys.includes(val), {
           message: "無効なジャンルです",
         }),
@@ -192,7 +189,6 @@ export const eventRouter = router({
           content,
           location,
           base64Image,
-          premium,
           genre,
         } = input;
         const userId = ctx.user.id;
@@ -250,7 +246,6 @@ export const eventRouter = router({
             title,
             content,
             location,
-            premium,
             genre,
             ...(image_url && { image: image_url }),
           },

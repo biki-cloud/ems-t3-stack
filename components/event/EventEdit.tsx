@@ -37,7 +37,6 @@ const schema = z.object({
   title: z.string().min(3, { message: "3文字以上入力する必要があります" }),
   content: z.string().min(3, { message: "3文字以上入力する必要があります" }),
   location: z.string().min(3, { message: "3文字以上入力する必要があります" }),
-  premium: z.boolean(),
   genre: z.string().refine((val) => Object.keys(genreMapping).includes(val), {
     message: "無効なジャンルです",
   }),
@@ -68,7 +67,6 @@ const EventEdit = ({ event: event }: EventEditProps) => {
       title: event.title || "",
       content: event.content || "",
       location: event.location || "",
-      premium: event.premium || false,
       genre: event.genre || "",
     },
   })
@@ -104,7 +102,6 @@ const EventEdit = ({ event: event }: EventEditProps) => {
       content: data.content,
       location: data.location,
       base64Image,
-      premium: data.premium,
       genre: data.genre,
     })
   }
@@ -234,27 +231,6 @@ const EventEdit = ({ event: event }: EventEditProps) => {
                   </DropdownMenu>
                 </FormControl>
                 <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="premium"
-            render={({ field }) => (
-              <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-5 shadow-sm">
-                <FormControl>
-                  <Checkbox
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                  />
-                </FormControl>
-                <div className="space-y-2 leading-none">
-                  <FormLabel>有料会員限定</FormLabel>
-                  <FormDescription>
-                    有料会員のみが閲覧できるようにする
-                  </FormDescription>
-                </div>
               </FormItem>
             )}
           />
