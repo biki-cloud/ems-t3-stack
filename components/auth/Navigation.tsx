@@ -8,11 +8,10 @@ import { ThemeModeToggle } from "../ui/theme"
 
 interface NavigationProps {
   user: User | null
-  isSubscribed: boolean
 }
 
 // ナビゲーション
-const Navigation = ({ user, isSubscribed }: NavigationProps) => {
+const Navigation = ({ user }: NavigationProps) => {
   return (
     <header className="shadow-lg shadow-gray-100 mb-10">
       <div className="container mx-auto flex max-w-screen-md items-center justify-between px-2 py-3">

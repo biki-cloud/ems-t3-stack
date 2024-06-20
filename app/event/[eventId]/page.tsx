@@ -36,11 +36,6 @@ const EventDetailPage = async ({
     )
   }
 
-  // サブスクリプション有効チェック
-  const { isSubscribed } = await getSubscription({
-    userId: user?.id,
-  })
-
   // コメント一覧取得
   const { comments, totalComments } = await trpc.comment.getComments({
     userId: user?.id,
@@ -63,7 +58,6 @@ const EventDetailPage = async ({
       comments={comments}
       pageCount={pageCount}
       totalComments={totalComments}
-      isSubscribed={isSubscribed}
       user={user}
       eventParticipationRequests={eventParticipationRequests}
     />

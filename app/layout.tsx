@@ -27,9 +27,6 @@ const RootLayout = async ({ children }: RootLayoutProps) => {
   // 認証情報取得
   const user = await getAuthSession()
 
-  // サブスクリプション有効チェック
-  const { isSubscribed } = await getSubscription({ userId: user?.id })
-
   return (
     <html lang="ja" suppressHydrationWarning={true}>
       <body className={inter.className}>
@@ -42,7 +39,7 @@ const RootLayout = async ({ children }: RootLayoutProps) => {
           <div className="flex min-h-screen flex-col">
             <AuthProvider>
               <TrpcProvider>
-                <Navigation user={user} isSubscribed={isSubscribed} />
+                <Navigation user={user} />
                 <ToastProvider />
 
 
