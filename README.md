@@ -103,8 +103,6 @@ google認証を追加する
   - youtubeみたいな感じが良さそう, スマホとPCを真似る
   - PCの場合はサイドバー
     - [react-device-detectでPC/モバイル判定を行う](https://sunday-morning.app/posts/2021-05-13-react-device-detect-pc-mobile)
-- 有料会員部分のUIを削除する
-- イベントにジャンルを追加。ジャンルで検索できるようにする
 - 出店者検索
 - 消費者検索
 - 消費者はログインだけ

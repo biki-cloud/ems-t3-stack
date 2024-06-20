@@ -50,7 +50,6 @@ export const eventRouter = router({
             content,
             location,
             image: image_url,
-            premium,
             genre,
           },
         });
@@ -250,7 +249,6 @@ export const eventRouter = router({
             title,
             content,
             location,
-            premium,
             genre,
             ...(image_url && { image: image_url }),
           },

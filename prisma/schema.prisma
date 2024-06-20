@@ -93,7 +93,6 @@ model Event {
   content   String
   location  String
   image     String?
-  premium   Boolean   @default(false)
   genre     String
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt

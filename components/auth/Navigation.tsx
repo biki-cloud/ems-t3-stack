@@ -22,11 +22,6 @@ const Navigation = ({ user, isSubscribed }: NavigationProps) => {
 
         {user ? (
           <div className="flex items-center justify-center space-x-3">
-            {!isSubscribed && (
-              <Button asChild variant="premium">
-                <Link href="/payment">有料会員</Link>
-              </Button>
-            )}
 
             <UserNavigation user={user} />
           </div>

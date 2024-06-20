@@ -65,13 +65,8 @@ const EventDetail = ({
 
   const router = useRouter()
 
-  // 表示内容判定
-  const isSubscribedEvent =
-    event.premium && !isSubscribed && event.userId !== userId
-
   // 投稿内容を200文字に制限
-  const content =
-    isSubscribedEvent && event.content.length > 200
+  const content = event.content.length > 200
       ? event.content.slice(0, 200) + "..."
       : event.content
 
@@ -136,11 +131,6 @@ const EventDetail = ({
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="grid gap-8">
-        {event.premium && (
-          <div className="bg-gradient-radial from-blue-500 to-sky-500 rounded-md text-white font-semibold px-3 py-1 text-xs inline-block">
-            有料会員限定
-          </div>
-        )}
         <div>
           <h1 className="text-3xl font-bold">{event.title}</h1>
           <div>
@@ -223,32 +213,6 @@ const EventDetail = ({
               >
                 <Trash2 className="w-5 h-5 text-red-500" />
               </button>
-            </div>
-          )}
-
-          {isSubscribedEvent && (
-            <div className="bg-gradient-radial from-blue-500 to-sky-500 text-white rounded-md p-5 sm:p-10 text-center space-y-5">
-              <div>この記事の続きは有料会員になるとお読みいただけます。</div>
-
-              <div className="inline-block">
-                {userId ? (
-                  <Link href="/payment">
-                    <div className="w-[300px] bg-white text-blue-500 hover:bg-white/90 font-bold shadow rounded-md py-2">
-                      有料プランをみる
-                    </div>
-                  </Link>
-                ) : (
-                  <Link href="/login">
-                    <div className="w-[300px] bg-white text-blue-500 hover:bg-white/90 font-bold shadow rounded-md py-2">
-                      ログインする
-                    </div>
-                  </Link>
-                )}
-              </div>
-
-              <div className="text-xs">※いつでも解約可能です</div>
-              <div className="font-bold">有料会員特典</div>
-              <div className="text-sm">有料記事が読み放題</div>
             </div>
           )}
 
