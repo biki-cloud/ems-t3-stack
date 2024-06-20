@@ -348,7 +348,7 @@ export const eventRouter = router({
       const { eventId, status } = input;
       const vendorId = ctx.user.id; // ベンダーIDをセッションから取得
 
-      // ユーザからvendorを取��
+      // ユーザからvendorを取得
       const vendor = await prisma.vendor.findUnique({
         where: { userId: vendorId },
       });

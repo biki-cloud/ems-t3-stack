@@ -66,7 +66,7 @@ async function createEvent(
       location,
       image,
       premium,
-      genre: genre as any,
+      genre: genre,
     },
   });
 }
