@@ -6,27 +6,25 @@ import UserNavigation from "@/components/auth/UserNavigation"
 import Link from "next/link"
 import { ThemeModeToggle } from "../ui/theme"
 import { trpc } from "@/trpc/react"
+import { get } from "http"
+import { useEffect } from "react"
+import { stringToDate } from "@/lib/utils"
 
 interface NavigationProps {
-  user: User | null
+  user: User & { organizer: Organizer, vendor: Vendor, customer: Customer } | null
   isSubscribed: boolean
 }
 
 // ナビゲーション
 const Navigation = ({ user, isSubscribed }: NavigationProps) => {
-  const { data: user_role, isLoading, refetch } = trpc.event.getUserRoleInfo.useQuery({
+
+  const { data: user_role, isLoading, refetch } = trpc.user.getUserRoleByUserId.useQuery({
     userId: user?.id ?? "",
   }, {
     //  オプションにより、新しいデータがロードされる間、前のデータが表示され続けます。
     keepPreviousData: true,
   });
-
-  // user_role の createdAt と updatedAt を Date 型に変換
-  const formattedUserRole = user_role ? {
-    ...user_role,
-    createdAt: new Date(user_role.createdAt),
-    updatedAt: new Date(user_role.updatedAt),
-  } : null;
+  let formattedUserRole = stringToDate(user_role)
 
   return (
     <header className="shadow-lg shadow-gray-100 mb-10">

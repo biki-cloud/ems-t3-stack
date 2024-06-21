@@ -112,8 +112,7 @@ google認証を追加する
 - 開発用と本番用のDBを用意
 - isSubscribedとか削除する
 - 下記みたいなアクセスできると楽
-  - user.role
-  - user.role_type
+  - user.roleで判定して、user.organizerで使っていきたい。わざわざロール情報を取得するプロシージャを用意するのはめんどくさい。使うところでincludeしていく。
 
 ## Next JS お勉強
 ### クライアントコンポーネント
