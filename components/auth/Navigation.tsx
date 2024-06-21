@@ -1,17 +1,15 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Customer, Organizer, User, Vendor } from "@prisma/client"
+import { User } from "@prisma/client"
 import UserNavigation from "@/components/auth/UserNavigation"
 import Link from "next/link"
 import { ThemeModeToggle } from "../ui/theme"
 import { trpc } from "@/trpc/react"
-import { get } from "http"
-import { useEffect } from "react"
 import { stringToDate } from "@/lib/utils"
 
 interface NavigationProps {
-  user: User & { organizer: Organizer, vendor: Vendor, customer: Customer } | null
+  user: User | null
   isSubscribed: boolean
 }
 

@@ -11,6 +11,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/react"
 import { ThemeProvider } from "@/components/ui/theme-provider"
 import { ThemeModeToggle } from "@/components/ui/theme"
+import { Organizer, User } from "@prisma/client"
 
 const inter = Inter({ subsets: ["latin"] })
 
