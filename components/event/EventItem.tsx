@@ -1,14 +1,16 @@
 "use client"
 
+import { Role, getRoleFromUser } from "@/lib/utils"
 import { Event, User } from "@prisma/client"
 import { formatDistance } from "date-fns"
 import { ja } from "date-fns/locale"
 import Image from "next/image"
 import Link from "next/link"
+import UserLink from "../common/UserLink"
 
 interface EventItemProps {
   event: Event & {
-    user: Pick<User, "id" | "name" | "image">
+    user: User & Role
   }
 }
 
@@ -22,6 +24,8 @@ const EventItem = ({ event: event }: EventItemProps) => {
   const updatedAt = new Date(event.updatedAt ?? 0)
   const now = new Date()
   const date = formatDistance(updatedAt, now, { addSuffix: true, locale: ja })
+
+  let user_role = getRoleFromUser(event.user)
 
   return (
     <div>
@@ -49,22 +53,9 @@ const EventItem = ({ event: event }: EventItemProps) => {
           </div>
 
           <div>
-            <Link href={`/author/${event.user.id}`}>
-              <div className="flex items-center space-x-1">
-                <div className="relative w-6 h-6 flex-shrink-0">
-                  <Image
-                    src={event.user.image || "/default.png"}
-                    className="rounded-full object-cover"
-                    alt={event.user.name || "avatar"}
-                    fill
-                    sizes="24px"
-                  />
-                </div>
-                <div className="text-sm hover:underline break-words min-w-0">
-                  {event.user.name} | {date}
-                </div>
-              </div>
-            </Link>
+            {user_role && (
+              <UserLink userId={user_role.id} userName={event.user.name} userImage={event.user.image} userType={event.user.role as "vendor" | "organizer"} />
+            )}
           </div>
         </div>
       </div>
