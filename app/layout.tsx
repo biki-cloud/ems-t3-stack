@@ -15,6 +15,8 @@ import { Customer, Organizer, User, Vendor } from "@prisma/client"
 import { Role } from "@/lib/utils"
 import SidebarNav from "@/components/settings/SidebarNav"
 import { BrowserView, MobileView, isBrowser, isMobile } from "react-device-detect"
+import { useEffect, useState } from "react"
+import GetWindowSize from "@/components/common/GetWindowSize"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -47,11 +49,7 @@ const RootLayout = async ({ children }: RootLayoutProps) => {
                 <ToastProvider />
 
                 <div className="flex">
-                  {isBrowser && <h1>browser</h1>}
-                  {isMobile && <h1>mobile</h1>}
-                  <BrowserView>
-                    <SidebarNav />
-                  </BrowserView>
+                  <SidebarNav />
                   <main className="container mx-auto max-w-screen-md flex-1 px-2">
                     {children}
                     <SpeedInsights />
