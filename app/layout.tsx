@@ -11,6 +11,8 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/react"
 import { ThemeProvider } from "@/components/ui/theme-provider"
 import { ThemeModeToggle } from "@/components/ui/theme"
+import { Customer, Organizer, User, Vendor } from "@prisma/client"
+import { Role } from "@/lib/utils"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -25,7 +27,7 @@ interface RootLayoutProps {
 
 const RootLayout = async ({ children }: RootLayoutProps) => {
   // 認証情報取得
-  const user = await getAuthSession()
+  const user: User & Role |  null = await getAuthSession()
 
   return (
     <html lang="ja" suppressHydrationWarning={true}>
@@ -54,15 +56,6 @@ const RootLayout = async ({ children }: RootLayoutProps) => {
                 {/* フッター */}
                 <footer className="py-5">
                   <div className="text-center text-sm">
-                    Copyright © All rights reserved |{" "}
-                    <a
-                      href="https://www.youtube.com/@fullstackchannel"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="underline"
-                    >
-                      FullStackChannel
-                    </a>
                   </div>
                 </footer>
               </TrpcProvider>

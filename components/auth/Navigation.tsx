@@ -1,17 +1,20 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { User } from "@prisma/client"
+import { Customer, Organizer, User, Vendor } from "@prisma/client"
 import UserNavigation from "@/components/auth/UserNavigation"
 import Link from "next/link"
 import { ThemeModeToggle } from "../ui/theme"
+import { Role } from "@/lib/utils"
 
 interface NavigationProps {
-  user: User | null
+  user: User & Role | null
+  isSubscribed: boolean
 }
 
 // ナビゲーション
-const Navigation = ({ user }: NavigationProps) => {
+const Navigation = ({ user, isSubscribed }: NavigationProps) => {
+
   return (
     <header className="shadow-lg shadow-gray-100 mb-10">
       <div className="container mx-auto flex max-w-screen-md items-center justify-between px-2 py-3">

@@ -27,6 +27,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { useState } from "react"
 
 // 入力データの検証ルールを定義
 const schema = z.object({
@@ -56,16 +57,15 @@ const Signup = () => {
     },
   })
 
-  // Googleアカウントでサインアップ
   const handleGoogleSingup = async () => {
     try {
       const result = await signIn("google", { callbackUrl: "/" })
 
       if (result?.error) {
-        toast.error("アカウント作成に失敗しました")
+        toast.error("アカウント作成に失敗しました");
       }
     } catch (error) {
-      toast.error("アカウント作成に失敗しました")
+      toast.error("アカウント作成に失敗しました");
     }
   }
 
@@ -99,7 +99,7 @@ const Signup = () => {
     <div className="max-w-[400px] m-auto">
       <div className="text-2xl font-bold text-center mb-10">新規登録</div>
 
-      <Button variant="outline" className="w-full" onClick={handleGoogleSingup}>
+      {/* <Button variant="outline" className="w-full" onClick={handleGoogleSingup}>
         <FcGoogle className="mr-2 h-4 w-4" />
         Googleアカウント
       </Button>
@@ -111,7 +111,7 @@ const Signup = () => {
         <div className="relative flex justify-center">
           <span className="bg-background px-2 text-muted-foreground">OR</span>
         </div>
-      </div>
+      </div> */}
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
@@ -136,11 +136,11 @@ const Signup = () => {
               <FormItem>
                 <FormLabel>ユーザ種別</FormLabel>
                 <FormControl>
-                  <Select 
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}>
                     <SelectTrigger className="w-[180px]">
-                      <SelectValue placeholder=""/>
+                      <SelectValue placeholder="" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="organizer">イベント主催者</SelectItem>

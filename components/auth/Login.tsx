@@ -91,7 +91,7 @@ const Login = () => {
     <div className="max-w-[400px] m-auto">
       <div className="text-2xl font-bold text-center mb-10">ログイン</div>
 
-      <Button variant="outline" className="w-full" onClick={handleGoogleLogin}>
+      {/* <Button variant="outline" className="w-full" onClick={handleGoogleLogin}>
         <FcGoogle className="mr-2 h-4 w-4" />
         Googleアカウント
       </Button>
@@ -103,7 +103,7 @@ const Login = () => {
         <div className="relative flex justify-center">
           <span className="bg-background px-2 text-muted-foreground">OR</span>
         </div>
-      </div>
+      </div> */}
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
