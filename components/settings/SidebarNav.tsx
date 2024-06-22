@@ -17,7 +17,7 @@ const items = [
   },
   {
     title: "ユーザプロフィール",
-    href: "/settings/profile",
+    href: "/settings/userProfile",
   },
   {
     title: "イベント主催者プロフィール",

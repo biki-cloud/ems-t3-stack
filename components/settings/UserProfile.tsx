@@ -37,7 +37,7 @@ interface ProfileProps {
 }
 
 // プロフィール
-const Profile = ({ user }: ProfileProps) => {
+const UserProfile = ({ user }: ProfileProps) => {
   const router = useRouter()
   const [imageUpload, setImageUpload] = useState<ImageListType>([
     {
@@ -207,4 +207,4 @@ const Profile = ({ user }: ProfileProps) => {
   )
 }
 
-export default Profile
+export default UserProfile
