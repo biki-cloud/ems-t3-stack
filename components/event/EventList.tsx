@@ -6,9 +6,12 @@ import { Button } from "../ui/button"
 import { Input } from "../ui/input"
 import EventItem from "./EventItem"
 import { eventPerPage } from "@/lib/utils"
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu";
 import genreMapping from "../objects/mapping";
+import { useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 interface props {
     limit: number
@@ -19,6 +22,9 @@ const EventList = ({ limit, offset }: props) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [query, setQuery] = useState('');
     const [selectedGenre, setSelectedGenre] = useState('');
+    const router = useRouter();
+    const searchParams = useSearchParams();
+    const pathname = usePathname();
 
     const { data: events, isLoading, refetch } = trpc.event.getEvents.useQuery({
         limit,
@@ -26,13 +32,23 @@ const EventList = ({ limit, offset }: props) => {
         query: query,
         genre: selectedGenre,
     }, {
-        //  オプションにより、新しいデータがロードされる間、前のデータが表示され続けます。
         keepPreviousData: true,
     });
 
+    useEffect(() => {
+        const search = searchParams.get('search') || '';
+        const genre = searchParams.get('genre') || '';
+        setSearchTerm(search);
+        setSelectedGenre(genre);
+        setQuery(search);
+        refetch();
+    }, [searchParams]);
+
     const handleSearch = () => {
-        setQuery(searchTerm); // 検索ボタンが押された時にクエリを設定
-        refetch(); // クエリを手動で��実行
+        setQuery(searchTerm);
+        refetch();
+        const queryString = new URLSearchParams({ search: searchTerm, genre: selectedGenre }).toString();
+        router.push(`${pathname}?${queryString}`);
     };
 
     return (
@@ -62,7 +78,7 @@ const EventList = ({ limit, offset }: props) => {
                     ))}
                 </DropdownMenuContent>
             </DropdownMenu>
-            {isLoading && <div>検索中です</div>}
+            {isLoading && <div>索中です</div>}
             <div className="space-y-5">
                 {events && events.events.length > 0 ? (
                     events.events.map((event) => (
