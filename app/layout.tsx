@@ -16,7 +16,6 @@ import { Role } from "@/lib/utils"
 import SidebarNav from "@/components/settings/SidebarNav"
 import { BrowserView, MobileView, isBrowser, isMobile } from "react-device-detect"
 import { useEffect, useState } from "react"
-import GetWindowSize from "@/components/common/GetWindowSize"
 
 const inter = Inter({ subsets: ["latin"] })
 
