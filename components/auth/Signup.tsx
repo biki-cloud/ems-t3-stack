@@ -56,24 +56,8 @@ const Signup = () => {
       password: "",
     },
   })
-  // フォームの状態
-  const gooleForm = useForm<InputType>({
-    // 入力値の検証
-    resolver: zodResolver(schema),
-    // 初期値
-    defaultValues: {
-      role: "",
-    },
-  })
-
-  const [role, setRole] = useState("");
 
   const handleGoogleSingup = async () => {
-    if (!role) {
-      toast.error("ロールを選択してください");
-      return;
-    }
-
     try {
       const result = await signIn("google", { callbackUrl: "/" })
 
@@ -115,26 +99,10 @@ const Signup = () => {
     <div className="max-w-[400px] m-auto">
       <div className="text-2xl font-bold text-center mb-10">新規登録</div>
 
-      <Form {...gooleForm}>
-        <div className="mb-5">
-          <FormLabel>ユーザ種別</FormLabel>
-          <Select onValueChange={setRole} defaultValue={role}>
-            <SelectTrigger className="w-full">
-              <SelectValue placeholder="ロールを選択" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="organizer">イベント主催者</SelectItem>
-              <SelectItem value="vendor">イベント出店者</SelectItem>
-              <SelectItem value="customer">イベント参加者</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-
-        <Button variant="outline" className="w-full" onClick={handleGoogleSingup}>
-          <FcGoogle className="mr-2 h-4 w-4" />
-          Googleアカウント
-        </Button>
-      </Form>
+      {/* <Button variant="outline" className="w-full" onClick={handleGoogleSingup}>
+        <FcGoogle className="mr-2 h-4 w-4" />
+        Googleアカウント
+      </Button>
 
       <div className="relative my-5">
         <div className="absolute inset-0 flex items-center">
@@ -143,7 +111,7 @@ const Signup = () => {
         <div className="relative flex justify-center">
           <span className="bg-background px-2 text-muted-foreground">OR</span>
         </div>
-      </div>
+      </div> */}
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
@@ -168,11 +136,11 @@ const Signup = () => {
               <FormItem>
                 <FormLabel>ユーザ種別</FormLabel>
                 <FormControl>
-                  <Select 
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}>
                     <SelectTrigger className="w-[180px]">
-                      <SelectValue placeholder=""/>
+                      <SelectValue placeholder="" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="organizer">イベント主催者</SelectItem>
