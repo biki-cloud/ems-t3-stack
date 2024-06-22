@@ -14,7 +14,7 @@ import { ThemeModeToggle } from "@/components/ui/theme"
 import { Customer, Organizer, User, Vendor } from "@prisma/client"
 import { Role } from "@/lib/utils"
 import SidebarNav from "@/components/settings/SidebarNav"
-import { BrowserView, MobileView } from "react-device-detect"
+import { BrowserView, MobileView, isBrowser, isMobile } from "react-device-detect"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -50,6 +50,9 @@ const RootLayout = async ({ children }: RootLayoutProps) => {
                   <BrowserView>
                     <SidebarNav />
                   </BrowserView>
+                  <MobileView>
+                    {/* <SidebarNav /> */}
+                  </MobileView>
                   <main className="container mx-auto max-w-screen-md flex-1 px-2">
                     {children}
                     <SpeedInsights />
