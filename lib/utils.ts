@@ -19,3 +19,9 @@ export function stringToDate(obj: any) {
     updatedAt: new Date(obj.updatedAt),
   } : null;
 }
+
+export interface Role {
+  organizer: Organizer | null
+  vendor: Vendor | null
+  customer: Customer | null
+}

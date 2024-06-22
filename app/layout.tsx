@@ -11,7 +11,8 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/react"
 import { ThemeProvider } from "@/components/ui/theme-provider"
 import { ThemeModeToggle } from "@/components/ui/theme"
-import { Organizer, User } from "@prisma/client"
+import { Customer, Organizer, User, Vendor } from "@prisma/client"
+import { Role } from "@/lib/utils"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -26,7 +27,7 @@ interface RootLayoutProps {
 
 const RootLayout = async ({ children }: RootLayoutProps) => {
   // 認証情報取得
-  const user = await getAuthSession()
+  const user: User & Role |  null = await getAuthSession()
 
   // サブスクリプション有効チェック
   const { isSubscribed } = await getSubscription({ userId: user?.id })
