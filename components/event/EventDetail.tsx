@@ -43,14 +43,14 @@ interface EventDetailProps {
     user: User & Role
   }
   userId?: string
-  comments: (Comment & { user: User } & {
+  comments: (Comment & { user: User & Role } & {
     hasLiked: boolean
     commentLikeId: string | null
   } & { likes: CommentLike[] })[]
   pageCount: number
   totalComments: number
   user: User | null
-  eventParticipationRequests: (EventParticipationRequest & { vendor: Vendor & { user: User } })[]
+  eventParticipationRequests: (EventParticipationRequest & { vendor: Vendor & { user: User & Role } })[]
 }
 
 const EventDetail = ({

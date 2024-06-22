@@ -1,7 +1,7 @@
 "use client"
 
 import { Comment, User, CommentLike } from "@prisma/client"
-import { commentPerPage } from "@/lib/utils"
+import { Role, commentPerPage } from "@/lib/utils"
 import CommentNew from "@/components/comment/CommentNew"
 import CommentItem from "@/components/comment/CommentItem"
 import PaginationButton from "@/components/pagers/PaginationButton"
@@ -9,7 +9,7 @@ import PaginationButton from "@/components/pagers/PaginationButton"
 interface CommentDetailProps {
   userId?: string
   eventId: string
-  comments: (Comment & { user: Pick<User, "id" | "name" | "image"> } & {
+  comments: (Comment & { user: User & Role } & {
     hasLiked: boolean
     commentLikeId: string | null
   } & { likes: CommentLike[] })[]
