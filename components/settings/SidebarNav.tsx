@@ -16,7 +16,7 @@ const items = [
     href: "/"
   },
   {
-    title: "プロフィール編集",
+    title: "ユーザプロフィール",
     href: "/settings/profile",
   },
   {
