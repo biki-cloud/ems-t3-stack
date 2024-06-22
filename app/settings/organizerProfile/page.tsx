@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation"
 import { getAuthSession } from "@/lib/nextauth"
-import OrganizerProfileEdit from "@/components/settings/OrganizerProfileEdit"
+import OrganizerProfileEdit from "@/components/organizer/OrganizerProfileEdit"
 import prisma from "@/lib/prisma"
 
 // プロフィール編集ページ

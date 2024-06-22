@@ -31,7 +31,7 @@ interface ProfileProps {
 }
 
 // プロフィール
-const OrganizerProfile = ({ organizer }: ProfileProps) => {
+const OrganizerIntroduceProfile = ({ organizer }: ProfileProps) => {
 
   const { data: user, isLoading, refetch } = trpc.user.getUserByUserId.useQuery({
     userId: organizer.user.id,
@@ -49,4 +49,4 @@ const OrganizerProfile = ({ organizer }: ProfileProps) => {
   )
 }
 
-export default OrganizerProfile
+export default OrganizerIntroduceProfile

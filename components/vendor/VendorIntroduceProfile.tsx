@@ -26,12 +26,12 @@ import toast from "react-hot-toast"
 
 interface ProfileProps {
   vendor: Vendor & {
-    user: User 
+    user: User
   }
 }
 
 // プロフィール
-const VendorProfile = ({ vendor: vendor }: ProfileProps) => {
+const VendorIntroduceProfile = ({ vendor: vendor }: ProfileProps) => {
 
   const { data: user, isLoading, refetch } = trpc.user.getUserByUserId.useQuery({
     userId: vendor.user.id,
@@ -49,4 +49,4 @@ const VendorProfile = ({ vendor: vendor }: ProfileProps) => {
   )
 }
 
-export default VendorProfile
+export default VendorIntroduceProfile

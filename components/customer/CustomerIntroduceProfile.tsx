@@ -10,7 +10,7 @@ interface ProfileProps {
 }
 
 // プロフィール
-const CustomerProfile = ({ customer }: ProfileProps) => {
+const CustomerIntroduceProfile = ({ customer }: ProfileProps) => {
   const { data: user, isLoading, refetch } = trpc.user.getUserByUserId.useQuery({
     userId: customer.user.id,
   }, {
@@ -26,4 +26,4 @@ const CustomerProfile = ({ customer }: ProfileProps) => {
   )
 }
 
-export default CustomerProfile
+export default CustomerIntroduceProfile
