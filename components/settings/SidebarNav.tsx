@@ -43,6 +43,21 @@ const SidebarNav = ({user}: SidebarNavProps) => {
 
   const [isDevicePC, setIsDevicePC] = useState(false)
 
+  // ユーザーの役割に基づいてナビゲーションアイテムをフィルタリング
+  const filteredItems = items.filter(item => {
+    if (user?.role === "organizer" && item.href === "/settings/vendorProfile") {
+      return false
+    }
+    if (user?.role === "vendor" && item.href === "/settings/organizerProfile") {
+      return false
+    }
+    if (user?.role !== "organizer" && user?.role !== "vendor" && 
+        (item.href === "/settings/vendorProfile" || item.href === "/settings/organizerProfile")) {
+      return false
+    }
+    return true
+  })
+
   useEffect(() => {
     const handleResize = () => {
       // 画面の幅が700px以上、高さが700px以上の場合はPCと判定
@@ -58,7 +73,7 @@ const SidebarNav = ({user}: SidebarNavProps) => {
     <div>
       {isDevicePC && (
         <nav className={cn("flex space-x-2 md:flex-col md:space-x-0 md:space-y-1")}>
-          {items.map((item) => (
+          {filteredItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
