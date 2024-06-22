@@ -47,12 +47,11 @@ const RootLayout = async ({ children }: RootLayoutProps) => {
                 <ToastProvider />
 
                 <div className="flex">
+                  {isBrowser && <h1>browser</h1>}
+                  {isMobile && <h1>mobile</h1>}
                   <BrowserView>
                     <SidebarNav />
                   </BrowserView>
-                  <MobileView>
-                    {/* <SidebarNav /> */}
-                  </MobileView>
                   <main className="container mx-auto max-w-screen-md flex-1 px-2">
                     {children}
                     <SpeedInsights />
