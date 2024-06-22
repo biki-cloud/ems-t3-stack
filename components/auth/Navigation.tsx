@@ -9,11 +9,10 @@ import { Role } from "@/lib/utils"
 
 interface NavigationProps {
   user: User & Role | null
-  isSubscribed: boolean
 }
 
 // ナビゲーション
-const Navigation = ({ user, isSubscribed }: NavigationProps) => {
+const Navigation = ({ user }: NavigationProps) => {
 
   return (
     <header className="shadow-lg shadow-gray-100 mb-10">
