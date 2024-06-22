@@ -105,14 +105,8 @@ google認証を追加する
     - [react-device-detectでPC/モバイル判定を行う](https://sunday-morning.app/posts/2021-05-13-react-device-detect-pc-mobile)
 - 出店者検索
 - 消費者検索
-- 消費者はログインだけ
-- 出店者プロフィールページ
-- 主催者プロフィールページ
 - 自前でsupabaseのバックアップ機能を作成 
 - 開発用と本番用のDBを用意
-- isSubscribedとか削除する
-- 下記みたいなアクセスできると楽
-  - user.roleで判定して、user.organizerで使っていきたい。わざわざロール情報を取得するプロシージャを用意するのはめんどくさい。使うところでincludeしていく。
 
 ## Next JS お勉強
 ### クライアントコンポーネント

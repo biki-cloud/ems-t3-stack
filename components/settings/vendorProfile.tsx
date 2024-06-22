@@ -25,16 +25,26 @@ import toast from "react-hot-toast"
 
 
 interface ProfileProps {
-  vendor: Vendor
+  vendor: Vendor & {
+    user: User 
+  }
 }
 
 // プロフィール
 const VendorProfile = ({ vendor: vendor }: ProfileProps) => {
 
+  const { data: user, isLoading, refetch } = trpc.user.getUserByUserId.useQuery({
+    userId: vendor.user.id,
+  }, {
+    //  オプションにより、新しいデータがロードされる間、前のデータが表示され続けます。
+    keepPreviousData: true,
+  });
+
   return (
     <div>
       <div className="text-xl font-bold text-center mb-5">イベント出店者プロフィール</div>
       <p>事業者名: {vendor.vendorName}</p>
+      <p>名前: {user?.name}</p>
     </div>
   )
 }

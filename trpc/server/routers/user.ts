@@ -4,7 +4,7 @@ import { TRPCError } from "@trpc/server";
 import { createCloudImage, deleteCloudImage } from "@/actions/cloudImage";
 import { extractPublicId } from "cloudinary-build-url";
 import prisma from "@/lib/prisma";
-import { ro } from "date-fns/locale";
+import { ro, tr } from "date-fns/locale";
 
 export const userRouter = router({
   // ユーザー情報更新
@@ -119,6 +119,36 @@ export const userRouter = router({
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
           message: "ユーザー投稿詳細の取得に失敗しました",
+        });
+      }
+    }),
+
+  // 特定のユーザーの詳細を取得
+  getUserByUserId: publicProcedure
+    .input(
+      z.object({
+        userId: z.string(),
+      })
+    )
+    .query(async ({ input }) => {
+      try {
+        const { userId } = input;
+
+        // ユーザー詳細を取得
+        const user = await prisma.user.findUnique({
+          where: { id: userId },
+        });
+
+        if (!user) {
+          return null;
+        }
+
+        return user;
+      } catch (error) {
+        console.log(error);
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "ユーザー詳細の取得に失敗しました",
         });
       }
     }),

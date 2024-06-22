@@ -32,7 +32,7 @@ const EventList = ({ limit, offset }: props) => {
 
     const handleSearch = () => {
         setQuery(searchTerm); // 検索ボタンが押された時にクエリを設定
-        refetch(); // クエリを手動で再実行
+        refetch(); // クエリを手動で��実行
     };
 
     return (
@@ -71,7 +71,16 @@ const EventList = ({ limit, offset }: props) => {
                             event={{
                                 ...event,
                                 createdAt: new Date(event.createdAt),
-                                updatedAt: new Date(event.updatedAt)
+                                updatedAt: new Date(event.updatedAt),
+                                user: {
+                                    ...event.user,
+                                    emailVerified: event.user.emailVerified ? new Date(event.user.emailVerified) : null,
+                                    createdAt: new Date(event.user.createdAt),
+                                    updatedAt: new Date(event.user.updatedAt),
+                                    organizer: event.user.organizer ? { ...event.user.organizer, createdAt: new Date(event.user.organizer.createdAt), updatedAt: new Date(event.user.organizer.updatedAt) } : null,
+                                    vendor: event.user.vendor ? { ...event.user.vendor, createdAt: new Date(event.user.vendor.createdAt), updatedAt: new Date(event.user.vendor.updatedAt) } : null,
+                                    customer: event.user.customer ? { ...event.user.customer, createdAt: new Date(event.user.customer.createdAt), updatedAt: new Date(event.user.customer.updatedAt) } : null,
+                                }
                             }}
                         />
                     ))

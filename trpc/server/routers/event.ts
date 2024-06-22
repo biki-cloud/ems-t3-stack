@@ -112,8 +112,19 @@ export const eventRouter = router({
             user: {
               select: {
                 id: true,
+                email: true,
+                emailVerified: true,
+                introduction: true,
+                isAdmin: true,
                 name: true,
                 image: true,
+                role: true,
+                hashedPassword: true,
+                createdAt: true,
+                updatedAt: true,
+                organizer: true,
+                vendor: true,
+                customer: true,
               },
             },
           },
@@ -150,11 +161,22 @@ export const eventRouter = router({
             user: {
               select: {
                 id: true,
+                email: true,
+                emailVerified: true,
+                introduction: true,
+                isAdmin: true,
                 name: true,
                 image: true,
+                role: true,
+                hashedPassword: true,
+                createdAt: true,
+                updatedAt: true,
+                organizer: true,
+                vendor: true,
+                customer: true,
               },
             },
-          },
+          }
         });
 
         return event;
@@ -398,7 +420,13 @@ export const eventRouter = router({
         include: {
           vendor: {
             include: {
-              user: true,
+              user: {
+                include: {
+                  organizer: true,
+                  vendor: true,
+                  customer: true,
+                },
+              }
             },
           },
           event: true,

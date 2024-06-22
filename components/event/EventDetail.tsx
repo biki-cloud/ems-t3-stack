@@ -35,20 +35,22 @@ import { AvatarImage, AvatarFallback, Avatar } from "@/components/ui/avatar"
 import EventParticipationRequestDetail from "@/components/EventParticipation/EventParticipationRequestDetail"
 import EventParticipationSettleDetail from "@/components/EventParticipation/EventParticipationSettleDetail"
 import genreMapping from "@/components/objects/mapping"
+import { Role, getRoleFromUser } from "@/lib/utils"
+import UserLink from "../common/UserLink"
 
 interface EventDetailProps {
   event: Event & {
-    user: Pick<User, "id" | "name" | "image">
+    user: User & Role
   }
   userId?: string
-  comments: (Comment & { user: Pick<User, "id" | "name" | "image"> } & {
+  comments: (Comment & { user: User & Role } & {
     hasLiked: boolean
     commentLikeId: string | null
   } & { likes: CommentLike[] })[]
   pageCount: number
   totalComments: number
   user: User | null
-  eventParticipationRequests: (EventParticipationRequest & { vendor: Vendor & { user: User } })[]
+  eventParticipationRequests: (EventParticipationRequest & { vendor: Vendor & { user: User & Role } })[]
 }
 
 const EventDetail = ({
@@ -60,13 +62,14 @@ const EventDetail = ({
   user,
   eventParticipationRequests,
 }: EventDetailProps) => {
+  let user_role = getRoleFromUser(event.user)
 
   const router = useRouter()
 
   // 投稿内容を200文字に制限
   const content = event.content.length > 200
-      ? event.content.slice(0, 200) + "..."
-      : event.content
+    ? event.content.slice(0, 200) + "..."
+    : event.content
 
   // 投稿削除
   const { mutate: deleteEvent, isLoading } = trpc.event.deleteEvent.useMutation({
@@ -122,7 +125,7 @@ const EventDetail = ({
   const isEventAuthor = event.userId == user?.id
 
   // 申請リスト一覧にログインしているvendorがいるか
-  const isVendorRequested = eventParticipationRequests.some(request => 
+  const isVendorRequested = eventParticipationRequests.some(request =>
     request.vendor.user.id === userId
   );
 
@@ -132,23 +135,12 @@ const EventDetail = ({
         <div>
           <h1 className="text-3xl font-bold">{event.title}</h1>
           <div>
-            <Link href={`/author/${event.user.id}`}>
-              <div className="flex items-center space-x-1">
-                <div className="relative w-6 h-6 flex-shrink-0">
-                  <Image
-                    src={event.user.image || "/default.png"}
-                    className="rounded-full object-cover"
-                    alt={event.user.name || "avatar"}
-                    fill
-                    sizes="24px"
-                  />
-                </div>
-                <div className="text-sm hover:underline break-words min-w-0">
-                  {event.user.name} |{" "}
-                  {format(new Date(event.updatedAt), "yyyy/MM/dd HH:mm")}
-                </div>
-              </div>
-            </Link>
+            {user_role && (
+              <UserLink userId={user_role.id} userName={event.user.name} userImage={event.user.image} userType={event.user.role as "vendor" | "organizer"} />
+            )}
+            <div className="text-sm hover:underline break-words min-w-0">
+              {format(new Date(event.updatedAt), "yyyy/MM/dd HH:mm")}
+            </div>
           </div>
         </div>
         <div className="aspect-[16/9] relative">
@@ -177,16 +169,16 @@ const EventDetail = ({
             <Button
               className="w-full sm:w-auto"
               onClick={() => sendParticipationRequest({ eventId: event.id, status: "pending" })}
-              disabled={isRequestLoading}
+              disabled={isRequestLoading || isVendorRequested}
             >
               {isVendorRequested && '参加リクエスト送信済み' || '参加リクエストを送る'}
             </Button>
           </div>
         )}
         <div className="grid gap-6">
-          {(isEventAuthor || isVendorRequested) && <EventParticipationRequestDetail eventParticipationRequests={pendingRequests} isEventAuthor={isEventAuthor}/>}
-          <EventParticipationSettleDetail eventParticipationRequests={approvedRequests}/>
-          
+          {(isEventAuthor || isVendorRequested) && <EventParticipationRequestDetail eventParticipationRequests={pendingRequests} isEventAuthor={isEventAuthor} />}
+          <EventParticipationSettleDetail eventParticipationRequests={approvedRequests} />
+
           {userId === event.user.id && (
             <div className="flex items-center justify-end space-x-1">
               <Link href={`/event/${event.id}/edit`}>

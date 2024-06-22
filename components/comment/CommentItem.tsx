@@ -9,9 +9,11 @@ import CommentLikeDetail from "@/components/comment/CommentLikeDetail"
 import Link from "next/link"
 import toast from "react-hot-toast"
 import Image from "next/image"
+import { Role, getRoleFromUser } from "@/lib/utils"
+import UserLink from "../common/UserLink"
 
 interface CommentItemProps {
-  comment: Comment & { user: Pick<User, "id" | "name" | "image"> } & {
+  comment: Comment & { user: User & Role } & {
     hasLiked: boolean
     commentLikeId: string | null
   } & { likes: CommentLike[] }
@@ -42,23 +44,14 @@ const CommentItem = ({ comment, userId }: CommentItemProps) => {
     })
   }
 
+  let user_role = getRoleFromUser(comment.user)
+
   return (
     <div>
       <div className="flex items-center justify-between p-2 sm:p-5 border-b">
-        <Link href={`/author/${comment.user.id}`}>
-          <div className="flex items-center space-x-1">
-            <div className="relative w-6 h-6 flex-shrink-0">
-              <Image
-                src={comment.user.image || "/default.png"}
-                className="rounded-full object-cover"
-                alt={comment.user.name || "avatar"}
-                fill
-                sizes="24px"
-              />
-            </div>
-            <div className="text-sm hover:underline">{comment.user.name}</div>
-          </div>
-        </Link>
+        {user_role && (
+          <UserLink userId={user_role.id} userName={comment.user.name} userImage={comment.user.image} userType={comment.user.role as "vendor" | "organizer"} />
+        )}
 
         <div className="text-sm">
           {format(new Date(comment.updatedAt), "yyyy/MM/dd HH:mm")}

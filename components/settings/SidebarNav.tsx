@@ -19,10 +19,10 @@ const items = [
     title: "イベント出店者プロフィール",
     href: "/settings/vendorProfile",
   },
-  {
-    title: "定期購入",
-    href: "/settings/billing",
-  },
+  // {
+  //   title: "定期購入",
+  //   href: "/settings/billing",
+  // },
   {
     title: "パスワード変更",
     href: "/settings/password",

@@ -6,10 +6,12 @@ import { format } from "date-fns";
 import { trpc } from "@/trpc/react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation"
+import { Role, getRoleFromUser } from "@/lib/utils";
+import UserLink from "../common/UserLink";
 
 
 interface EventParticipationRequestItemProps {
-    eventParticipationRequest: (EventParticipationRequest & { vendor: Vendor & { user: User }})
+    eventParticipationRequest: (EventParticipationRequest & { vendor: Vendor & { user: User & Role } })
     isEventAuthor: boolean
 }
 
@@ -20,7 +22,7 @@ const EventParticipationRequestItem = ({
     const router = useRouter();
     const updateStatus = trpc.event.updateParticipationRequestStatus.useMutation();
 
-    const {mutate: updateParticipationRequestStatus, isLoading} = trpc.event.updateParticipationRequestStatus.useMutation({
+    const { mutate: updateParticipationRequestStatus, isLoading } = trpc.event.updateParticipationRequestStatus.useMutation({
         onSuccess: () => {
             toast.success("更新しました");
             router.refresh(); // 画面をリロードして、リクエストを参加者リストに反映する
@@ -39,28 +41,16 @@ const EventParticipationRequestItem = ({
         router.refresh()
     }
 
+    let user_role = getRoleFromUser(eventParticipationRequest.vendor.user)
+
     return (
         <div>
             <ul className="grid gap-4 mt-4">
                 <li className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
-                        <Link href={`/author/${eventParticipationRequest.vendor.user.id}`}>
-                            <div className="flex items-center space-x-1">
-                                <div className="relative w-6 h-6 flex-shrink-0">
-                                    <Image
-                                        src={eventParticipationRequest.vendor.user.image || "/default.png"}
-                                        className="rounded-full object-cover"
-                                        alt={eventParticipationRequest.vendor.user.name || "avatar"}
-                                        fill
-                                        sizes="24px"
-                                    />
-                                </div>
-                                <div className="text-sm hover:underline break-words min-w-0">
-                                    {eventParticipationRequest.vendor.user.name} |{" "}
-                                    {format(new Date(eventParticipationRequest.createdAt), "yyyy/MM/dd HH:mm")}
-                                </div>
-                            </div>
-                        </Link>
+                        {user_role && (
+                            <UserLink userId={user_role.id} userName={eventParticipationRequest.vendor.user.name} userImage={eventParticipationRequest.vendor.user.image} userType={eventParticipationRequest.vendor.user.role as "vendor" | "organizer"} />
+                        )}
                     </div>
                     {isEventAuthor &&
                         <div className="flex items-center gap-2">

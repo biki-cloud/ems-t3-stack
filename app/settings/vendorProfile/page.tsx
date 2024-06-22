@@ -16,6 +16,9 @@ const VendorProfilePage = async () => {
         where: {
             userId: user.id,
         },
+        include: {
+            user: true,
+        },
     })
 
     if (!vendor) {
