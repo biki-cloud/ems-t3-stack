@@ -47,7 +47,6 @@ interface EventDetailProps {
   } & { likes: CommentLike[] })[]
   pageCount: number
   totalComments: number
-  isSubscribed: boolean
   user: User | null
   eventParticipationRequests: (EventParticipationRequest & { vendor: Vendor & { user: User } })[]
 }
@@ -58,7 +57,6 @@ const EventDetail = ({
   comments,
   pageCount,
   totalComments,
-  isSubscribed,
   user,
   eventParticipationRequests,
 }: EventDetailProps) => {
