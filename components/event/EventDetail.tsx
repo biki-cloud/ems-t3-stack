@@ -169,7 +169,7 @@ const EventDetail = ({
             <Button
               className="w-full sm:w-auto"
               onClick={() => sendParticipationRequest({ eventId: event.id, status: "pending" })}
-              disabled={isRequestLoading}
+              disabled={isRequestLoading || isVendorRequested}
             >
               {isVendorRequested && '参加リクエスト送信済み' || '参加リクエストを送る'}
             </Button>

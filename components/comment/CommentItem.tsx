@@ -45,8 +45,6 @@ const CommentItem = ({ comment, userId }: CommentItemProps) => {
   }
 
   let user_role = getRoleFromUser(comment.user)
-  console.log(comment.user)
-  console.log(user_role)
 
   return (
     <div>
