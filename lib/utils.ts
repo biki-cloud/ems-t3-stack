@@ -1,5 +1,4 @@
-import { Customer, Organizer, Vendor } from "@prisma/client"
-import { Or } from "@prisma/client/runtime/library"
+import { Customer, Organizer, User, Vendor } from "@prisma/client"
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 
@@ -11,17 +10,20 @@ export const eventPerPage = 10
 export const userEventPerPage = 10
 export const commentPerPage = 10
 
-// オブジェクトの日付フィールドを Date 型に変換
-export function stringToDate(obj: any) {
-  return obj ? {
-    ...obj,
-    createdAt: new Date(obj.createdAt),
-    updatedAt: new Date(obj.updatedAt),
-  } : null;
-}
-
 export interface Role {
   organizer: Organizer | null
   vendor: Vendor | null
   customer: Customer | null
+}
+
+export function getRoleFromUser(user: User & Role) {
+  let user_role = null;
+  if (user.role === "vendor") {
+    user_role = user.vendor as Vendor
+  } else if (user.role === "organizer") {
+    user_role = user.organizer as Organizer
+  } else {
+    user_role = user.customer as Customer
+  }
+  return user_role
 }

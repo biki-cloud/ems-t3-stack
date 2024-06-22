@@ -12,14 +12,15 @@ import { signOut } from "next-auth/react"
 import Link from "next/link"
 import Image from "next/image"
 import UserLink from "../common/UserLink"
+import { Role, getRoleFromUser } from "@/lib/utils"
 
 interface UserNavigationProps {
-  user: User
-  user_role: Organizer | Vendor | Customer
+  user: User & Role
 }
 
 // ユーザーナビゲーション
-const UserNavigation = ({ user, user_role }: UserNavigationProps) => {
+const UserNavigation = ({ user }: UserNavigationProps) => {
+  let user_role = getRoleFromUser(user)
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -36,14 +37,6 @@ const UserNavigation = ({ user, user_role }: UserNavigationProps) => {
 
       <DropdownMenuContent className="bg-white p-2 w-[300px]" align="end">
         <UserLink userId={user_role.id} userName={user.name} userImage={user.image} userType={user.role as "vendor" | "organizer"} />
-        {/* <Link href={`/author/${user.id}`}>
-          <DropdownMenuItem className="cursor-pointer">
-            <div className="break-words min-w-0">
-              <div className="mb-2">{user.name || ""}</div>
-              <div className="text-gray-500">{user.email || ""}</div>
-            </div>
-          </DropdownMenuItem>
-        </Link> */}
 
         <DropdownMenuSeparator />
 
