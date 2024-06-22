@@ -25,16 +25,26 @@ import toast from "react-hot-toast"
 
 
 interface ProfileProps {
-  organizer: Organizer
+  organizer: Organizer & {
+    user: User 
+  }
 }
 
 // プロフィール
 const OrganizerProfile = ({ organizer }: ProfileProps) => {
 
+  const { data: user, isLoading, refetch } = trpc.user.getUserByUserId.useQuery({
+    userId: organizer.user.id,
+  }, {
+    //  オプションにより、新しいデータがロードされる間、前のデータが表示され続けます。
+    keepPreviousData: true,
+  });
+
   return (
     <div>
       <div className="text-xl font-bold text-center mb-5">イベント主催者プロフィール</div>
       <p>事業者名: {organizer.organizationName}</p>
+      <p>名前: {user?.name}</p>
     </div>
   )
 }

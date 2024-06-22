@@ -16,6 +16,9 @@ const OrganizerProfilePage = async ({ params }: OrganizerProfilePageProps) => {
     where: {
       id: organizerId,
     },
+    include: {
+      user: true,
+    },
   })
 
   if (!organizer) {

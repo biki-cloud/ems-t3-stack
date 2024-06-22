@@ -16,6 +16,9 @@ const VendorProfilePage = async ({ params }: VendorProfilePageProps) => {
     where: {
       id: vendorId,
     },
+    include: {
+      user: true,
+    },
   })
 
   if (!vendor) {

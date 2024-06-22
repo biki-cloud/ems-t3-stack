@@ -17,6 +17,9 @@ const CustomerProfilePage = async ({ params }: CustomerProfilePageProps) => {
     where: {
       id: customerId,
     },
+    include: {
+      user: true,
+    },
   })
 
   if (!customer) {
