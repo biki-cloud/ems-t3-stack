@@ -13,6 +13,9 @@ import { ThemeProvider } from "@/components/ui/theme-provider"
 import { ThemeModeToggle } from "@/components/ui/theme"
 import { Customer, Organizer, User, Vendor } from "@prisma/client"
 import { Role } from "@/lib/utils"
+import SidebarNav from "@/components/settings/SidebarNav"
+import { BrowserView, MobileView, isBrowser, isMobile } from "react-device-detect"
+import { useEffect, useState } from "react"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -27,7 +30,7 @@ interface RootLayoutProps {
 
 const RootLayout = async ({ children }: RootLayoutProps) => {
   // 認証情報取得
-  const user: User & Role |  null = await getAuthSession()
+  const user: User & Role | null = await getAuthSession()
 
   return (
     <html lang="ja" suppressHydrationWarning={true}>
@@ -44,14 +47,14 @@ const RootLayout = async ({ children }: RootLayoutProps) => {
                 <Navigation user={user} />
                 <ToastProvider />
 
-
-                <main className="container mx-auto max-w-screen-md flex-1 px-2">
-
-                  {children}
-                  <SpeedInsights />
-                  <Analytics />
-                </main>
-
+                <div className="flex">
+                  <SidebarNav />
+                  <main className="container mx-auto max-w-screen-md flex-1 px-2">
+                    {children}
+                    <SpeedInsights />
+                    <Analytics />
+                  </main>
+                </div>
 
                 {/* フッター */}
                 <footer className="py-5">
@@ -61,7 +64,6 @@ const RootLayout = async ({ children }: RootLayoutProps) => {
               </TrpcProvider>
             </AuthProvider>
           </div>
-
         </ThemeProvider>
       </body>
     </html>
