@@ -36,7 +36,9 @@ const UserNavigation = ({ user }: UserNavigationProps) => {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="bg-white p-2 w-[300px]" align="end">
+        {user_role && (
         <UserLink userId={user_role.id} userName={user.name} userImage={user.image} userType={user.role as "vendor" | "organizer"} />
+        )}
 
         <DropdownMenuSeparator />
 

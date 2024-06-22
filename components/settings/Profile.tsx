@@ -159,12 +159,21 @@ const Profile = ({ user }: ProfileProps) => {
 
           <FormItem>
             <FormLabel>ユーザ種別</FormLabel>
+            {!user.role ? (
+            <Input value={
+              user.role == 'organizer' ? 'イベント主催者' : 
+              user.role == 'vendor' ? 'イベント出店者' :
+              user.role
+              }
+              />
+            ) : 
             <Input value={
               user.role == 'organizer' ? 'イベント主催者' : 
               user.role == 'vendor' ? 'イベント出店者' :
               user.role
               }
               disabled />
+            }
           </FormItem>
 
           <FormItem>
