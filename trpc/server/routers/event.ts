@@ -406,7 +406,13 @@ export const eventRouter = router({
         include: {
           vendor: {
             include: {
-              user: true,
+              user: {
+                include: {
+                  organizer: true,
+                  vendor: true,
+                  customer: true,
+                },
+              }
             },
           },
           event: true,
