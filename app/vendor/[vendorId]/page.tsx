@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation"
-import VendorProfile from "@/components/settings/vendorProfile"
+import VendorIntroduceProfile from "@/components/vendor/VendorIntroduceProfile"
 import prisma from "@/lib/prisma"
 
 interface VendorProfilePageProps {
@@ -9,7 +9,7 @@ interface VendorProfilePageProps {
 }
 
 // ベンダープロフィールページ
-const VendorProfilePage = async ({ params }: VendorProfilePageProps) => {
+const VendorIntoroduceProfilePage = async ({ params }: VendorProfilePageProps) => {
   const { vendorId } = params
 
   const vendor = await prisma.vendor.findUnique({
@@ -25,7 +25,7 @@ const VendorProfilePage = async ({ params }: VendorProfilePageProps) => {
     notFound()
   }
 
-  return <VendorProfile vendor={vendor} />
+  return <VendorIntroduceProfile vendor={vendor} />
 }
 
-export default VendorProfilePage
+export default VendorIntoroduceProfilePage

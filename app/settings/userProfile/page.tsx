@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation"
 import { getAuthSession } from "@/lib/nextauth"
-import Profile from "@/components/settings/Profile"
+import UserProfile from "@/components/settings/UserProfile"
 
 // プロフィールページ
 const ProfilePage = async () => {
@@ -11,7 +11,7 @@ const ProfilePage = async () => {
     redirect("/login")
   }
 
-  return <Profile user={user} />
+  return <UserProfile user={user} />
 }
 
 export default ProfilePage

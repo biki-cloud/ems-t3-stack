@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation"
-import OrganizerProfile from "@/components/settings/OrganizerProfile"
+import OrganizerIntroduceProfile from "@/components/organizer/OrganizerIntroduceProfile"
 import prisma from "@/lib/prisma"
 
 interface OrganizerProfilePageProps {
@@ -9,7 +9,7 @@ interface OrganizerProfilePageProps {
 }
 
 // 主催者プロフィールページ
-const OrganizerProfilePage = async ({ params }: OrganizerProfilePageProps) => {
+const OrganizerIntoroduceProfilePage = async ({ params }: OrganizerProfilePageProps) => {
   const { organizerId } = params
 
   const organizer = await prisma.organizer.findUnique({
@@ -25,7 +25,7 @@ const OrganizerProfilePage = async ({ params }: OrganizerProfilePageProps) => {
     notFound()
   }
 
-  return <OrganizerProfile organizer={organizer} />
+  return <OrganizerIntroduceProfile organizer={organizer} />
 }
 
-export default OrganizerProfilePage
+export default OrganizerIntoroduceProfilePage

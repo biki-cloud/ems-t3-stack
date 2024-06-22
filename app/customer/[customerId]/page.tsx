@@ -1,6 +1,6 @@
 
 import { notFound } from "next/navigation"
-import CustomerProfile from "@/components/settings/CustomerProfile"
+import CustomerIntroduceProfile from "@/components/customer/CustomerIntroduceProfile"
 import prisma from "@/lib/prisma"
 
 interface CustomerProfilePageProps {
@@ -10,7 +10,7 @@ interface CustomerProfilePageProps {
 }
 
 // カスタマープロフィールページ
-const CustomerProfilePage = async ({ params }: CustomerProfilePageProps) => {
+const CustomerIntoroduceProfilePage = async ({ params }: CustomerProfilePageProps) => {
   const { customerId } = params
 
   const customer = await prisma.customer.findUnique({
@@ -26,7 +26,7 @@ const CustomerProfilePage = async ({ params }: CustomerProfilePageProps) => {
     notFound()
   }
 
-  return <CustomerProfile customer={customer} />
+  return <CustomerIntroduceProfile customer={customer} />
 }
 
-export default CustomerProfilePage
+export default CustomerIntoroduceProfilePage

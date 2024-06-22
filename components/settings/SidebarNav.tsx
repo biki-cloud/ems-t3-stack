@@ -1,16 +1,23 @@
 "use client"
 
 import { usePathname } from "next/navigation"
-import { cn } from "@/lib/utils"
+import { Role, cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import Link from "next/link"
 import { useEffect, useState } from "react"
+import { get } from "http"
+import { getAuthSession } from "@/lib/nextauth"
+import { User } from "@prisma/client"
 
 // ナビゲーション
 const items = [
   {
-    title: "プロフィール",
-    href: "/settings/profile",
+    title: "イベント一覧",
+    href: "/"
+  },
+  {
+    title: "ユーザプロフィール",
+    href: "/settings/userProfile",
   },
   {
     title: "イベント主催者プロフィール",
@@ -20,21 +27,36 @@ const items = [
     title: "イベント出店者プロフィール",
     href: "/settings/vendorProfile",
   },
-  // {
-  //   title: "定期購入",
-  //   href: "/settings/billing",
-  // },
   {
     title: "パスワード変更",
     href: "/settings/password",
   },
 ]
 
+interface SidebarNavProps {
+  user: (User & Role) | null;
+}
+
 // サイドナビゲーション
-const SidebarNav = () => {
+const SidebarNav = ({user}: SidebarNavProps) => {
   const pathname = usePathname()
 
   const [isDevicePC, setIsDevicePC] = useState(false)
+
+  // ユーザーの役割に基づいてナビゲーションアイテムをフィルタリング
+  const filteredItems = items.filter(item => {
+    if (user?.role === "organizer" && item.href === "/settings/vendorProfile") {
+      return false
+    }
+    if (user?.role === "vendor" && item.href === "/settings/organizerProfile") {
+      return false
+    }
+    if (user?.role !== "organizer" && user?.role !== "vendor" && 
+        (item.href === "/settings/vendorProfile" || item.href === "/settings/organizerProfile")) {
+      return false
+    }
+    return true
+  })
 
   useEffect(() => {
     const handleResize = () => {
@@ -47,12 +69,11 @@ const SidebarNav = () => {
 
     return () => window.removeEventListener("resize", handleResize)
   }, [])
-
   return (
     <div>
       {isDevicePC && (
         <nav className={cn("flex space-x-2 md:flex-col md:space-x-0 md:space-y-1")}>
-          {items.map((item) => (
+          {filteredItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}

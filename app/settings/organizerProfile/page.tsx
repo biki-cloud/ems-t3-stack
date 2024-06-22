@@ -1,10 +1,10 @@
 import { redirect } from "next/navigation"
 import { getAuthSession } from "@/lib/nextauth"
-import VendorProfileEdit from "@/components/vendor/VendorProfileEdit"
+import OrganizerProfileEdit from "@/components/organizer/OrganizerProfileEdit"
 import prisma from "@/lib/prisma"
 
 // プロフィール編集ページ
-const VendorProfileEditPage = async () => {
+const OrganizerProfileEditPage = async () => {
   // 認証情報取得
   const user = await getAuthSession()
 
@@ -12,7 +12,7 @@ const VendorProfileEditPage = async () => {
     redirect("/login")
   }
 
-  const vendor = await prisma.vendor.findUnique({
+  const organizer = await prisma.organizer.findUnique({
     where: {
       userId: user.id,
     },
@@ -21,11 +21,11 @@ const VendorProfileEditPage = async () => {
     },
   })
 
-  if (!vendor) {
+  if (!organizer) {
     redirect("/login")
   }
 
-  return <VendorProfileEdit vendor={vendor} />
+  return <OrganizerProfileEdit organizer={organizer} />
 }
 
-export default VendorProfileEditPage
+export default OrganizerProfileEditPage

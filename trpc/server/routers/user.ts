@@ -73,6 +73,109 @@ export const userRouter = router({
       }
     }),
 
+  // 主催者情報更新
+  updateOrganizer: privateProcedure
+    .input(
+      z.object({
+        organizationName: z
+          .string()
+          .min(3, { message: "3文字以上入力する必要があります" }),
+      })
+    )
+    .mutation(async ({ input, ctx }) => {
+      try {
+        const { organizationName } = input;
+        const userId = ctx.user.id;
+
+        // 主催者の検索
+        const organizer = await prisma.organizer.findUnique({
+          where: { userId },
+        });
+
+        if (!organizer) {
+          throw new TRPCError({
+            code: "BAD_REQUEST",
+            message: "主催者が見つかりませんでした",
+          });
+        }
+
+        // 主催者情報更新
+        await prisma.organizer.update({
+          where: {
+            userId,
+          },
+          data: {
+            organizationName,
+          },
+        });
+      } catch (error) {
+        console.log(error);
+
+        if (error instanceof TRPCError && error.code === "BAD_REQUEST") {
+          throw new TRPCError({
+            code: "BAD_REQUEST",
+            message: error.message,
+          });
+        } else {
+          throw new TRPCError({
+            code: "INTERNAL_SERVER_ERROR",
+            message: "プロフィール編集に失敗しました",
+          });
+        }
+      }
+    }),
+
+  updateVendor: privateProcedure
+    .input(
+      z.object({
+        vendorName: z
+          .string()
+          .min(3, { message: "3文字以上入力する必要があります" }),
+      })
+    )
+    .mutation(async ({ input, ctx }) => {
+      try {
+        const { vendorName } = input;
+        const userId = ctx.user.id;
+
+        // ベンダーの検索
+        const vendor = await prisma.vendor.findUnique({
+          where: { userId },
+        });
+
+        if (!vendor) {
+          throw new TRPCError({
+            code: "BAD_REQUEST",
+            message: "ベンダーが見つかりませんでした",
+          });
+        }
+
+        // ベンダー情報更新
+        await prisma.vendor.update({
+          where: {
+            userId,
+          },
+          data: {
+            vendorName,
+          },
+        });
+      } catch (error) {
+        console.log(error);
+
+        if (error instanceof TRPCError && error.code === "BAD_REQUEST") {
+          throw new TRPCError({
+            code: "BAD_REQUEST",
+            message: error.message,
+          });
+        } else {
+          throw new TRPCError({
+            code: "INTERNAL_SERVER_ERROR",
+            message: "プロフィール編集に失敗しました",
+          });
+        }
+      }
+    }),
+
   // ユーザー投稿詳細取得
   getUserByIdEvent: publicProcedure
     .input(

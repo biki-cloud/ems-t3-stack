@@ -37,7 +37,7 @@ interface ProfileProps {
 }
 
 // プロフィール
-const Profile = ({ user }: ProfileProps) => {
+const UserProfile = ({ user }: ProfileProps) => {
   const router = useRouter()
   const [imageUpload, setImageUpload] = useState<ImageListType>([
     {
@@ -103,7 +103,7 @@ const Profile = ({ user }: ProfileProps) => {
 
   return (
     <div>
-      <div className="text-xl font-bold text-center mb-5">プロフィール</div>
+      <div className="text-xl font-bold text-center mb-5">ユーザプロフィール</div>
       <Form {...form}>
         <div className="mb-5">
           <ImageUploading
@@ -207,4 +207,4 @@ const Profile = ({ user }: ProfileProps) => {
   )
 }
 
-export default Profile
+export default UserProfile
