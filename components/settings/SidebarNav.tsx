@@ -1,15 +1,22 @@
 "use client"
 
 import { usePathname } from "next/navigation"
-import { cn } from "@/lib/utils"
+import { Role, cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import Link from "next/link"
 import { useEffect, useState } from "react"
+import { get } from "http"
+import { getAuthSession } from "@/lib/nextauth"
+import { User } from "@prisma/client"
 
 // ナビゲーション
 const items = [
   {
-    title: "プロフィール",
+    title: "イベント一覧",
+    href: "/"
+  },
+  {
+    title: "プロフィール編集",
     href: "/settings/profile",
   },
   {
@@ -20,18 +27,18 @@ const items = [
     title: "イベント出店者プロフィール",
     href: "/settings/vendorProfile",
   },
-  // {
-  //   title: "定期購入",
-  //   href: "/settings/billing",
-  // },
   {
     title: "パスワード変更",
     href: "/settings/password",
   },
 ]
 
+interface SidebarNavProps {
+  user: (User & Role) | null;
+}
+
 // サイドナビゲーション
-const SidebarNav = () => {
+const SidebarNav = ({user}: SidebarNavProps) => {
   const pathname = usePathname()
 
   const [isDevicePC, setIsDevicePC] = useState(false)
@@ -47,7 +54,6 @@ const SidebarNav = () => {
 
     return () => window.removeEventListener("resize", handleResize)
   }, [])
-
   return (
     <div>
       {isDevicePC && (

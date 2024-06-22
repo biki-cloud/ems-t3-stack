@@ -48,7 +48,7 @@ const RootLayout = async ({ children }: RootLayoutProps) => {
                 <ToastProvider />
 
                 <div className="flex">
-                  <SidebarNav />
+                  <SidebarNav user={user}/>
                   <main className="container mx-auto max-w-screen-md flex-1 px-2">
                     {children}
                     <SpeedInsights />
