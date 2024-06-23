@@ -86,7 +86,7 @@ const EventList = ({ limit, offset }: props) => {
                     ))}
                 </DropdownMenuContent>
             </DropdownMenu>
-            {isLoading && <div>索中です</div>}
+            {isLoading && <div>検索中です</div>}
             <div className="space-y-5">
                 {events && events.events.length > 0 ? (
                     events.events.map((event) => (
