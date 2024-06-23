@@ -3,10 +3,9 @@ export function getBaseUrl() {
   console.log('process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL', process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL)
   console.log('process.env.NEXT_PUBLIC_VERCEL_URL', process.env.NEXT_PUBLIC_VERCEL_URL)
   console.log('process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL', process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL)
-  return `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
   let url = '';
   if (process.env.NEXT_PUBLIC_VERCEL_ENV === 'preview') {
-    url = `https://${process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL}`;
+    url =  `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
   } else if (process.env.NEXT_PUBLIC_VERCEL_ENV === 'production') {
     // 独自ドメイン
     url = 'https://www.sunnybe.online';
