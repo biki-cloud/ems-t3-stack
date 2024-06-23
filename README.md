@@ -90,9 +90,9 @@ google認証を追加する
 ### Github Actions
 - https://vercel.com/guides/how-can-i-run-end-to-end-tests-after-my-vercel-preview-deployment
 
-### PlayWrite
+### PlayWright
 ```
-$ export URL=https://www.sunnybe.online/
+$ export BASE_URL=https://www.sunnybe.online/
 $ npx playwright test
 ```
 
