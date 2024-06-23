@@ -17,4 +17,5 @@ export function getBaseUrl() {
   }
   console.log('selected url: ' + url)
   return url;
+
 }
