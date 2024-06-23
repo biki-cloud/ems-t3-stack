@@ -50,7 +50,7 @@ const UserNavigation = ({ user }: UserNavigationProps) => {
           </Link>
         )}
 
-        <Link href="/settings/profile">
+        <Link href="/settings/userProfile">
           <DropdownMenuItem className="cursor-pointer">
             アカウント設定
           </DropdownMenuItem>
