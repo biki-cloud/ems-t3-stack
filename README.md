@@ -84,9 +84,17 @@ google認証を追加する
 - [haruyasu/t3-stack-deploy-tutorial](https://github.com/haruyasu/t3-stack-deploy-tutorial)
 - [[完全版] T3 Stack入門！デプロイまで実践するサブスクアプリ構築マスターガイド - YouTube](https://www.youtube.com/watch?v=EVjx7lAu0XQ&t=506s)
 
-## ドメイン設定
+### ドメイン設定
 - [Vercelにお名前.comで取得したドメインをカスタムドメインとして設定する | ZUMA Lab](https://zuma-lab.com/posts/vercel-onamae-domain-settings)
 
+### Github Actions
+- https://vercel.com/guides/how-can-i-run-end-to-end-tests-after-my-vercel-preview-deployment
+
+### PlayWrite
+```
+$ export URL=https://www.sunnybe.online/
+$ npx playwright test
+```
 
 # TODO
 - プロジェクトの理解
@@ -101,11 +109,11 @@ google認証を追加する
 - 主催者の自己紹介ページやプロフィールに投稿一覧(/author/xxx)のリンクを貼る
 - 出店者検索
 - 消費者検索
-- playwrightの導入。BASE_URLを読み込むやり方。githubactionsで動かす
+- playwrightの導入。BASE_URLを読み込むやり方。githubactionsで動かす. playwrightのgithubバッチも追加したい。
 - イベントの並べ方はもう少しかっこよくできないか？
   - youtubeみたいな感じが良さそう, スマホとPCを真似る
+  - PCの場合のみサイドバー. サイドバーと同じ項目をスマホの場合は右上のユーザ欄に入れるか
 ## プレリリースまでやること
- - PCの場合のみサイドバー. サイドバーと同じ項目をスマホの場合は右上のユーザ欄に入れるか
 - 自前でsupabaseのバックアップ機能を作成 
 - 開発用と本番用のDBを用意
 
