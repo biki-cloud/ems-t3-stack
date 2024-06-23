@@ -18,7 +18,14 @@ jobs:
           ENVIRONMENT_URL: ${{ github.event.deployment_status.environment_url }}
           URL2: ${{ github.event.deployment_status.target_url }}
           ENV2: ${{ github.event.deployment_status.environment }}
+      - name: Set BASE_URL for production
+        if: ${{ github.event.deployment_status.environment == 'Production' }}
+        run: echo "BASE_URL=https://www.sunnybe.online" >> $GITHUB_ENV
+      - name: Set BASE_URL for preview
+        if: ${{ github.event.deployment_status.environment == 'Preview' }}
+        run: echo "BASE_URL=${{ github.event.deployment_status.environment_url }}" >> $GITHUB_ENV
       - name: Run tests
         run: npx playwright test
         env:
-          BASE_URL: ${{ github.event.deployment_status.environment_url }}
+          # BASE_URL: ${{ github.event.deployment_status.environment_url }}
+          BASE_URL: ${{ env.BASE_URL || 'http://default-url' }}
