@@ -68,11 +68,19 @@ const EventList = ({ limit, offset }: props) => {
                     <Button variant="outline">{selectedGenre ? genreMapping[selectedGenre] : "ジャンルを選択"}</Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                    <DropdownMenuItem key="none" onClick={() => setSelectedGenre('')}>
+                    <DropdownMenuItem key="none" onClick={() => {
+                        setSelectedGenre('');
+                        const queryString = new URLSearchParams({ search: searchTerm, genre: '' }).toString();
+                        router.push(`${pathname}?${queryString}`);
+                    }}>
                         ジャンル選択なし
                     </DropdownMenuItem>
                     {Object.keys(genreMapping).map((genre) => (
-                        <DropdownMenuItem key={genre} onClick={() => setSelectedGenre(genre)}>
+                        <DropdownMenuItem key={genre} onClick={() => {
+                            setSelectedGenre(genre);
+                            const queryString = new URLSearchParams({ search: searchTerm, genre }).toString();
+                            router.push(`${pathname}?${queryString}`);
+                        }}>
                             {genreMapping[genre]}
                         </DropdownMenuItem>
                     ))}
