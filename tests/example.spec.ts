@@ -7,11 +7,7 @@ test('verify title of the page', async ({ page }) => {
     throw new Error('URL is not provided');
   }
   await page.goto(BASE_URL);
-});
 
-test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+  await expect(page).toHaveTitle('イベントマッチングサービス');
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
 });

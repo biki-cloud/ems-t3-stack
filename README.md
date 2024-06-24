@@ -62,6 +62,8 @@ $ npm cache clean --force && rm -rf node_modules package-lock.json && npm instal
 
 
 ### オンライン決済: Stripe
+<img src="https://img.shields.io/badge/Stripe-626CD9?style=for-the-badge&logo=Stripe&logoColor=white">
+
 オンライン決済を提供する
 
 #### テストクレジットカードの内容
