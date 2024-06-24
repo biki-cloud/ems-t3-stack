@@ -2,6 +2,7 @@
 
 ![Vercel](https://vercelbadge.vercel.app/api/biki-cloud/ems-t3-stack)
 
+
 ## サービス
 [event-matching-service](ems-t3-stack.vercel.app)
 
@@ -31,31 +32,35 @@ $ npm cache clean --force && rm -rf node_modules package-lock.json && npm instal
 ### アーキテクチャ: T3 Stack
 - [Create T3 App](https://create.t3.gg/)
 
-### 言語(フロントエンド&バックエンド): NextJS & Typescript
+### 言語(フロントエンド&バックエンド): 
+<img src="https://img.shields.io/badge/next%20js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white"> 
+<img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white">
+
 - [Next.js by Vercel - The React Framework](https://nextjs.org/)
 - [TypeScript: JavaScript With Syntax For Types.](https://www.typescriptlang.org/)
 
-### デザイン: Tailwind CSS & Shadcn
+### デザイン: 
+<img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" /> <img src="https://img.shields.io/badge/shadcn%2Fui-000000?style=for-the-badge&logo=shadcnui&logoColor=white">
+
 - https://ui.shadcn.com/docs/components
 - https://v0.dev/
 - shadcnを使用したFigmaのデザイン: https://www.figma.com/community/file/1203061493325953101
 
-### デプロイメント: Vercel
+### デプロイメント
+<img src="https://img.shields.io/badge/shadcn%2Fui-000000?style=for-the-badge&logo=shadcnui&logoColor=white">
+
 デプロイに使用する
 ### ドキュメント
 - [System Environment Variables Overview](https://vercel.com/docs/projects/environment-variables/system-environment-variables)
 
 ### DB: Supabase
+<img src="https://img.shields.io/badge/Supabase-181818?style=for-the-badge&logo=supabase&logoColor=white">
+
 クラウドのDB
 
 #### ドキュメント
 [T3 Stack で Supabase をセットアップする](https://zenn.dev/yu_undefined/articles/f799ea05167621)
 
-### 認証: Google Auth
-google認証を追加する
-
-#### ドキュメント
-[NextAuth.jsでNext.js13にGoogle認証機能を実装](https://zenn.dev/hayato94087/articles/91179fbbe1cad4)
 
 ### オンライン決済: Stripe
 オンライン決済を提供する
@@ -74,7 +79,9 @@ google認証を追加する
 - [Stripe WebhookのデバッグをStripe CLIで行う](https://zenn.dev/hideokamoto/books/e961b4bad92429/viewer/fcc60a)
 
 
-### メディアファイル保存: Cloudinary
+### メディアファイル保存: 
+<img src="https://img.shields.io/badge/Cloudinary-3448C5?style=for-the-badge&logo=Cloudinary&logoColor=white">
+
 クラウドに画像や動画を保存する
 
 #### ドキュメント
@@ -88,13 +95,19 @@ google認証を追加する
 - [Vercelにお名前.comで取得したドメインをカスタムドメインとして設定する | ZUMA Lab](https://zuma-lab.com/posts/vercel-onamae-domain-settings)
 
 ### Github Actions
+<img src="https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white">
+
 - https://vercel.com/guides/how-can-i-run-end-to-end-tests-after-my-vercel-preview-deployment
 
 ### PlayWright
+<img src="https://img.shields.io/badge/Playwright-45ba4b?style=for-the-badge&logo=Playwright&logoColor=white">
+
 ```
 $ export BASE_URL=https://www.sunnybe.online/
 $ npx playwright test
 ```
+- https://playwright.dev/docs/intro
+- https://playwright.dev/docs/ci-intro
 
 # TODO
 - プロジェクトの理解
