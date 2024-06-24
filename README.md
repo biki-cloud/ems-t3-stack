@@ -51,7 +51,7 @@ $ npx playwright codegen http://localhost:3000/
 - shadcnを使用したFigmaのデザイン: https://www.figma.com/community/file/1203061493325953101
 
 ### デプロイメント
-<img src="https://img.shields.io/badge/shadcn%2Fui-000000?style=for-the-badge&logo=shadcnui&logoColor=white">
+<img src="![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)>
 
 デプロイに使用する
 ### ドキュメント
@@ -93,9 +93,6 @@ $ npx playwright codegen http://localhost:3000/
 #### ドキュメント
 - [【Web Library】Nextjs13で覚える便利なライブラリ【#１８Cloudinary SetUp】](https://zenn.dev/web_life_ch/articles/f3499dcfddba8b)
 
-## 参考GitHub
-- [haruyasu/t3-stack-deploy-tutorial](https://github.com/haruyasu/t3-stack-deploy-tutorial)
-- [[完全版] T3 Stack入門！デプロイまで実践するサブスクアプリ構築マスターガイド - YouTube](https://www.youtube.com/watch?v=EVjx7lAu0XQ&t=506s)
 
 ### ドメイン設定
 - [Vercelにお名前.comで取得したドメインをカスタムドメインとして設定する | ZUMA Lab](https://zuma-lab.com/posts/vercel-onamae-domain-settings)
@@ -110,6 +107,11 @@ $ npx playwright codegen http://localhost:3000/
 
 - https://playwright.dev/docs/intro
 - https://playwright.dev/docs/ci-intro
+
+## その他
+- [haruyasu/t3-stack-deploy-tutorial](https://github.com/haruyasu/t3-stack-deploy-tutorial)
+- [[完全版] T3 Stack入門！デプロイまで実践するサブスクアプリ構築マスターガイド - YouTube](https://www.youtube.com/watch?v=EVjx7lAu0XQ&t=506s)
+- [アイコン](https://github.com/Ileriayo/markdown-badges)
 
 # TODO
 - プロジェクトの理解
