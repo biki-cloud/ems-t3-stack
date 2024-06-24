@@ -25,6 +25,11 @@ $ ./node_modules/.bin/mmdc -i docs/ERD.md -o docs/ERD.png
 
 # npmのリセット
 $ npm cache clean --force && rm -rf node_modules package-lock.json && npm install
+
+# Playwright
+$ export BASE_URL=https://www.sunnybe.online/
+$ npx playwright test
+$ npx playwright codegen http://localhost:3000/
 ```
 
 ## 技術スタック
@@ -32,13 +37,13 @@ $ npm cache clean --force && rm -rf node_modules package-lock.json && npm instal
 ### アーキテクチャ: T3 Stack
 - [Create T3 App](https://create.t3.gg/)
 
-### 言語(フロントエンド&バックエンド): 
+### 言語(フロントエンド&バックエンド)
 <img src="https://img.shields.io/badge/next%20js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white"> <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white">
 
 - [Next.js by Vercel - The React Framework](https://nextjs.org/)
 - [TypeScript: JavaScript With Syntax For Types.](https://www.typescriptlang.org/)
 
-### デザイン: 
+### デザイン
 <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" /> <img src="https://img.shields.io/badge/shadcn%2Fui-000000?style=for-the-badge&logo=shadcnui&logoColor=white">
 
 - https://ui.shadcn.com/docs/components
@@ -52,7 +57,7 @@ $ npm cache clean --force && rm -rf node_modules package-lock.json && npm instal
 ### ドキュメント
 - [System Environment Variables Overview](https://vercel.com/docs/projects/environment-variables/system-environment-variables)
 
-### DB: Supabase
+### DB
 <img src="https://img.shields.io/badge/Supabase-181818?style=for-the-badge&logo=supabase&logoColor=white">
 
 クラウドのDB
@@ -61,7 +66,7 @@ $ npm cache clean --force && rm -rf node_modules package-lock.json && npm instal
 [T3 Stack で Supabase をセットアップする](https://zenn.dev/yu_undefined/articles/f799ea05167621)
 
 
-### オンライン決済: Stripe
+### オンライン決済
 <img src="https://img.shields.io/badge/Stripe-626CD9?style=for-the-badge&logo=Stripe&logoColor=white">
 
 オンライン決済を提供する
@@ -103,10 +108,6 @@ $ npm cache clean --force && rm -rf node_modules package-lock.json && npm instal
 ### PlayWright
 <img src="https://img.shields.io/badge/Playwright-45ba4b?style=for-the-badge&logo=Playwright&logoColor=white">
 
-```
-$ export BASE_URL=https://www.sunnybe.online/
-$ npx playwright test
-```
 - https://playwright.dev/docs/intro
 - https://playwright.dev/docs/ci-intro
 
