@@ -85,7 +85,7 @@ $ npx playwright codegen http://localhost:3000/
 - [Stripe WebhookのデバッグをStripe CLIで行う](https://zenn.dev/hideokamoto/books/e961b4bad92429/viewer/fcc60a)
 
 
-### メディアファイル保存: 
+### ファイルストレージ
 <img src="https://img.shields.io/badge/Cloudinary-3448C5?style=for-the-badge&logo=Cloudinary&logoColor=white">
 
 クラウドに画像や動画を保存する
@@ -97,12 +97,12 @@ $ npx playwright codegen http://localhost:3000/
 ### ドメイン設定
 - [Vercelにお名前.comで取得したドメインをカスタムドメインとして設定する | ZUMA Lab](https://zuma-lab.com/posts/vercel-onamae-domain-settings)
 
-### Github Actions
+### CI/CD
 <img src="https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white">
 
 - https://vercel.com/guides/how-can-i-run-end-to-end-tests-after-my-vercel-preview-deployment
 
-### PlayWright
+### E2E
 <img src="https://img.shields.io/badge/Playwright-45ba4b?style=for-the-badge&logo=Playwright&logoColor=white">
 
 - https://playwright.dev/docs/intro
