@@ -33,8 +33,7 @@ $ npm cache clean --force && rm -rf node_modules package-lock.json && npm instal
 - [Create T3 App](https://create.t3.gg/)
 
 ### 言語(フロントエンド&バックエンド): 
-<img src="https://img.shields.io/badge/next%20js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white"> 
-<img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white">
+<img src="https://img.shields.io/badge/next%20js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white"> <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white">
 
 - [Next.js by Vercel - The React Framework](https://nextjs.org/)
 - [TypeScript: JavaScript With Syntax For Types.](https://www.typescriptlang.org/)
