@@ -51,7 +51,7 @@ $ npx playwright codegen http://localhost:3000/
 - shadcnを使用したFigmaのデザイン: https://www.figma.com/community/file/1203061493325953101
 
 ### デプロイメント
-<img src="![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)>
+<img src="https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white">
 
 デプロイに使用する
 ### ドキュメント
