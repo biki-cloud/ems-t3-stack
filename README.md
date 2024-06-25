@@ -34,10 +34,10 @@ $ npx playwright codegen http://localhost:3000/
 
 ## 技術スタック
 
-### アーキテクチャ: T3 Stack
-- [Create T3 App](https://create.t3.gg/)
+### アーキテクチャ
+- [T3 Stack](https://create.t3.gg/)
 
-### 言語(フロントエンド&バックエンド)
+### 言語
 <img src="https://img.shields.io/badge/next%20js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white"> <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white">
 
 ### デザイン
@@ -57,11 +57,6 @@ $ npx playwright codegen http://localhost:3000/
 
 ### E2E
 <img src="https://img.shields.io/badge/Playwright-45ba4b?style=for-the-badge&logo=Playwright&logoColor=white">
-
-## その他
-- [haruyasu/t3-stack-deploy-tutorial](https://github.com/haruyasu/t3-stack-deploy-tutorial)
-- [[完全版] T3 Stack入門！デプロイまで実践するサブスクアプリ構築マスターガイド - YouTube](https://www.youtube.com/watch?v=EVjx7lAu0XQ&t=506s)
-- [アイコン](https://github.com/Ileriayo/markdown-badges)
 
 # TODO
 - プロジェクトの理解
