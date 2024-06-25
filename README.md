@@ -40,54 +40,23 @@ $ npx playwright codegen http://localhost:3000/
 ### 言語(フロントエンド&バックエンド)
 <img src="https://img.shields.io/badge/next%20js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white"> <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white">
 
-- [Next.js by Vercel - The React Framework](https://nextjs.org/)
-- [TypeScript: JavaScript With Syntax For Types.](https://www.typescriptlang.org/)
-
 ### デザイン
 <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" /> <img src="https://img.shields.io/badge/shadcn%2Fui-000000?style=for-the-badge&logo=shadcnui&logoColor=white">
-
-- https://ui.shadcn.com/docs/components
-- https://v0.dev/
-- shadcnを使用したFigmaのデザイン: https://www.figma.com/community/file/1203061493325953101
 
 ### デプロイメント
 <img src="https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white">
 
-デプロイに使用する
-### ドキュメント
-- [System Environment Variables Overview](https://vercel.com/docs/projects/environment-variables/system-environment-variables)
-
 ### DB
 <img src="https://img.shields.io/badge/Supabase-181818?style=for-the-badge&logo=supabase&logoColor=white">
-
-クラウドのDB
-
-#### ドキュメント
-[T3 Stack で Supabase をセットアップする](https://zenn.dev/yu_undefined/articles/f799ea05167621)
-
 
 ### ファイルストレージ
 <img src="https://img.shields.io/badge/Cloudinary-3448C5?style=for-the-badge&logo=Cloudinary&logoColor=white">
 
-クラウドに画像や動画を保存する
-
-#### ドキュメント
-- [【Web Library】Nextjs13で覚える便利なライブラリ【#１８Cloudinary SetUp】](https://zenn.dev/web_life_ch/articles/f3499dcfddba8b)
-
-
-### ドメイン設定
-- [Vercelにお名前.comで取得したドメインをカスタムドメインとして設定する | ZUMA Lab](https://zuma-lab.com/posts/vercel-onamae-domain-settings)
-
 ### CI/CD
 <img src="https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white">
 
-- https://vercel.com/guides/how-can-i-run-end-to-end-tests-after-my-vercel-preview-deployment
-
 ### E2E
 <img src="https://img.shields.io/badge/Playwright-45ba4b?style=for-the-badge&logo=Playwright&logoColor=white">
-
-- https://playwright.dev/docs/intro
-- https://playwright.dev/docs/ci-intro
 
 ## その他
 - [haruyasu/t3-stack-deploy-tutorial](https://github.com/haruyasu/t3-stack-deploy-tutorial)
@@ -114,15 +83,3 @@ $ npx playwright codegen http://localhost:3000/
 ## プレリリースまでやること
 - 自前でsupabaseのバックアップ機能を作成 
 - 開発用と本番用のDBを用意
-
-## Next JS お勉強
-### クライアントコンポーネント
-- 'use client'を付けた場合のみクライアントコンポーネントして判断される。それ以外は全てサーバコンポーネント。
-- クライアントサイドで実行される: クライアントコンポーネントはブラウザ上で実行され、ユーザーインターフェイスのインタラクティブな部分を担当します。
-- クライアントコンポーネントでのみReact Hookを使用できる。
-- サーバーサイドのコード実行不可: サーバーサイド専用のコード（例えば、データベースクエリやファイルシステム操作など）は実行できません。
-- クライアントコンポーネントではtrpc.event.getEvents.useQueryやtrpc.event.getEvents.useMutationをReact Hooksとともに利用するとよき！！
-
-### サーバサイドコンポーネント
-- サーバーサイドのデータフェッチ: データベースクエリや外部APIの呼び出しなど、サーバーサイドの処理を直接行うことができます。
-
