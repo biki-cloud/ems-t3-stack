@@ -66,25 +66,6 @@ $ npx playwright codegen http://localhost:3000/
 [T3 Stack で Supabase をセットアップする](https://zenn.dev/yu_undefined/articles/f799ea05167621)
 
 
-### オンライン決済
-<img src="https://img.shields.io/badge/Stripe-626CD9?style=for-the-badge&logo=Stripe&logoColor=white">
-
-オンライン決済を提供する
-
-#### テストクレジットカードの内容
-- 番号: 4242 4242 4242 4242
-- 期限: 未来の値
-- ３桁の番号: 適当な３桁の番号
-
-#### ドキュメント
-- [Stripe のドキュメント](https://docs.stripe.com/)
-- [[Next.js + Stripe] Stripeで簡単にオンライン決済を実装しよう](https://zenn.dev/knagano/articles/zenn-article-9)
-- [Stripe ElementとNext.jsを利用して、クレジットカードの登録画面を構築する #JavaScript - Qiita](https://qiita.com/hideokamoto/items/cef6eaa1c62ae6cb728d)
-- [Next.js 14 App router で動かす、Stripe Subscription Starter のハンズオン。 #GitHub - Qiita](https://qiita.com/masakinihirota/items/33cdd1f9cb1276211bdf#stripe%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%9E%E3%83%BC%E3%83%9D%E3%83%BC%E3%82%BF%E3%83%AB%E3%81%AE%E8%A8%AD%E5%AE%9A)
-- https://zenn.dev/hathle/books/t3-stack-subscription-book
-- [Stripe WebhookのデバッグをStripe CLIで行う](https://zenn.dev/hideokamoto/books/e961b4bad92429/viewer/fcc60a)
-
-
 ### ファイルストレージ
 <img src="https://img.shields.io/badge/Cloudinary-3448C5?style=for-the-badge&logo=Cloudinary&logoColor=white">
 
