@@ -5,9 +5,8 @@ import { Role, cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import Link from "next/link"
 import { useEffect, useState } from "react"
-import { get } from "http"
-import { getAuthSession } from "@/lib/nextauth"
 import { User } from "@prisma/client"
+import TabBar from "./tabbar"
 
 // ナビゲーション
 const items = [
@@ -71,7 +70,7 @@ const SidebarNav = ({user}: SidebarNavProps) => {
   }, [])
   return (
     <div>
-      {isDevicePC && (
+      {isDevicePC ? (
         <nav className={cn("flex space-x-2 md:flex-col md:space-x-0 md:space-y-1")}>
           {filteredItems.map((item) => (
             <Link
@@ -89,7 +88,9 @@ const SidebarNav = ({user}: SidebarNavProps) => {
             </Link>
           ))}
         </nav>
-      )}
+      ) : (
+        <TabBar />
+      )} 
     </div>
   )
 }

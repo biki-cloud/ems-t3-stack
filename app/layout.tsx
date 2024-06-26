@@ -16,6 +16,7 @@ import { Role } from "@/lib/utils"
 import SidebarNav from "@/components/settings/SidebarNav"
 import { BrowserView, MobileView, isBrowser, isMobile } from "react-device-detect"
 import { useEffect, useState } from "react"
+import TabBar from "@/components/settings/tabbar"
 
 const inter = Inter({ subsets: ["latin"] })
 
