@@ -1,4 +1,4 @@
-import SidebarNav from "@/components/settings/SidebarNav"
+import SidebarNav from "@/components/settings/LeftNavBar"
 
 interface SettingsLayoutProps {
   children: React.ReactNode

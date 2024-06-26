@@ -13,10 +13,11 @@ import { ThemeProvider } from "@/components/ui/theme-provider"
 import { ThemeModeToggle } from "@/components/ui/theme"
 import { Customer, Organizer, User, Vendor } from "@prisma/client"
 import { Role } from "@/lib/utils"
-import SidebarNav from "@/components/settings/SidebarNav"
+import SidebarNav from "@/components/settings/LeftNavBar"
 import { BrowserView, MobileView, isBrowser, isMobile } from "react-device-detect"
 import { useEffect, useState } from "react"
-import TabBar from "@/components/settings/tabbar"
+import TabBar from "@/components/settings/FootNavBar"
+import CustomNavBar from "@/components/settings/CustomNavBar"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -49,7 +50,7 @@ const RootLayout = async ({ children }: RootLayoutProps) => {
                 <ToastProvider />
 
                 <div className="flex">
-                  <SidebarNav user={user}/>
+                  <CustomNavBar user={user}/>
                   <main className="container mx-auto max-w-screen-md flex-1 px-2">
                     {children}
                     <SpeedInsights />

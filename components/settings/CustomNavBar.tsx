@@ -1,12 +1,10 @@
 "use client"
 
-import { usePathname } from "next/navigation"
 import { Role, cn } from "@/lib/utils"
-import { buttonVariants } from "@/components/ui/button"
-import Link from "next/link"
 import { useEffect, useState } from "react"
 import { User } from "@prisma/client"
-import TabBar from "./tabbar"
+import TabBar from "./FootNavBar"
+import LeftNavBar from "./LeftNavBar"
 
 // ナビゲーション
 const items = [
@@ -37,8 +35,7 @@ interface SidebarNavProps {
 }
 
 // サイドナビゲーション
-const SidebarNav = ({user}: SidebarNavProps) => {
-  const pathname = usePathname()
+const CustomNavBar = ({user}: SidebarNavProps) => {
 
   const [isDevicePC, setIsDevicePC] = useState(false)
 
@@ -71,28 +68,12 @@ const SidebarNav = ({user}: SidebarNavProps) => {
   return (
     <div>
       {isDevicePC ? (
-        <nav className={cn("flex space-x-2 md:flex-col md:space-x-0 md:space-y-1")}>
-          {filteredItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                buttonVariants({ variant: "ghost" }),
-                pathname === item.href
-                  ? "bg-muted hover:bg-muted"
-                  : "hover:bg-transparent hover:underline",
-                "justify-start"
-              )}
-            >
-              {item.title}
-            </Link>
-          ))}
-        </nav>
+        <LeftNavBar items={filteredItems}/>
       ) : (
-        <TabBar />
+        <TabBar items={filteredItems}/>
       )} 
     </div>
   )
 }
 
-export default SidebarNav
+export default CustomNavBar
