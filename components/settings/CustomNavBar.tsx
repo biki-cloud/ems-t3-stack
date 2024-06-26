@@ -3,7 +3,7 @@
 import { Role, cn } from "@/lib/utils"
 import { useEffect, useState } from "react"
 import { User } from "@prisma/client"
-import TabBar from "./FootNavBar"
+import FootNavBar from "./FootNavBar"
 import LeftNavBar from "./LeftNavBar"
 
 // ナビゲーション
@@ -35,7 +35,7 @@ interface SidebarNavProps {
 }
 
 // サイドナビゲーション
-const CustomNavBar = ({user}: SidebarNavProps) => {
+const CustomNavBar = ({ user }: SidebarNavProps) => {
 
   const [isDevicePC, setIsDevicePC] = useState(false)
 
@@ -68,10 +68,10 @@ const CustomNavBar = ({user}: SidebarNavProps) => {
   return (
     <div>
       {isDevicePC ? (
-        <LeftNavBar items={filteredItems}/>
+        <LeftNavBar items={filteredItems} />
       ) : (
-        <TabBar items={filteredItems}/>
-      )} 
+        <FootNavBar items={filteredItems} />
+      )}
     </div>
   )
 }
