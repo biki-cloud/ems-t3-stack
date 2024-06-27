@@ -3,10 +3,7 @@ import { test, expect } from "@playwright/test";
 const BASE_URL = process.env.BASE_URL;
 
 test.beforeEach(async ({ page }) => {
-  if (!BASE_URL) {
-    throw new Error("URL is not provided");
-  }
-  await page.goto(BASE_URL);
+  await page.goto('/');
 });
 
 let event_titles = [
@@ -19,6 +16,7 @@ let event_titles = [
 
 test.describe("Search Event", () => {
   test("search event by word", async ({ page }) => {
+    await page.waitForTimeout(5000); // 5秒待機
     await expect(page).toHaveTitle("イベントマッチングサービス");
 
     // イベント一覧表示でイベント名が全て表示されているか確認

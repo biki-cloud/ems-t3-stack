@@ -24,9 +24,15 @@ $ ./node_modules/.bin/mmdc -i docs/ERD.md -o docs/ERD.png
 $ npm cache clean --force && rm -rf node_modules package-lock.json && npm install
 
 # Playwright
+# 事前準備
 $ export BASE_URL=https://www.sunnybe.online/
-$ npx playwright test
+# コード生成
 $ npx playwright codegen http://localhost:3000/
+# テスト実行
+$ npx playwright test
+$ npx playwright test --reporter=allure-playwright
+# テスト結果確認
+$ allure generate allure-results -o allure-report --clean && allure open allure-report
 ```
 
 ## 技術スタック
