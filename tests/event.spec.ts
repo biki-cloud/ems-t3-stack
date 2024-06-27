@@ -4,6 +4,7 @@ const BASE_URL = process.env.BASE_URL;
 
 test.beforeEach(async ({ page }) => {
   await page.goto('/');
+  await page.waitForTimeout(3000); // 5秒待機
 });
 
 let event_titles = [
@@ -16,19 +17,18 @@ let event_titles = [
 
 test.describe("Search Event", () => {
   test("search event by word", async ({ page }) => {
-    await page.waitForTimeout(5000); // 5秒待機
     await expect(page).toHaveTitle("イベントマッチングサービス");
 
     // イベント一覧表示でイベント名が全て表示されているか確認
-    event_titles.forEach(async (event) => {
+    for (const event of event_titles) {
       await expect(await page.getByText(event)).toBeVisible();
-    });
+    }
 
     // イベント名で検索
     await page.getByPlaceholder("イベント名").click();
     await page.getByPlaceholder("イベント名").fill("セル");
     await page.getByRole("button", { name: "検索" }).click();
-    await expect(await page.getByText("セルゲーム開催します！！")).toBeVisible();
+    await expect(await page.getByText("セルゲーム開催します！")).toBeVisible();
     await expect(await page.getByText("ビルス様と修行！！")).toBeHidden();
 
     // イベント名をクリックして詳細を表示
