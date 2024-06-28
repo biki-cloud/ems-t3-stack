@@ -1,6 +1,5 @@
 // components/TabBar.js
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 
 interface Item {
   title: string;
