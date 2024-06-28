@@ -38,7 +38,6 @@ interface SidebarNavProps {
 const CustomNavBar = ({ user }: SidebarNavProps) => {
 
   const [isDevicePC, setIsDevicePC] = useState(false)
-  console.log("isDevicePC", isDevicePC)
 
   // ユーザーの役割に基づいてナビゲーションアイテムをフィルタリング
   const filteredItems = items.filter(item => {
