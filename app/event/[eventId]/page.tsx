@@ -1,7 +1,6 @@
 import { trpc } from "@/trpc/client"
 import { getAuthSession } from "@/lib/nextauth"
 import { commentPerPage } from "@/lib/utils"
-import { getSubscription } from "@/actions/subscription"
 import EventDetail from "@/components/event/EventDetail"
 
 interface EventDetailPageProps {
