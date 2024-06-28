@@ -88,21 +88,6 @@ erDiagram
     }
   
 
-  "Subscription" {
-    String id "🗝️"
-    String customerId 
-    String userId 
-    String status "❓"
-    String subscriptionId "❓"
-    String priceId "❓"
-    DateTime currentPeriodStart "❓"
-    DateTime currentPeriodEnd "❓"
-    Boolean cancelAtPeriodEnd "❓"
-    DateTime createdAt 
-    DateTime updatedAt 
-    }
-  
-
   "Organizer" {
     String id "🗝️"
     String userId 
@@ -147,7 +132,6 @@ erDiagram
     "User" o{--}o "Event" : "events"
     "User" o{--}o "Comment" : "comments"
     "User" o{--}o "CommentLike" : "likes"
-    "User" o{--}o "Subscription" : "subscription"
     "User" o{--}o "Organizer" : "organizer"
     "User" o{--}o "Vendor" : "vendor"
     "User" o{--}o "Customer" : "customer"
@@ -160,7 +144,6 @@ erDiagram
     "Comment" o|--|| "Event" : "event"
     "CommentLike" o|--|| "User" : "user"
     "CommentLike" o|--|| "Comment" : "comment"
-    "Subscription" o|--|| "User" : "user"
     "Organizer" o|--|| "User" : "user"
     "Vendor" o{--}o "EventParticipationRequest" : "EventParticipationRequest"
     "Vendor" o|--|| "User" : "user"
