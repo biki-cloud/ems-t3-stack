@@ -8,6 +8,7 @@ import Link from "next/link"
 interface Item {
   title: string;
   href: string;
+  icon: JSX.Element;
 }
 
 interface Props {
@@ -33,7 +34,7 @@ const LeftNavBar = ({items}: Props) => {
                 "justify-start"
               )}
             >
-              {item.title}
+              {item.icon}{item.title}
             </Link>
           ))}
         </nav>

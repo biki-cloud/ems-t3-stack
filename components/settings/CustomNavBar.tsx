@@ -5,29 +5,39 @@ import { useEffect, useState } from "react"
 import { User } from "@prisma/client"
 import FootNavBar from "./FootNavBar"
 import LeftNavBar from "./LeftNavBar"
+import EventNoteIcon from '@mui/icons-material/EventNote';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import BadgeIcon from '@mui/icons-material/Badge';
+import LockIcon from '@mui/icons-material/Lock';
+          
 
 // ナビゲーション
 const items = [
   {
-    title: "イベント一覧",
-    href: "/"
+    title: "イベント",
+    href: "/",
+    icon: <EventNoteIcon />,
   },
   {
-    title: "ユーザプロフィール",
+    title: "ユーザ",
     href: "/settings/userProfile",
+    icon: <AccountCircleIcon />,
   },
   {
-    title: "イベント主催者プロフィール",
+    title: "イベント主催者",
     href: "/settings/organizerProfile",
+    icon: <BadgeIcon />,
   },
   {
-    title: "イベント出店者プロフィール",
+    title: "イベント出店者",
     href: "/settings/vendorProfile",
+    icon: <BadgeIcon />,
   },
-  {
-    title: "パスワード変更",
-    href: "/settings/password",
-  },
+  // {
+  //   title: "パスワード変更",
+  //   href: "/settings/password",
+  //   icon: <LockIcon />,
+  // },
 ]
 
 interface SidebarNavProps {
