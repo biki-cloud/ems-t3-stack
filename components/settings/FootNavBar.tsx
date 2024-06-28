@@ -5,6 +5,7 @@ interface Item {
   title: string;
   href: string;
   icon: JSX.Element;
+  isSP: boolean;
 }
 
 interface Props {
@@ -17,10 +18,12 @@ const FootNavBar = ({ items }: Props) => {
       className={`fixed bottom-0 w-full flex justify-around bg-white border-t border-gray-200 p-4 transition-transform duration-300`}
     >
       {items.map((item) => (
-        <Link href={item.href} key={item.title} className="text-center text-black hover:text-gray-500 text-sm">
-          {item.icon}
-          {item.title}
-        </Link>
+        item.isSP && (
+          <Link href={item.href} key={item.title} className="text-center text-black hover:text-gray-500 text-sm">
+            {item.icon}
+            {item.title}
+          </Link>
+        )
       ))}
     </div>
   );

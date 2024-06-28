@@ -9,20 +9,21 @@ interface Item {
   title: string;
   href: string;
   icon: JSX.Element;
+  isPC: boolean;
 }
 
 interface Props {
   items: Item[];
 }
 
-
 // サイドナビゲーション
-const LeftNavBar = ({items}: Props) => {
+const LeftNavBar = ({ items }: Props) => {
   const pathname = usePathname()
   return (
     <div>
-        <nav className={cn("flex space-x-2 md:flex-col md:space-x-0 md:space-y-1")}>
-          {items.map((item) => (
+      <nav className={cn("flex space-x-2 md:flex-col md:space-x-0 md:space-y-1")}>
+        {items.map((item) => (
+          item.isPC && (
             <Link
               key={item.href}
               href={item.href}
@@ -36,8 +37,9 @@ const LeftNavBar = ({items}: Props) => {
             >
               {item.icon}{item.title}
             </Link>
-          ))}
-        </nav>
+          )
+        ))}
+      </nav>
     </div>
   )
 }

@@ -9,6 +9,7 @@ import EventNoteIcon from '@mui/icons-material/EventNote';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import BadgeIcon from '@mui/icons-material/Badge';
 import LockIcon from '@mui/icons-material/Lock';
+import { is } from "date-fns/locale"
           
 
 // ナビゲーション
@@ -17,27 +18,37 @@ const items = [
     title: "イベント",
     href: "/",
     icon: <EventNoteIcon />,
+    isSP: true,
+    isPC: true,
   },
   {
     title: "ユーザ",
     href: "/settings/userProfile",
     icon: <AccountCircleIcon />,
+    isSP: true,
+    isPC: true,
   },
   {
     title: "イベント主催者",
     href: "/settings/organizerProfile",
     icon: <BadgeIcon />,
+    isSP: true,
+    isPC: true,
   },
   {
     title: "イベント出店者",
     href: "/settings/vendorProfile",
     icon: <BadgeIcon />,
+    isSP: true,
+    isPC: true,
   },
-  // {
-  //   title: "パスワード変更",
-  //   href: "/settings/password",
-  //   icon: <LockIcon />,
-  // },
+  {
+    title: "パスワード変更",
+    href: "/settings/password",
+    icon: <LockIcon />,
+    isSP: true,
+    isPC: true,
+  },
 ]
 
 interface SidebarNavProps {
