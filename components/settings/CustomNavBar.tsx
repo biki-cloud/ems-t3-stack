@@ -38,6 +38,7 @@ interface SidebarNavProps {
 const CustomNavBar = ({ user }: SidebarNavProps) => {
 
   const [isDevicePC, setIsDevicePC] = useState(false)
+  console.log("isDevicePC", isDevicePC)
 
   // ユーザーの役割に基づいてナビゲーションアイテムをフィルタリング
   const filteredItems = items.filter(item => {
@@ -56,8 +57,7 @@ const CustomNavBar = ({ user }: SidebarNavProps) => {
 
   useEffect(() => {
     const handleResize = () => {
-      // 画面の幅が700px以上、高さが700px以上の場合はPCと判定
-      setIsDevicePC(window.innerWidth > 700 && window.innerHeight > 700)
+      setIsDevicePC(window.innerWidth > 700)
     }
 
     window.addEventListener("resize", handleResize)
