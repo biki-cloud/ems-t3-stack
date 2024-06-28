@@ -13,7 +13,7 @@ export function getBaseUrl() {
     // url = `https://${process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL}`;
   } else {
     // ローカルの場合は、ローカルのURLを返す
-    url = `${process.env.NEXT_PUBLIC_APP_URL}`;
+    url = 'http://localhost:3000';
   }
   // console.log('selected url: ' + url)
   return url;

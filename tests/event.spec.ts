@@ -3,10 +3,8 @@ import { test, expect } from "@playwright/test";
 const BASE_URL = process.env.BASE_URL;
 
 test.beforeEach(async ({ page }) => {
-  if (!BASE_URL) {
-    throw new Error("URL is not provided");
-  }
-  await page.goto(BASE_URL);
+  await page.goto('/');
+  await page.waitForTimeout(3000); // 5秒待機
 });
 
 let event_titles = [
@@ -22,9 +20,9 @@ test.describe("Search Event", () => {
     await expect(page).toHaveTitle("イベントマッチングサービス");
 
     // イベント一覧表示でイベント名が全て表示されているか確認
-    event_titles.forEach(async (event) => {
+    for (const event of event_titles) {
       await expect(await page.getByText(event)).toBeVisible();
-    });
+    }
 
     // イベント名で検索
     await page.getByPlaceholder("イベント名").click();
