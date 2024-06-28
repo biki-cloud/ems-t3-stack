@@ -12,6 +12,7 @@ import genreMapping from "../objects/mapping";
 import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
 import { usePathname } from 'next/navigation';
+import SearchIcon from '@mui/icons-material/Search';
 
 interface props {
     limit: number
@@ -60,7 +61,7 @@ const EventList = ({ limit, offset }: props) => {
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />
-                <Button variant="default" onClick={handleSearch}>検索</Button>
+                <Button variant="default" onClick={handleSearch}><SearchIcon /></Button>
 
             </div>
             <DropdownMenu>

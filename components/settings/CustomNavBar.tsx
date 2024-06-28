@@ -46,7 +46,7 @@ const items = [
     title: "パスワード変更",
     href: "/settings/password",
     icon: <LockIcon />,
-    isSP: true,
+    isSP: false,
     isPC: true,
   },
 ]
