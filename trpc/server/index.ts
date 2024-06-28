@@ -3,7 +3,6 @@ import { authRouter } from "@/trpc/server/routers/auth"
 import { eventRouter } from "@/trpc/server/routers/event"
 import { userRouter } from "@/trpc/server/routers/user"
 import { commentRouter } from "@/trpc/server/routers/comment"
-import { subscriptionRouter } from "@/trpc/server/routers/subscription"
 
 // ルーターの作成
 export const appRouter = router({
@@ -11,7 +10,6 @@ export const appRouter = router({
   event: eventRouter,
   user: userRouter,
   comment: commentRouter,
-  subscription: subscriptionRouter,
 })
 
 // ルーターの型定義
