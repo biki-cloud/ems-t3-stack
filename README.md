@@ -64,19 +64,9 @@ $ allure generate allure-results -o allure-report --clean && allure open allure-
 <a href="https://playwright.dev/" target="_blank"><img src="https://img.shields.io/badge/Playwright-45ba4b?style=for-the-badge&logo=Playwright&logoColor=white"></a>
 
 # TODO
-- プロジェクトの理解
-- 頻繁に使うパーツをコンポーネントにする
-  - パーツに必要な情報はプロップスを渡す形になる
-  - components/utils/aicon.tsxみたいなイメージ
-  - 頻繁に仕様するパーツ
-    - ユーザプロフィールへのリンクになっているアイコン + 名前
-    - 情報入力,編集(名前:入力欄)
-    - 情報表示(名前：値)
 - ESlintを導入
-- 主催者の自己紹介ページやプロフィールに投稿一覧(/author/xxx)のリンクを貼る
 - 出店者検索
 - 消費者検索
-- playwrightの導入。BASE_URLを読み込むやり方。githubactionsで動かす. playwrightのgithubバッチも追加したい。
 - イベントの並べ方はもう少しかっこよくできないか？
   - youtubeみたいな感じが良さそう, スマホとPCを真似る
   - PCの場合のみサイドバー. サイドバーと同じ項目をスマホの場合は右上のユーザ欄に入れるか

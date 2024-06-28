@@ -28,7 +28,7 @@ test.describe("Search Event", () => {
     await page.getByPlaceholder("イベント名").click();
     await page.getByPlaceholder("イベント名").fill("セル");
     await page.getByRole("button", { name: "検索" }).click();
-    await expect(await page.getByText("セルゲーム開催します！")).toBeVisible();
+    await expect(await page.getByText("セルゲーム開催します！！")).toBeVisible();
     await expect(await page.getByText("ビルス様と修行！！")).toBeHidden();
 
     // イベント名をクリックして詳細を表示
