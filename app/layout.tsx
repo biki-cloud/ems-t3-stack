@@ -33,6 +33,9 @@ const RootLayout = async ({ children }: RootLayoutProps) => {
   // 認証情報取得
   const user: User & Role | null = await getAuthSession()
 
+  // スマホでフッターナビゲーションが表示されるとmainの一番下のコンポーネントが隠れるため、隠れないようにするための高さ
+  const FOOT_NAV_BAR_HEIGHT = 100;
+
   return (
     <html lang="ja" suppressHydrationWarning={true}>
       <body className={inter.className}>
@@ -48,7 +51,7 @@ const RootLayout = async ({ children }: RootLayoutProps) => {
                 <Navigation user={user} />
                 <ToastProvider />
 
-                <div className="flex">
+                <div className="flex" style={{ marginBottom: FOOT_NAV_BAR_HEIGHT }}>
                   <CustomNavBar user={user}/>
                   <main className="container mx-auto max-w-screen-md flex-1 px-2">
                     {children}
