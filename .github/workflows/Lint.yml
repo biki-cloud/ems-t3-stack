@@ -23,16 +23,16 @@ jobs:
         run: npm run lint:eslint
       - name: lint-fixのエラーを自動修正
         run: npm run fix
-      - name: Githubの設定
+      - name: 修正されたファイルをpushする
         run: |
-          git remote set-url origin https://github-actions:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY
-          git config --global user.name $GITHUB_ACTOR
-          git config --global user.email $GITHUB_ACTOR@user.noreply.github.com
+          git remote set-url origin https://github-actions:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}
+          git config --global user.name "${GITHUB_ACTOR}"
+          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          if (git diff --shortstat | grep '[0-9]'); then \
+            git add .; \
+            git commit -m "👕 Fixed auto-fixable lint errors by github-actions"; \
+            git push origin HEAD:${GITHUB_REF}; \
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: lint-fixの自動修正をプッシュ
-        run: |
-          git add .;
-          git commit -m "🖋lint auto fixed!!!🖋";
-          git push -f origin HEAD:${GITHUB_REF};
 
