@@ -20,10 +20,9 @@ Not implement(maybe supabase docker container)
 ```bash
 # local run
 $ npm run dev
-
-# db reset
-$ npm run db-dev
 ```
+
+see http://localhost:3000
 
 ### Test
 
@@ -33,6 +32,12 @@ $ npx playwright test --reporter=allure-playwright
 
 # check test result with allure
 $ allure generate allure-results -o allure-report --clean && allure open allure-report
+```
+
+### DB
+```bash
+# db reset
+$ npm run db-dev
 ```
 
 ## Technical Stack
