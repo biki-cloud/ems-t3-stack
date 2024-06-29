@@ -10,15 +10,17 @@
 ```bash
 $ vercel env pull .env.local
 ```
+https://vercel.com/docs/cli
 
 #### Setting DB
 ```bash
-# start supabase locally: https://supabase.com/docs/guides/cli/local-development
+# start supabase locally
 $ supabase start
 
 # db init and insert
 $ npm run db-dev
 ```
+https://supabase.com/docs/guides/cli/local-development
 
 ### Run
 
