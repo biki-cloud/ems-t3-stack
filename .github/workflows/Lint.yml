@@ -28,4 +28,5 @@ jobs:
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "👕 Fixed auto-fixable lint errors by github-actions"
+          file_pattern: ". !.github/workflows/*"
 
