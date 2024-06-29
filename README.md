@@ -7,8 +7,15 @@
 ### Prepare development
 
 #### Setting DB
+```bash
+# start supabase locally
+$ supabase start
 
-Not implement(maybe supabase docker container)
+# db init and insert
+$ npm run db-dev
+```
+
+https://supabase.com/docs/guides/cli/local-development
 
 #### Setting Environment variable
 
@@ -32,13 +39,6 @@ $ npx playwright test --reporter=allure-playwright
 
 # check test result with allure
 $ allure generate allure-results -o allure-report --clean && allure open allure-report
-```
-
-### DB
-
-```bash
-# db reset
-$ npm run db-dev
 ```
 
 ## Technical Stack
