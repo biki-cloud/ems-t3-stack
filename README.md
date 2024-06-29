@@ -2,10 +2,6 @@
 
 ![Vercel](https://vercelbadge.vercel.app/api/biki-cloud/ems-t3-stack)
 
-## サービス
-
-[event-matching-service](ems-t3-stack.vercel.app)
-
 # ローカル開発
 
 ```bash
@@ -16,7 +12,7 @@ $ npm run dev
 $ npx prisma studio
 
 # DBデータを初期化&リセット
-$ ./init_db.sh
+$ npm run db-dev
 
 # docs/ERD.pngを更新
 $ ./node_modules/.bin/mmdc -i docs/ERD.md -o docs/ERD.png
