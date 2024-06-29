@@ -3,10 +3,6 @@ import { Event, PrismaClient, User, Vendor } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-
-
-
-
 async function createUser(
   email: string,
   name: string,
