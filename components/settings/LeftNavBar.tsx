@@ -4,11 +4,12 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
+import React from "react"; // 追加
 
 interface Item {
   title: string;
   href: string;
-  icon: JSX.Element;
+  icon: React.JSX.Element;
   isPC: boolean;
 }
 

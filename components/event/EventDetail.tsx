@@ -18,7 +18,6 @@ To read more about using these font, please visit the Next.js documentation:
 - Pages Directory: https://nextjs.org/docs/pages/building-your-application/optimizing/fonts
 **/
 "use client";
-import { getAuthSession } from "@/lib/nextauth";
 
 import {
   Event,
@@ -38,7 +37,6 @@ import toast from "react-hot-toast";
 import CommentDetail from "@/components/comment/CommentDetail";
 
 import { Button } from "@/components/ui/button";
-import { AvatarImage, AvatarFallback, Avatar } from "@/components/ui/avatar";
 import EventParticipationRequestDetail from "@/components/EventParticipation/EventParticipationRequestDetail";
 import EventParticipationSettleDetail from "@/components/EventParticipation/EventParticipationSettleDetail";
 import genreMapping from "@/components/objects/mapping";
@@ -71,15 +69,9 @@ const EventDetail = ({
   user,
   eventParticipationRequests,
 }: EventDetailProps) => {
-  let user_role = getRoleFromUser(event.user);
+  const user_role = getRoleFromUser(event.user);
 
   const router = useRouter();
-
-  // 投稿内容を200文字に制限
-  const content =
-    event.content.length > 200
-      ? event.content.slice(0, 200) + "..."
-      : event.content;
 
   // 投稿削除
   const { mutate: deleteEvent, isLoading } = trpc.event.deleteEvent.useMutation(
@@ -131,8 +123,6 @@ const EventDetail = ({
   const approvedRequests = eventParticipationRequests.filter(
     (request) => request.status === "approved",
   );
-
-  const isOrganizer = user?.role == "organizer";
 
   // ユーザーがイベントのオーガナイザーかどうか
   const isEventAuthor = event.userId == user?.id;
@@ -240,45 +230,3 @@ const EventDetail = ({
   );
 };
 export default EventDetail;
-
-function CalendarIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M8 2v4" />
-      <path d="M16 2v4" />
-      <rect width="18" height="18" x="3" y="4" rx="2" />
-      <path d="M3 10h18" />
-    </svg>
-  );
-}
-
-function MapPinIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
-      <circle cx="12" cy="10" r="3" />
-    </svg>
-  );
-}

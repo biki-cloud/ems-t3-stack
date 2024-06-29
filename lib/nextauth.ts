@@ -4,7 +4,6 @@ import prisma from "@/lib/prisma";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
-import { TRPCError } from "@trpc/server";
 
 // NextAuth設定
 export const authOptions: NextAuthOptions = {

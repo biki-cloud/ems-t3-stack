@@ -1,12 +1,4 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
-import { Button } from "../ui/button";
-import Image from "next/image";
-import {
-  EventParticipationRequest,
-  Organizer,
-  User,
-  Vendor,
-} from "@prisma/client";
+import { EventParticipationRequest, User, Vendor } from "@prisma/client";
 import EventParticipationRequestItem from "./EventParticipationRequestItem";
 import { Role } from "@/lib/utils";
 

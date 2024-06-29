@@ -1,6 +1,7 @@
 "use client";
 
 import { SessionProvider } from "next-auth/react";
+import React from "react"; // 追加
 
 interface AuthProviderProps {
   children: React.ReactNode;

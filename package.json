@@ -1,16 +1,18 @@
 {
-  "name": "ts-stack-auth-tutorial",
-  "version": "0.1.0",
+  "name": "event-matching-service",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
     "lint": "run-p --continue-on-error --print-label lint:*",
     "lint:prettier": "prettier --check .",
+    "lint:eslint": "next lint",
     "lint:secretlint": "secretlint --maskSecrets --secretlintignore .gitignore '**/*'",
     "fix": "run-s --continue-on-error --print-label fix:*",
     "fix:prettier": "prettier --write .",
+    "fix:eslint": "next lint --fix",
     "db-dev": "run-s --continue-on-error --print-label db-dev:*",
     "db-dev:generate": "npx prisma generate # スキーマからprisma clientを生成",
     "db-dev:reset": "npx prisma migrate reset --force # データベース内容を削除し + データ挿入",
@@ -70,6 +72,7 @@
   },
   "devDependencies": {
     "@mermaid-js/mermaid-cli": "^10.9.1",
+    "@next/eslint-plugin-next": "^14.2.4",
     "@playwright/test": "^1.45.0",
     "@prisma/generator-helper": "^5.15.0",
     "@secretlint/secretlint-rule-preset-recommend": "^8.2.4",
@@ -78,10 +81,13 @@
     "@types/nodemailer": "^6.4.13",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@typescript-eslint/eslint-plugin": "^7.14.1",
+    "@typescript-eslint/parser": "^7.14.1",
     "allure-playwright": "^3.0.0-beta.3",
     "autoprefixer": "^10",
-    "eslint": "^8",
-    "eslint-config-next": "13.5.6",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "^14.2.4",
+    "eslint-plugin-next": "^0.0.0",
     "npm-run-all2": "^6.2.0",
     "postcss": "^8",
     "prettier": "^3.3.2",
@@ -90,6 +96,6 @@
     "secretlint": "^8.2.4",
     "tailwindcss": "^3",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.5"
+    "typescript": "5.4.x"
   }
 }

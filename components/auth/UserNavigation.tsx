@@ -1,6 +1,6 @@
 "use client";
 
-import { Customer, Organizer, User, Vendor } from "@prisma/client";
+import { User } from "@prisma/client";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,7 +20,7 @@ interface UserNavigationProps {
 
 // ユーザーナビゲーション
 const UserNavigation = ({ user }: UserNavigationProps) => {
-  let user_role = getRoleFromUser(user);
+  const user_role = getRoleFromUser(user);
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>

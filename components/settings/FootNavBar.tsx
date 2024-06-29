@@ -1,10 +1,11 @@
 // components/TabBar.js
 import Link from "next/link";
+import React from "react"; // 追加
 
 interface Item {
   title: string;
   href: string;
-  icon: JSX.Element;
+  icon: React.JSX.Element;
   isSP: boolean;
 }
 

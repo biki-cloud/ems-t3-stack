@@ -11,11 +11,7 @@ interface ProfileProps {
 
 // プロフィール
 const CustomerIntroduceProfile = ({ customer }: ProfileProps) => {
-  const {
-    data: user,
-    isLoading,
-    refetch,
-  } = trpc.user.getUserByUserId.useQuery(
+  const { data: user } = trpc.user.getUserByUserId.useQuery(
     {
       userId: customer.user.id,
     },

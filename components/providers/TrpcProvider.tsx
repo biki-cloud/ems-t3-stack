@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { httpBatchLink } from "@trpc/client";
 import { trpc } from "@/trpc/react";
 import { getBaseUrl } from "@/trpc/url";
+import React from "react"; // 追加
 
 interface TrpcProviderProps {
   children: React.ReactNode;
