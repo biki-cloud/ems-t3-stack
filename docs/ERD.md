@@ -1,22 +1,6 @@
 ```mermaid
 erDiagram
 
-  "Account" {
-    String id "🗝️"
-    String userId 
-    String type 
-    String provider 
-    String providerAccountId 
-    String refresh_token "❓"
-    String access_token "❓"
-    Int expires_at "❓"
-    String token_type "❓"
-    String scope "❓"
-    String id_token "❓"
-    String session_state "❓"
-    }
-  
-
   "Session" {
     String id "🗝️"
     String sessionToken 
@@ -124,9 +108,7 @@ erDiagram
     DateTime updatedAt 
     }
   
-    "Account" o|--|| "User" : "user"
     "Session" o|--|| "User" : "user"
-    "User" o{--}o "Account" : "accounts"
     "User" o{--}o "Session" : "sessions"
     "User" o{--}o "PasswordResetToken" : "PasswordResetToken"
     "User" o{--}o "Event" : "events"
