@@ -44,7 +44,7 @@ const CommentItem = ({ comment, userId }: CommentItemProps) => {
     });
   };
 
-  let user_role = getRoleFromUser(comment.user);
+  const user_role = getRoleFromUser(comment.user);
 
   return (
     <div>

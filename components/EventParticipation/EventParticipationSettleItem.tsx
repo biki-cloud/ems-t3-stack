@@ -16,7 +16,7 @@ interface EventParticipationRequestItemProps {
 const EventParticipationSettleItem = ({
   eventParticipationRequest,
 }: EventParticipationRequestItemProps) => {
-  let user_role = getRoleFromUser(eventParticipationRequest.vendor.user);
+  const user_role = getRoleFromUser(eventParticipationRequest.vendor.user);
   return (
     <div>
       <ul className="grid gap-4 mt-4">

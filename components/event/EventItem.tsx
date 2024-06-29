@@ -27,7 +27,7 @@ const EventItem = ({ event: event }: EventItemProps) => {
   const now = new Date();
   const date = formatDistance(updatedAt, now, { addSuffix: true, locale: ja });
 
-  let user_role = getRoleFromUser(event.user);
+  const user_role = getRoleFromUser(event.user);
 
   return (
     <div>

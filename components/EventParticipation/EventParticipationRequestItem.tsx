@@ -44,7 +44,7 @@ const EventParticipationRequestItem = ({
     router.refresh();
   };
 
-  let user_role = getRoleFromUser(eventParticipationRequest.vendor.user);
+  const user_role = getRoleFromUser(eventParticipationRequest.vendor.user);
 
   return (
     <div>

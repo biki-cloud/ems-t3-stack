@@ -71,7 +71,7 @@ const EventDetail = ({
   user,
   eventParticipationRequests,
 }: EventDetailProps) => {
-  let user_role = getRoleFromUser(event.user);
+  const user_role = getRoleFromUser(event.user);
 
   const router = useRouter();
 
