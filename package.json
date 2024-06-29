@@ -6,13 +6,20 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "postinstall": "prisma generate",
-    "prettier-check": "prettier --cache --check .",
-    "prettier-fix": "prettier --cache --write ."
+    "lint": "run-p --continue-on-error --print-label lint:*",
+    "lint:prettier": "prettier --check .",
+    "fix": "run-s --continue-on-error --print-label fix:*",
+    "fix:prettier": "prettier --write .",
+    "db-dev": "run-s --continue-on-error --print-label db-dev:*",
+    "db-dev:generate": "npx prisma generate # スキーマからprisma clientを生成",
+    "db-dev:reset": "npx prisma migrate reset --force # データベース内容を削除し + データ挿入",
+    "db-prd:migrate": "npx prisma migrate dev --name init # マイグレーションファイルを生成. 開発段階では不要 データ型を厳密に管理する場合に必要",
+    "db-prd:deploy": "npx prisma migrate deploy --preview-feature # マイグレーションファイルをデータベースに適用",
+    "db-prd:push": "npx prisma db push --preview-feature # データベースにスキーマを適用",
+    "prisma-studio": "npx prisma studio"
   },
   "prisma": {
-    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts # データベースに初期データを挿入 ここを消すとdb-db:resetで初期データが投入されなくなる"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
@@ -73,6 +80,7 @@
     "autoprefixer": "^10",
     "eslint": "^8",
     "eslint-config-next": "13.5.6",
+    "npm-run-all2": "^6.2.0",
     "postcss": "^8",
     "prettier": "^3.3.2",
     "prisma": "^5.4.2",
