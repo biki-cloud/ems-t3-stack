@@ -69,8 +69,7 @@ $ allure generate allure-results -o allure-report --clean && allure open allure-
 <a href="https://playwright.dev/" target="_blank"><img src="https://img.shields.io/badge/Playwright-45ba4b?style=for-the-badge&logo=Playwright&logoColor=white"></a>
 
 # TODO
-
-- ESlintを導入
+- Github actionsでFixで自動修正した後、自動コミットする
 - イベントの並べ方はもう少しかっこよくできないか？
   - youtubeみたいな感じが良さそう, スマホとPCを真似る
 - 出店者検索
