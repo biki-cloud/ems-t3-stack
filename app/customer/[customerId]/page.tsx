@@ -1,17 +1,18 @@
-
-import { notFound } from "next/navigation"
-import CustomerIntroduceProfile from "@/components/customer/CustomerIntroduceProfile"
-import prisma from "@/lib/prisma"
+import { notFound } from "next/navigation";
+import CustomerIntroduceProfile from "@/components/customer/CustomerIntroduceProfile";
+import prisma from "@/lib/prisma";
 
 interface CustomerProfilePageProps {
   params: {
-    customerId: string
-  }
+    customerId: string;
+  };
 }
 
 // カスタマープロフィールページ
-const CustomerIntoroduceProfilePage = async ({ params }: CustomerProfilePageProps) => {
-  const { customerId } = params
+const CustomerIntoroduceProfilePage = async ({
+  params,
+}: CustomerProfilePageProps) => {
+  const { customerId } = params;
 
   const customer = await prisma.customer.findUnique({
     where: {
@@ -20,13 +21,13 @@ const CustomerIntoroduceProfilePage = async ({ params }: CustomerProfilePageProp
     include: {
       user: true,
     },
-  })
+  });
 
   if (!customer) {
-    notFound()
+    notFound();
   }
 
-  return <CustomerIntroduceProfile customer={customer} />
-}
+  return <CustomerIntroduceProfile customer={customer} />;
+};
 
-export default CustomerIntoroduceProfilePage
+export default CustomerIntoroduceProfilePage;

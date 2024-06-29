@@ -1,11 +1,11 @@
-import Link from "next/link"
-import Image from "next/image"
+import Link from "next/link";
+import Image from "next/image";
 
 interface UserLinkProps {
-  userId: string | null
-  userName: string | null
-  userImage: string | null
-  userType: "vendor" | "organizer"
+  userId: string | null;
+  userName: string | null;
+  userImage: string | null;
+  userType: "vendor" | "organizer";
 }
 
 const UserLink = ({ userId, userName, userImage, userType }: UserLinkProps) => (
@@ -23,6 +23,6 @@ const UserLink = ({ userId, userName, userImage, userType }: UserLinkProps) => (
       <div className="text-sm hover:underline">{userName}</div>
     </div>
   </Link>
-)
+);
 
-export default UserLink
+export default UserLink;

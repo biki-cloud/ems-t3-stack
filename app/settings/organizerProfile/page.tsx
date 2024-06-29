@@ -1,15 +1,15 @@
-import { redirect } from "next/navigation"
-import { getAuthSession } from "@/lib/nextauth"
-import OrganizerProfileEdit from "@/components/organizer/OrganizerProfileEdit"
-import prisma from "@/lib/prisma"
+import { redirect } from "next/navigation";
+import { getAuthSession } from "@/lib/nextauth";
+import OrganizerProfileEdit from "@/components/organizer/OrganizerProfileEdit";
+import prisma from "@/lib/prisma";
 
 // プロフィール編集ページ
 const OrganizerProfileEditPage = async () => {
   // 認証情報取得
-  const user = await getAuthSession()
+  const user = await getAuthSession();
 
   if (!user) {
-    redirect("/login")
+    redirect("/login");
   }
 
   const organizer = await prisma.organizer.findUnique({
@@ -19,13 +19,13 @@ const OrganizerProfileEditPage = async () => {
     include: {
       user: true,
     },
-  })
+  });
 
   if (!organizer) {
-    redirect("/login")
+    redirect("/login");
   }
 
-  return <OrganizerProfileEdit organizer={organizer} />
-}
+  return <OrganizerProfileEdit organizer={organizer} />;
+};
 
-export default OrganizerProfileEditPage
+export default OrganizerProfileEditPage;

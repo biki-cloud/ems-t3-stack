@@ -14,7 +14,7 @@ export const userRouter = router({
         name: z.string(),
         introduction: z.string().optional(),
         base64Image: z.string().optional(),
-      })
+      }),
     )
     .mutation(async ({ input, ctx }) => {
       try {
@@ -80,7 +80,7 @@ export const userRouter = router({
         organizationName: z
           .string()
           .min(3, { message: "3文字以上入力する必要があります" }),
-      })
+      }),
     )
     .mutation(async ({ input, ctx }) => {
       try {
@@ -131,7 +131,7 @@ export const userRouter = router({
         vendorName: z
           .string()
           .min(3, { message: "3文字以上入力する必要があります" }),
-      })
+      }),
     )
     .mutation(async ({ input, ctx }) => {
       try {
@@ -183,7 +183,7 @@ export const userRouter = router({
         userId: z.string().optional(),
         limit: z.number(),
         offset: z.number(),
-      })
+      }),
     )
     .query(async ({ input }) => {
       try {
@@ -231,7 +231,7 @@ export const userRouter = router({
     .input(
       z.object({
         userId: z.string(),
-      })
+      }),
     )
     .query(async ({ input }) => {
       try {

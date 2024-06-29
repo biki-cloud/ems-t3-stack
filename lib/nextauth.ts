@@ -47,7 +47,7 @@ export const authOptions: NextAuthOptions = {
         // パスワードが一致しない場合はエラー
         const isCorrectPassword = await bcrypt.compare(
           credentials.password,
-          user.hashedPassword
+          user.hashedPassword,
         );
 
         if (!isCorrectPassword) {
@@ -88,5 +88,5 @@ export const getAuthSession = async () => {
     return null;
   }
 
-  return user
-}
+  return user;
+};

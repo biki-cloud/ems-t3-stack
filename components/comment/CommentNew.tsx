@@ -1,39 +1,39 @@
-"use client"
+"use client";
 
-import { useRouter } from "next/navigation"
-import { z } from "zod"
-import { useForm, SubmitHandler } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
+import { useRouter } from "next/navigation";
+import { z } from "zod";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-} from "@/components/ui/form"
-import { Button } from "@/components/ui/button"
-import { Textarea } from "@/components/ui/textarea"
-import { trpc } from "@/trpc/react"
-import { Loader2 } from "lucide-react"
-import toast from "react-hot-toast"
-import Link from "next/link"
+} from "@/components/ui/form";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { trpc } from "@/trpc/react";
+import { Loader2 } from "lucide-react";
+import toast from "react-hot-toast";
+import Link from "next/link";
 
 // 入力データの検証ルールを定義
 const schema = z.object({
   content: z.string().min(3, { message: "3文字以上入力する必要があります。" }),
-})
+});
 
 // 入力データの型を定義
-type InputType = z.infer<typeof schema>
+type InputType = z.infer<typeof schema>;
 
 interface CommentNewProps {
-  userId?: string
-  eventId: string
+  userId?: string;
+  eventId: string;
 }
 
 // 新規コメント
 const CommentNew = ({ userId, eventId: eventId }: CommentNewProps) => {
-  const router = useRouter()
+  const router = useRouter();
 
   // フォームの状態
   const form = useForm<InputType>({
@@ -43,21 +43,21 @@ const CommentNew = ({ userId, eventId: eventId }: CommentNewProps) => {
     defaultValues: {
       content: "",
     },
-  })
+  });
 
   // 新規コメント
   const { mutate: createComment, isLoading } =
     trpc.comment.createComment.useMutation({
       onSuccess: () => {
-        toast.success("コメントを投稿しました")
-        form.reset()
-        router.refresh()
+        toast.success("コメントを投稿しました");
+        form.reset();
+        router.refresh();
       },
       onError: (error) => {
-        toast.error("コメントの投稿に失敗しました")
-        console.error(error)
+        toast.error("コメントの投稿に失敗しました");
+        console.error(error);
       },
-    })
+    });
 
   // 送信
   const onSubmit: SubmitHandler<InputType> = (data) => {
@@ -65,8 +65,8 @@ const CommentNew = ({ userId, eventId: eventId }: CommentNewProps) => {
     createComment({
       eventId: eventId,
       content: data.content,
-    })
-  }
+    });
+  };
 
   return (
     <div className="border rounded-md p-2 sm:p-5 bg-gray-50">
@@ -108,7 +108,7 @@ const CommentNew = ({ userId, eventId: eventId }: CommentNewProps) => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default CommentNew
+export default CommentNew;

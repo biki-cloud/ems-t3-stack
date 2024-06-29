@@ -1,17 +1,17 @@
-"use client"
+"use client";
 
-import { Event, User } from "@prisma/client"
-import { userEventPerPage } from "@/lib/utils"
-import Image from "next/image"
-import AuthorEventItem from "@/components/author/AuthorEventItem"
-import PaginationButton from "@/components/pagers/PaginationButton"
+import { Event, User } from "@prisma/client";
+import { userEventPerPage } from "@/lib/utils";
+import Image from "next/image";
+import AuthorEventItem from "@/components/author/AuthorEventItem";
+import PaginationButton from "@/components/pagers/PaginationButton";
 
 interface AuthorDetailProps {
   user: User & {
-    events: Event[]
-  }
-  pageCount: number
-  totalEvents: number
+    events: Event[];
+  };
+  pageCount: number;
+  totalEvents: number;
 }
 
 // 投稿者詳細
@@ -60,7 +60,7 @@ const AuthorDetail = ({ user, pageCount, totalEvents }: AuthorDetailProps) => {
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AuthorDetail
+export default AuthorDetail;

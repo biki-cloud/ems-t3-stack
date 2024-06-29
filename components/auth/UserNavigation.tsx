@@ -1,26 +1,26 @@
-"use client"
+"use client";
 
-import { Customer, Organizer, User, Vendor } from "@prisma/client"
+import { Customer, Organizer, User, Vendor } from "@prisma/client";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { signOut } from "next-auth/react"
-import Link from "next/link"
-import Image from "next/image"
-import UserLink from "../common/UserLink"
-import { Role, getRoleFromUser } from "@/lib/utils"
+} from "@/components/ui/dropdown-menu";
+import { signOut } from "next-auth/react";
+import Link from "next/link";
+import Image from "next/image";
+import UserLink from "../common/UserLink";
+import { Role, getRoleFromUser } from "@/lib/utils";
 
 interface UserNavigationProps {
-  user: User & Role
+  user: User & Role;
 }
 
 // ユーザーナビゲーション
 const UserNavigation = ({ user }: UserNavigationProps) => {
-  let user_role = getRoleFromUser(user)
+  let user_role = getRoleFromUser(user);
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -37,7 +37,12 @@ const UserNavigation = ({ user }: UserNavigationProps) => {
 
       <DropdownMenuContent className="bg-white p-2 w-[300px]" align="end">
         {user_role && (
-          <UserLink userId={user_role.id} userName={user.name} userImage={user.image} userType={user.role as "vendor" | "organizer"} />
+          <UserLink
+            userId={user_role.id}
+            userName={user.name}
+            userImage={user.image}
+            userType={user.role as "vendor" | "organizer"}
+          />
         )}
 
         <DropdownMenuSeparator />
@@ -84,11 +89,10 @@ const UserNavigation = ({ user }: UserNavigationProps) => {
           </DropdownMenuItem>
         </Link>
 
-
         <DropdownMenuItem
           onSelect={async (event) => {
-            event.preventDefault()
-            await signOut({ callbackUrl: "/" })
+            event.preventDefault();
+            await signOut({ callbackUrl: "/" });
           }}
           className="text-red-600 cursor-pointer"
         >
@@ -96,7 +100,7 @@ const UserNavigation = ({ user }: UserNavigationProps) => {
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
-}
+  );
+};
 
-export default UserNavigation
+export default UserNavigation;

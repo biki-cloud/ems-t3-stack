@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { useRouter } from "next/navigation"
-import { z } from "zod"
-import { useForm, SubmitHandler } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
+import { useRouter } from "next/navigation";
+import { z } from "zod";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
   FormControl,
@@ -11,12 +11,12 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { trpc } from "@/trpc/react"
-import { Loader2 } from "lucide-react"
-import toast from "react-hot-toast"
+} from "@/components/ui/form";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { trpc } from "@/trpc/react";
+import { Loader2 } from "lucide-react";
+import toast from "react-hot-toast";
 
 // 入力データの検証ルールを定義
 const schema = z
@@ -29,18 +29,18 @@ const schema = z
   .refine((data) => data.password === data.repeatedPassword, {
     message: "新しいパスワードと確認用パスワードが一致しません",
     path: ["repeatedPassword"], // エラーメッセージが適用されるフィールド
-  })
+  });
 
 // 入力データの型を定義
-type InputType = z.infer<typeof schema>
+type InputType = z.infer<typeof schema>;
 
 interface ResetPasswordProps {
-  token: string
+  token: string;
 }
 
 // パスワード再設定
 const ResetPassword = ({ token }: ResetPasswordProps) => {
-  const router = useRouter()
+  const router = useRouter();
 
   // フォームの状態
   const form = useForm<InputType>({
@@ -51,22 +51,22 @@ const ResetPassword = ({ token }: ResetPasswordProps) => {
       password: "",
       repeatedPassword: "",
     },
-  })
+  });
 
   // パスワード再設定
   const { mutate: resetPassword, isLoading } =
     trpc.auth.resetPassword.useMutation({
       onSuccess: () => {
-        toast.success("パスワードを再設定しました")
+        toast.success("パスワードを再設定しました");
 
-        router.refresh()
-        router.push("/login")
+        router.refresh();
+        router.push("/login");
       },
       onError: (error) => {
-        toast.error(error.message)
-        console.error(error)
+        toast.error(error.message);
+        console.error(error);
       },
-    })
+    });
 
   // 送信
   const onSubmit: SubmitHandler<InputType> = (data) => {
@@ -74,8 +74,8 @@ const ResetPassword = ({ token }: ResetPasswordProps) => {
     resetPassword({
       token,
       password: data.password,
-    })
-  }
+    });
+  };
 
   return (
     <div className="max-w-[400px] m-auto">
@@ -120,7 +120,7 @@ const ResetPassword = ({ token }: ResetPasswordProps) => {
         </form>
       </Form>
     </div>
-  )
-}
+  );
+};
 
-export default ResetPassword
+export default ResetPassword;

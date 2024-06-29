@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { useRouter } from "next/navigation"
-import { z } from "zod"
-import { useForm, SubmitHandler } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
+import { useRouter } from "next/navigation";
+import { z } from "zod";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
   FormControl,
@@ -11,24 +11,24 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { trpc } from "@/trpc/react"
-import { Loader2 } from "lucide-react"
-import toast from "react-hot-toast"
+} from "@/components/ui/form";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { trpc } from "@/trpc/react";
+import { Loader2 } from "lucide-react";
+import toast from "react-hot-toast";
 
 // 入力データの検証ルールを定義
 const schema = z.object({
   email: z.string().email({ message: "メールアドレスの形式ではありません" }),
-})
+});
 
 // 入力データの型を定義
-type InputType = z.infer<typeof schema>
+type InputType = z.infer<typeof schema>;
 
 // パスワードリセット
 const ForgotPassword = () => {
-  const router = useRouter()
+  const router = useRouter();
 
   // フォームの状態
   const form = useForm<InputType>({
@@ -38,27 +38,27 @@ const ForgotPassword = () => {
     defaultValues: {
       email: "",
     },
-  })
+  });
 
   // パスワード再設定メール送信
   const { mutate: forgotPassword, isLoading } =
     trpc.auth.forgotPassword.useMutation({
       onSuccess: () => {
-        toast.success("パスワード再設定に必要なメールを送信しました")
-        form.reset()
-        router.refresh()
+        toast.success("パスワード再設定に必要なメールを送信しました");
+        form.reset();
+        router.refresh();
       },
       onError: (error) => {
-        toast.error(error.message)
-        console.error(error)
+        toast.error(error.message);
+        console.error(error);
       },
-    })
+    });
 
   // 送信
   const onSubmit: SubmitHandler<InputType> = (data) => {
     // パスワード再設定メール送信
-    forgotPassword(data)
-  }
+    forgotPassword(data);
+  };
 
   return (
     <div className="max-w-[400px] m-auto">
@@ -89,7 +89,7 @@ const ForgotPassword = () => {
         </form>
       </Form>
     </div>
-  )
-}
+  );
+};
 
-export default ForgotPassword
+export default ForgotPassword;

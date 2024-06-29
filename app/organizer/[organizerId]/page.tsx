@@ -1,16 +1,18 @@
-import { notFound } from "next/navigation"
-import OrganizerIntroduceProfile from "@/components/organizer/OrganizerIntroduceProfile"
-import prisma from "@/lib/prisma"
+import { notFound } from "next/navigation";
+import OrganizerIntroduceProfile from "@/components/organizer/OrganizerIntroduceProfile";
+import prisma from "@/lib/prisma";
 
 interface OrganizerProfilePageProps {
   params: {
-    organizerId: string
-  }
+    organizerId: string;
+  };
 }
 
 // 主催者プロフィールページ
-const OrganizerIntoroduceProfilePage = async ({ params }: OrganizerProfilePageProps) => {
-  const { organizerId } = params
+const OrganizerIntoroduceProfilePage = async ({
+  params,
+}: OrganizerProfilePageProps) => {
+  const { organizerId } = params;
 
   const organizer = await prisma.organizer.findUnique({
     where: {
@@ -19,13 +21,13 @@ const OrganizerIntoroduceProfilePage = async ({ params }: OrganizerProfilePagePr
     include: {
       user: true,
     },
-  })
+  });
 
   if (!organizer) {
-    notFound()
+    notFound();
   }
 
-  return <OrganizerIntroduceProfile organizer={organizer} />
-}
+  return <OrganizerIntroduceProfile organizer={organizer} />;
+};
 
-export default OrganizerIntoroduceProfilePage
+export default OrganizerIntoroduceProfilePage;

@@ -3,7 +3,7 @@ import { test, expect } from "@playwright/test";
 const BASE_URL = process.env.BASE_URL;
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('/');
+  await page.goto("/");
   await page.waitForTimeout(3000); // 5秒待機
 });
 
@@ -27,8 +27,10 @@ test.describe("Search Event", () => {
     // イベント名で検索
     await page.getByPlaceholder("イベント名").click();
     await page.getByPlaceholder("イベント名").fill("セル");
-    await page.locator('#event-search-button-id').click();
-    await expect(await page.getByText("セルゲーム開催します！！")).toBeVisible();
+    await page.locator("#event-search-button-id").click();
+    await expect(
+      await page.getByText("セルゲーム開催します！！"),
+    ).toBeVisible();
     await expect(await page.getByText("ビルス様と修行！！")).toBeHidden();
 
     // イベント名をクリックして詳細を表示

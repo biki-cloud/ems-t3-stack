@@ -1,6 +1,6 @@
-import { httpBatchLink } from "@trpc/client"
-import { appRouter } from "@/trpc/server"
-import { getBaseUrl } from "../url"
+import { httpBatchLink } from "@trpc/client";
+import { appRouter } from "@/trpc/server";
+import { getBaseUrl } from "../url";
 
 // バックエンドtRPCクライアント
 export const trpc = appRouter.createCaller({
@@ -9,4 +9,4 @@ export const trpc = appRouter.createCaller({
       url: `${getBaseUrl()}/api/trpc`,
     }),
   ],
-})
+});
