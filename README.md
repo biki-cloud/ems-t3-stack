@@ -35,6 +35,7 @@ $ allure generate allure-results -o allure-report --clean && allure open allure-
 ```
 
 ### DB
+
 ```bash
 # db reset
 $ npm run db-dev
