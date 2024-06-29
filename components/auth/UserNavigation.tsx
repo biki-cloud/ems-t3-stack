@@ -1,6 +1,6 @@
 "use client";
 
-import { Customer, Organizer, User, Vendor } from "@prisma/client";
+import { User } from "@prisma/client";
 import {
   DropdownMenu,
   DropdownMenuContent,

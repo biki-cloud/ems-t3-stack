@@ -8,7 +8,6 @@ import { trpc } from "@/trpc/react";
 import CommentLikeDetail from "@/components/comment/CommentLikeDetail";
 import Link from "next/link";
 import toast from "react-hot-toast";
-import Image from "next/image";
 import { Role, getRoleFromUser } from "@/lib/utils";
 import UserLink from "../common/UserLink";
 

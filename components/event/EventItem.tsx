@@ -2,8 +2,6 @@
 
 import { Role, getRoleFromUser } from "@/lib/utils";
 import { Event, User } from "@prisma/client";
-import { formatDistance } from "date-fns";
-import { ja } from "date-fns/locale";
 import Image from "next/image";
 import Link from "next/link";
 import UserLink from "../common/UserLink";
@@ -21,11 +19,6 @@ const EventItem = ({ event: event }: EventItemProps) => {
     event.content.length > 60
       ? event.content.slice(0, 60) + "..."
       : event.content;
-
-  // 日付
-  const updatedAt = new Date(event.updatedAt ?? 0);
-  const now = new Date();
-  const date = formatDistance(updatedAt, now, { addSuffix: true, locale: ja });
 
   const user_role = getRoleFromUser(event.user);
 

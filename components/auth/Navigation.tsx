@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Customer, Organizer, User, Vendor } from "@prisma/client";
+import { User } from "@prisma/client";
 import UserNavigation from "@/components/auth/UserNavigation";
 import Link from "next/link";
 import { ThemeModeToggle } from "../ui/theme";

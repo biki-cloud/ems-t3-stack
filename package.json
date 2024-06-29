@@ -1,6 +1,6 @@
 {
-  "name": "ts-stack-auth-tutorial",
-  "version": "0.1.0",
+  "name": "event-matching-service",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -86,7 +86,8 @@
     "allure-playwright": "^3.0.0-beta.3",
     "autoprefixer": "^10",
     "eslint": "^8.57.0",
-    "eslint-config-next": "13.5.6",
+    "eslint-config-next": "^14.2.4",
+    "eslint-plugin-next": "^0.0.0",
     "npm-run-all2": "^6.2.0",
     "postcss": "^8",
     "prettier": "^3.3.2",
@@ -95,6 +96,6 @@
     "secretlint": "^8.2.4",
     "tailwindcss": "^3",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.5"
+    "typescript": "5.4.x"
   }
 }

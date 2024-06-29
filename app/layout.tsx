@@ -9,19 +9,10 @@ import Navigation from "@/components/auth/Navigation";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "@/components/ui/theme-provider";
-import { ThemeModeToggle } from "@/components/ui/theme";
-import { Customer, Organizer, User, Vendor } from "@prisma/client";
+import { User } from "@prisma/client";
 import { Role } from "@/lib/utils";
-import SidebarNav from "@/components/settings/LeftNavBar";
-import {
-  BrowserView,
-  MobileView,
-  isBrowser,
-  isMobile,
-} from "react-device-detect";
-import { useEffect, useState } from "react";
-import TabBar from "@/components/settings/FootNavBar";
 import CustomNavBar from "@/components/settings/CustomNavBar";
+import React from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 

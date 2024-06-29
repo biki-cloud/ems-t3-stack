@@ -1,8 +1,5 @@
 import { EventParticipationRequest, User, Vendor } from "@prisma/client";
 import { Button } from "../ui/button";
-import Image from "next/image";
-import Link from "next/link";
-import { format } from "date-fns";
 import { trpc } from "@/trpc/react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
@@ -21,8 +18,6 @@ const EventParticipationRequestItem = ({
   isEventAuthor,
 }: EventParticipationRequestItemProps) => {
   const router = useRouter();
-  const updateStatus =
-    trpc.event.updateParticipationRequestStatus.useMutation();
 
   const { mutate: updateParticipationRequestStatus, isLoading } =
     trpc.event.updateParticipationRequestStatus.useMutation({

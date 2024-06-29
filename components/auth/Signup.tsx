@@ -14,7 +14,6 @@ import {
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { FcGoogle } from "react-icons/fc";
 import { trpc } from "@/trpc/react";
 import { Loader2 } from "lucide-react";
 import { signIn } from "next-auth/react";
@@ -27,7 +26,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useState } from "react";
 
 // 入力データの検証ルールを定義
 const schema = z.object({
@@ -56,18 +54,6 @@ const Signup = () => {
       password: "",
     },
   });
-
-  const handleGoogleSingup = async () => {
-    try {
-      const result = await signIn("google", { callbackUrl: "/" });
-
-      if (result?.error) {
-        toast.error("アカウント作成に失敗しました");
-      }
-    } catch (error) {
-      toast.error("アカウント作成に失敗しました");
-    }
-  };
 
   // サインアップ
   const { mutate: singUp, isLoading } = trpc.auth.singUp.useMutation({

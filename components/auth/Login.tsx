@@ -15,7 +15,6 @@ import {
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { FcGoogle } from "react-icons/fc";
 import { Loader2 } from "lucide-react";
 import { signIn } from "next-auth/react";
 import toast from "react-hot-toast";
@@ -45,19 +44,6 @@ const Login = () => {
       password: "",
     },
   });
-
-  // Googleアカウントでログイン
-  const handleGoogleLogin = async () => {
-    try {
-      const result = await signIn("google", { callbackUrl: "/" });
-
-      if (result?.error) {
-        toast.error("ログインに失敗しました");
-      }
-    } catch (error) {
-      toast.error("ログインに失敗しました");
-    }
-  };
 
   // 送信
   const onSubmit: SubmitHandler<InputType> = async (data) => {

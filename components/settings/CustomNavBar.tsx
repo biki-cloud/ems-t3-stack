@@ -1,6 +1,6 @@
 "use client";
 
-import { Role, cn } from "@/lib/utils";
+import { Role } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { User } from "@prisma/client";
 import FootNavBar from "./FootNavBar";
@@ -9,7 +9,6 @@ import EventNoteIcon from "@mui/icons-material/EventNote";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LockIcon from "@mui/icons-material/Lock";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
-import { is } from "date-fns/locale";
 
 // ナビゲーション
 const items = [
