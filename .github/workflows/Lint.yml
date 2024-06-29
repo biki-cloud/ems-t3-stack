@@ -34,5 +34,5 @@ jobs:
         run: |
           git add .;
           git commit -m "🖋lint auto fixed!!!🖋";
-          git push origin HEAD:${GITHUB_REF};
+          git push -f origin HEAD:${GITHUB_REF};
 
