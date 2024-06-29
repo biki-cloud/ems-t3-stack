@@ -10,8 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-        with:
-          ref: ${{ github.head_ref }}
+        # with:
+        #   ref: ${{ github.head_ref }}
       - name: npm install
         run: npm install
       - name: eslint review
@@ -25,10 +25,12 @@ jobs:
         run: npm run lint:eslint
       - name: lint-fixのエラーを自動修正
         run: npm run fix
-      - uses: stefanzweifel/git-auto-commit-action@v3.0.0
-        with:
-          commit_message: Apply Prettier Change
-          ref: ${{ github.head_ref }}
+      # -------------------------------------
+      # - uses: stefanzweifel/git-auto-commit-action@v3.0.0
+      #   with:
+      #     commit_message: Apply Prettier Change
+      #     ref: ${{ github.head_ref }}
+      # -------------------------------------
       # - name: 修正されたファイルをpushする
       #   run: |
       #     git remote set-url origin https://github-actions:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}
@@ -41,6 +43,7 @@ jobs:
       #     fi
       #   env:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # -------------------------------------
       # - name: Push changes if existing modified files
       #   id: push-changes
       #   run: |
