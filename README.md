@@ -4,6 +4,14 @@
 
 ## Local Development
 
+### Prepare development
+#### Setting DB
+Not implement(maybe supabase docker container)
+
+#### Setting Environment variable
+1. copy .sample.env to .env
+2. set each environment variable
+
 ### Run
 
 ```bash
