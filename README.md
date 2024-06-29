@@ -6,21 +6,19 @@
 
 ### Prepare development
 
+#### Setting Environment variable
+```bash
+$ vercel env pull .env.local
+```
+
 #### Setting DB
 ```bash
-# start supabase locally
+# start supabase locally: https://supabase.com/docs/guides/cli/local-development
 $ supabase start
 
 # db init and insert
 $ npm run db-dev
 ```
-
-https://supabase.com/docs/guides/cli/local-development
-
-#### Setting Environment variable
-
-1. copy .sample.env to .env
-2. set each environment variable
 
 ### Run
 
