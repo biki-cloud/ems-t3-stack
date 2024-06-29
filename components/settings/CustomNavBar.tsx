@@ -7,8 +7,8 @@ import FootNavBar from "./FootNavBar"
 import LeftNavBar from "./LeftNavBar"
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import BadgeIcon from '@mui/icons-material/Badge';
 import LockIcon from '@mui/icons-material/Lock';
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import { is } from "date-fns/locale"
           
 
@@ -31,14 +31,14 @@ const items = [
   {
     title: "イベント主催者",
     href: "/settings/organizerProfile",
-    icon: <BadgeIcon />,
+    icon: <AssignmentIndIcon />,
     isSP: true,
     isPC: true,
   },
   {
     title: "イベント出店者",
     href: "/settings/vendorProfile",
-    icon: <BadgeIcon />,
+    icon: <AssignmentIndIcon />,
     isSP: true,
     isPC: true,
   },

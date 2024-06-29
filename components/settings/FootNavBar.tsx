@@ -21,7 +21,9 @@ const FootNavBar = ({ items }: Props) => {
         item.isSP && (
           <Link href={item.href} key={item.title} className="text-center text-black hover:text-gray-500 text-sm">
             {item.icon}
-            {item.title}
+            <span className="ml-1">
+              {item.title}
+            </span>
           </Link>
         )
       ))}

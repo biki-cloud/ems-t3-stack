@@ -35,7 +35,10 @@ const LeftNavBar = ({ items }: Props) => {
                 "justify-start"
               )}
             >
-              {item.icon}{item.title}
+              {item.icon}
+              <span className="ml-1">
+                {item.title}
+              </span>
             </Link>
           )
         ))}

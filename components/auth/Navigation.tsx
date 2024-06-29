@@ -6,6 +6,8 @@ import UserNavigation from "@/components/auth/UserNavigation"
 import Link from "next/link"
 import { ThemeModeToggle } from "../ui/theme"
 import { Role } from "@/lib/utils"
+import LoginIcon from '@mui/icons-material/Login';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 
 interface NavigationProps {
   user: User & Role | null
@@ -29,10 +31,10 @@ const Navigation = ({ user }: NavigationProps) => {
         ) : (
           <div className="flex items-center space-x-1">
             <Button asChild variant="ghost" className="font-bold">
-              <Link href="/login">ログイン</Link>
+              <Link href="/login"><LoginIcon /><span className="ml-1">ログイン</span></Link>
             </Button>
             <Button asChild variant="default" className="font-bold">
-              <Link href="/signup">新規登録</Link>
+              <Link href="/signup"><PersonAddIcon /><span className="ml-1"> 新規登録</span></Link>
             </Button>
           </div>
         )}
