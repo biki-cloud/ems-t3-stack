@@ -23,16 +23,28 @@ jobs:
         run: npm run lint:eslint
       - name: lint-fixのエラーを自動修正
         run: npm run fix
-      - name: 修正されたファイルをpushする
+      # - name: 修正されたファイルをpushする
+      #   run: |
+      #     git remote set-url origin https://github-actions:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}
+      #     git config --global user.name "${GITHUB_ACTOR}"
+      #     git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+      #     if (git diff --shortstat | grep '[0-9]'); then \
+      #       git add .; \
+      #       git commit -m "👕 Fixed auto-fixable lint errors by github-actions"; \
+      #       git push origin HEAD:${GITHUB_REF}; \
+      #     fi
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Push changes if existing modified files
+        id: push-changes
         run: |
-          git remote set-url origin https://github-actions:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}
-          git config --global user.name "${GITHUB_ACTOR}"
-          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-          if (git diff --shortstat | grep '[0-9]'); then \
-            git add .; \
-            git commit -m "👕 Fixed auto-fixable lint errors by github-actions"; \
-            git push origin HEAD:${GITHUB_REF}; \
+          git config --global user.email "bot@example.com"
+          git config --global user.name "bot"
+          git remote set-url origin https://x-access-token:${{secrets.GITHUB_TOKEN}}@github.com/${{github.repository}}
+          git diff --quiet --exit-code || git commit -am "Automated changes"
+          if [ $? -eq 0 ]; then
+            echo "No changes to commit"
+          else
+            git push
           fi
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
