@@ -1,4 +1,5 @@
 import bcrypt from "bcrypt";
+
 import { Event, PrismaClient, User, Vendor } from "@prisma/client";
 
 const prisma = new PrismaClient();
