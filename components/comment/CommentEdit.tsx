@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { useRouter } from "next/navigation"
-import { z } from "zod"
-import { useForm, SubmitHandler } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
+import { useRouter } from "next/navigation";
+import { z } from "zod";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
   FormControl,
@@ -11,29 +11,29 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Button } from "@/components/ui/button"
-import { Textarea } from "@/components/ui/textarea"
-import { Comment } from "@prisma/client"
-import { trpc } from "@/trpc/react"
-import { Loader2 } from "lucide-react"
-import toast from "react-hot-toast"
+} from "@/components/ui/form";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { Comment } from "@prisma/client";
+import { trpc } from "@/trpc/react";
+import { Loader2 } from "lucide-react";
+import toast from "react-hot-toast";
 
 // 入力データの検証ルールを定義
 const schema = z.object({
   content: z.string().min(3, { message: "3文字以上入力する必要があります。" }),
-})
+});
 
 // 入力データの型を定義
-type InputType = z.infer<typeof schema>
+type InputType = z.infer<typeof schema>;
 
 interface CommentEditProps {
-  comment: Comment
+  comment: Comment;
 }
 
 // コメント編集
 const CommentEdit = ({ comment }: CommentEditProps) => {
-  const router = useRouter()
+  const router = useRouter();
 
   // フォームの状態
   const form = useForm<InputType>({
@@ -43,21 +43,21 @@ const CommentEdit = ({ comment }: CommentEditProps) => {
     defaultValues: {
       content: comment.content || "",
     },
-  })
+  });
 
   // コメント編集
   const { mutate: updateComment, isLoading } =
     trpc.comment.updateComment.useMutation({
       onSuccess: ({ eventId: eventId }) => {
-        toast.success("コメントを編集しました")
-        router.refresh()
-        router.push(`/event/${eventId}`)
+        toast.success("コメントを編集しました");
+        router.refresh();
+        router.push(`/event/${eventId}`);
       },
       onError: (error) => {
-        toast.error("コメントの編集に失敗しました")
-        console.error(error)
+        toast.error("コメントの編集に失敗しました");
+        console.error(error);
       },
-    })
+    });
 
   // 送信
   const onSubmit: SubmitHandler<InputType> = (data) => {
@@ -65,8 +65,8 @@ const CommentEdit = ({ comment }: CommentEditProps) => {
     updateComment({
       commentId: comment.id,
       content: data.content,
-    })
-  }
+    });
+  };
 
   return (
     <div>
@@ -94,7 +94,7 @@ const CommentEdit = ({ comment }: CommentEditProps) => {
         </form>
       </Form>
     </div>
-  )
-}
+  );
+};
 
-export default CommentEdit
+export default CommentEdit;

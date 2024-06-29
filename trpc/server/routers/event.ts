@@ -20,7 +20,7 @@ export const eventRouter = router({
         genre: z.string().refine((val) => genreKeys.includes(val), {
           message: "無効なジャンルです",
         }),
-      })
+      }),
     )
     .mutation(async ({ input, ctx }) => {
       try {
@@ -78,7 +78,7 @@ export const eventRouter = router({
         offset: z.number(),
         query: z.string().optional(),
         genre: z.string().optional(),
-      })
+      }),
     )
     .query(async ({ input }) => {
       try {
@@ -96,13 +96,13 @@ export const eventRouter = router({
               {
                 title: {
                   contains: query,
-                  mode: 'insensitive',
+                  mode: "insensitive",
                 },
               },
               {
                 content: {
                   contains: query,
-                  mode: 'insensitive',
+                  mode: "insensitive",
                 },
               },
             ],
@@ -148,7 +148,7 @@ export const eventRouter = router({
     .input(
       z.object({
         eventId: z.string(),
-      })
+      }),
     )
     .query(async ({ input }) => {
       try {
@@ -176,7 +176,7 @@ export const eventRouter = router({
                 customer: true,
               },
             },
-          }
+          },
         });
 
         return event;
@@ -201,7 +201,7 @@ export const eventRouter = router({
         genre: z.string().refine((val) => genreKeys.includes(val), {
           message: "無効なジャンルです",
         }),
-      })
+      }),
     )
     .mutation(async ({ input, ctx }) => {
       try {
@@ -293,7 +293,7 @@ export const eventRouter = router({
     .input(
       z.object({
         eventId: z.string(),
-      })
+      }),
     )
     .mutation(async ({ input, ctx }) => {
       try {
@@ -359,7 +359,7 @@ export const eventRouter = router({
       z.object({
         eventId: z.string(),
         status: z.string(),
-      })
+      }),
     )
     .mutation(async ({ input, ctx }) => {
       const { eventId, status } = input;
@@ -406,7 +406,7 @@ export const eventRouter = router({
     .input(
       z.object({
         eventId: z.string(),
-      })
+      }),
     )
     .query(async ({ input }) => {
       const { eventId } = input;
@@ -416,7 +416,7 @@ export const eventRouter = router({
           eventId: eventId,
         },
         // eventParticipationRequestに紐ずくvendor情報も取得
-        // vendor情報に紐ずくuser情報も取得 
+        // vendor情報に紐ずくuser情報も取得
         include: {
           vendor: {
             include: {
@@ -426,7 +426,7 @@ export const eventRouter = router({
                   vendor: true,
                   customer: true,
                 },
-              }
+              },
             },
           },
           event: true,
@@ -442,7 +442,7 @@ export const eventRouter = router({
       z.object({
         requestId: z.string(),
         status: z.string(),
-      })
+      }),
     )
     .mutation(async ({ input }) => {
       const { requestId, status } = input;

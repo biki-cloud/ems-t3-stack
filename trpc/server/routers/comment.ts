@@ -1,7 +1,7 @@
-import { publicProcedure, privateProcedure, router } from "@/trpc/server/trpc"
-import { z } from "zod"
-import { TRPCError } from "@trpc/server"
-import prisma from "@/lib/prisma"
+import { publicProcedure, privateProcedure, router } from "@/trpc/server/trpc";
+import { z } from "zod";
+import { TRPCError } from "@trpc/server";
+import prisma from "@/lib/prisma";
 
 export const commentRouter = router({
   // コメント投稿
@@ -10,12 +10,12 @@ export const commentRouter = router({
       z.object({
         eventId: z.string(),
         content: z.string(),
-      })
+      }),
     )
     .mutation(async ({ input, ctx }) => {
       try {
-        const { eventId: eventId, content } = input
-        const userId = ctx.user.id
+        const { eventId: eventId, content } = input;
+        const userId = ctx.user.id;
 
         const comment = await prisma.comment.create({
           data: {
@@ -23,15 +23,15 @@ export const commentRouter = router({
             eventId: eventId,
             content,
           },
-        })
+        });
 
-        return comment
+        return comment;
       } catch (error) {
-        console.log(error)
+        console.log(error);
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
           message: "エラーが発生しました。",
-        })
+        });
       }
     }),
 
@@ -43,11 +43,11 @@ export const commentRouter = router({
         eventId: z.string(),
         limit: z.number(),
         offset: z.number(),
-      })
+      }),
     )
     .query(async ({ input }) => {
       try {
-        const { userId, eventId: eventId, limit, offset } = input
+        const { userId, eventId: eventId, limit, offset } = input;
 
         const comments = await prisma.comment.findMany({
           where: { eventId: eventId },
@@ -77,32 +77,32 @@ export const commentRouter = router({
             },
             likes: true,
           },
-        })
+        });
 
         const commentsWithLikesStatus = comments.map((comment) => {
           const userLike = userId
             ? comment.likes.find((like) => like.userId === userId)
-            : null
+            : null;
 
           return {
             ...comment,
             hasLiked: !!userLike,
             commentLikeId: userLike ? userLike.id : null,
-          }
-        })
+          };
+        });
 
         // コメントの総数を取得
         const totalComments = await prisma.comment.count({
           where: { eventId: eventId },
-        })
+        });
 
-        return { comments: commentsWithLikesStatus, totalComments }
+        return { comments: commentsWithLikesStatus, totalComments };
       } catch (error) {
-        console.log(error)
+        console.log(error);
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
           message: "エラーが発生しました。",
-        })
+        });
       }
     }),
 
@@ -111,11 +111,11 @@ export const commentRouter = router({
     .input(
       z.object({
         commentId: z.string(),
-      })
+      }),
     )
     .query(async ({ input }) => {
       try {
-        const { commentId } = input
+        const { commentId } = input;
 
         const comment = await prisma.comment.findUnique({
           where: { id: commentId },
@@ -132,15 +132,15 @@ export const commentRouter = router({
               },
             },
           },
-        })
+        });
 
-        return comment
+        return comment;
       } catch (error) {
-        console.log(error)
+        console.log(error);
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
           message: "エラーが発生しました。",
-        })
+        });
       }
     }),
 
@@ -150,29 +150,29 @@ export const commentRouter = router({
       z.object({
         commentId: z.string(),
         content: z.string(),
-      })
+      }),
     )
     .mutation(async ({ input, ctx }) => {
       try {
-        const { commentId, content } = input
-        const userId = ctx.user.id
+        const { commentId, content } = input;
+        const userId = ctx.user.id;
 
         const comment = await prisma.comment.findUnique({
           where: { id: commentId },
-        })
+        });
 
         if (!comment) {
           throw new TRPCError({
             code: "BAD_REQUEST",
             message: "コメントが見つかりませんでした",
-          })
+          });
         }
 
         if (userId !== comment.userId) {
           throw new TRPCError({
             code: "BAD_REQUEST",
             message: "コメントの編集権限がありません",
-          })
+          });
         }
 
         await prisma.comment.update({
@@ -182,15 +182,15 @@ export const commentRouter = router({
           data: {
             content,
           },
-        })
+        });
 
-        return comment
+        return comment;
       } catch (error) {
-        console.log(error)
+        console.log(error);
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
           message: "エラーが発生しました。",
-        })
+        });
       }
     }),
 
@@ -199,42 +199,42 @@ export const commentRouter = router({
     .input(
       z.object({
         commentId: z.string(),
-      })
+      }),
     )
     .mutation(async ({ input, ctx }) => {
       try {
-        const { commentId } = input
-        const userId = ctx.user.id
+        const { commentId } = input;
+        const userId = ctx.user.id;
 
         const comment = await prisma.comment.findUnique({
           where: { id: commentId },
-        })
+        });
 
         if (!comment) {
           throw new TRPCError({
             code: "BAD_REQUEST",
             message: "コメントが見つかりませんでした",
-          })
+          });
         }
 
         if (userId !== comment.userId) {
           throw new TRPCError({
             code: "BAD_REQUEST",
             message: "コメントの削除権限がありません",
-          })
+          });
         }
 
         await prisma.comment.delete({
           where: {
             id: commentId,
           },
-        })
+        });
       } catch (error) {
-        console.log(error)
+        console.log(error);
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
           message: "エラーが発生しました。",
-        })
+        });
       }
     }),
 
@@ -243,25 +243,25 @@ export const commentRouter = router({
     .input(
       z.object({
         commentId: z.string(),
-      })
+      }),
     )
     .mutation(async ({ input, ctx }) => {
       try {
-        const { commentId } = input
-        const userId = ctx.user.id
+        const { commentId } = input;
+        const userId = ctx.user.id;
 
         await prisma.commentLike.create({
           data: {
             userId,
             commentId,
           },
-        })
+        });
       } catch (error) {
-        console.log(error)
+        console.log(error);
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
           message: "エラーが発生しました。",
-        })
+        });
       }
     }),
 
@@ -270,23 +270,23 @@ export const commentRouter = router({
     .input(
       z.object({
         commentLikeId: z.string(),
-      })
+      }),
     )
     .mutation(async ({ input }) => {
       try {
-        const { commentLikeId } = input
+        const { commentLikeId } = input;
 
         await prisma.commentLike.delete({
           where: {
             id: commentLikeId,
           },
-        })
+        });
       } catch (error) {
-        console.log(error)
+        console.log(error);
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
           message: "エラーが発生しました。",
-        })
+        });
       }
     }),
-})
+});

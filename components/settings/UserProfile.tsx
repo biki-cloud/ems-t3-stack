@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { z } from "zod"
-import { useForm, SubmitHandler } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { z } from "zod";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
   FormControl,
@@ -12,38 +12,38 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { User } from "@prisma/client"
-import { trpc } from "@/trpc/react"
-import { Loader2 } from "lucide-react"
-import ImageUploading, { ImageListType } from "react-images-uploading"
-import Image from "next/image"
-import toast from "react-hot-toast"
+} from "@/components/ui/form";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { User } from "@prisma/client";
+import { trpc } from "@/trpc/react";
+import { Loader2 } from "lucide-react";
+import ImageUploading, { ImageListType } from "react-images-uploading";
+import Image from "next/image";
+import toast from "react-hot-toast";
 
 // 入力データの検証ルールを定義
 const schema = z.object({
   name: z.string().min(3, { message: "3文字以上入力する必要があります" }),
   introduction: z.string().optional(),
-})
+});
 
 // 入力データの型を定義
-type InputType = z.infer<typeof schema>
+type InputType = z.infer<typeof schema>;
 
 interface ProfileProps {
-  user: User
+  user: User;
 }
 
 // プロフィール
 const UserProfile = ({ user }: ProfileProps) => {
-  const router = useRouter()
+  const router = useRouter();
   const [imageUpload, setImageUpload] = useState<ImageListType>([
     {
       dataURL: user.image || "/default.png",
     },
-  ])
+  ]);
 
   // フォームの状態
   const form = useForm<InputType>({
@@ -54,29 +54,29 @@ const UserProfile = ({ user }: ProfileProps) => {
       name: user.name || "",
       introduction: user.introduction || "",
     },
-  })
+  });
 
   // プロフィール編集
   const { mutate: updateUser, isLoading } = trpc.user.updateUser.useMutation({
     onSuccess: () => {
-      toast.success("プロフィールを編集しました")
-      router.refresh()
+      toast.success("プロフィールを編集しました");
+      router.refresh();
     },
     onError: (error) => {
-      toast.error(error.message)
-      console.error(error)
+      toast.error(error.message);
+      console.error(error);
     },
-  })
+  });
 
   // 送信
   const onSubmit: SubmitHandler<InputType> = (data) => {
-    let base64Image
+    let base64Image;
 
     if (
       imageUpload[0].dataURL &&
       imageUpload[0].dataURL.startsWith("data:image")
     ) {
-      base64Image = imageUpload[0].dataURL
+      base64Image = imageUpload[0].dataURL;
     }
 
     // プロフィール編集
@@ -84,26 +84,28 @@ const UserProfile = ({ user }: ProfileProps) => {
       name: data.name,
       introduction: data.introduction,
       base64Image,
-    })
-  }
+    });
+  };
 
   // 画像アップロード
   const onChangeImage = (imageList: ImageListType) => {
-    const file = imageList[0]?.file
-    const maxFileSize = 5 * 1024 * 1024
+    const file = imageList[0]?.file;
+    const maxFileSize = 5 * 1024 * 1024;
 
     // ファイルサイズチェック
     if (file && file.size > maxFileSize) {
-      toast.error("ファイルサイズは5MBを超えることはできません")
-      return
+      toast.error("ファイルサイズは5MBを超えることはできません");
+      return;
     }
 
-    setImageUpload(imageList)
-  }
+    setImageUpload(imageList);
+  };
 
   return (
     <div>
-      <div className="text-xl font-bold text-center mb-5">ユーザプロフィール</div>
+      <div className="text-xl font-bold text-center mb-5">
+        ユーザプロフィール
+      </div>
       <Form {...form}>
         <div className="mb-5">
           <ImageUploading
@@ -160,22 +162,31 @@ const UserProfile = ({ user }: ProfileProps) => {
           <FormItem>
             <FormLabel>ユーザ種別</FormLabel>
             {!user.role ? (
-            <Input value={
-              user.role == 'organizer' ? 'イベント主催者' : 
-              user.role == 'vendor' ? 'イベント出店者' :
-              user.role == 'customer' ? 'イベント参加者' :
-              user.role
-              }
+              <Input
+                value={
+                  user.role == "organizer"
+                    ? "イベント主催者"
+                    : user.role == "vendor"
+                      ? "イベント出店者"
+                      : user.role == "customer"
+                        ? "イベント参加者"
+                        : user.role
+                }
               />
-            ) : 
-            <Input value={
-              user.role == 'organizer' ? 'イベント主催者' : 
-              user.role == 'vendor' ? 'イベント出店者' :
-              user.role == 'customer' ? 'イベント参加者' :
-              user.role
-              }
-              disabled />
-            }
+            ) : (
+              <Input
+                value={
+                  user.role == "organizer"
+                    ? "イベント主催者"
+                    : user.role == "vendor"
+                      ? "イベント出店者"
+                      : user.role == "customer"
+                        ? "イベント参加者"
+                        : user.role
+                }
+                disabled
+              />
+            )}
           </FormItem>
 
           <FormItem>
@@ -204,7 +215,7 @@ const UserProfile = ({ user }: ProfileProps) => {
         </form>
       </Form>
     </div>
-  )
-}
+  );
+};
 
-export default UserProfile
+export default UserProfile;

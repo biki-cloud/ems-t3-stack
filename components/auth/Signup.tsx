@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { useRouter } from "next/navigation"
-import { z } from "zod"
-import { useForm, SubmitHandler } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
+import { useRouter } from "next/navigation";
+import { z } from "zod";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
   FormControl,
@@ -11,23 +11,23 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { FcGoogle } from "react-icons/fc"
-import { trpc } from "@/trpc/react"
-import { Loader2 } from "lucide-react"
-import { signIn } from "next-auth/react"
-import toast from "react-hot-toast"
-import Link from "next/link"
+} from "@/components/ui/form";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { FcGoogle } from "react-icons/fc";
+import { trpc } from "@/trpc/react";
+import { Loader2 } from "lucide-react";
+import { signIn } from "next-auth/react";
+import toast from "react-hot-toast";
+import Link from "next/link";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { useState } from "react"
+} from "@/components/ui/select";
+import { useState } from "react";
 
 // 入力データの検証ルールを定義
 const schema = z.object({
@@ -35,14 +35,14 @@ const schema = z.object({
   role: z.string(),
   email: z.string().email({ message: "メールアドレスの形式ではありません" }),
   password: z.string().min(8, { message: "8文字以上入力する必要があります" }),
-})
+});
 
 // 入力データの型を定義
-type InputType = z.infer<typeof schema>
+type InputType = z.infer<typeof schema>;
 
 // サインアップ
 const Signup = () => {
-  const router = useRouter()
+  const router = useRouter();
 
   // フォームの状態
   const form = useForm<InputType>({
@@ -55,11 +55,11 @@ const Signup = () => {
       email: "",
       password: "",
     },
-  })
+  });
 
   const handleGoogleSingup = async () => {
     try {
-      const result = await signIn("google", { callbackUrl: "/" })
+      const result = await signIn("google", { callbackUrl: "/" });
 
       if (result?.error) {
         toast.error("アカウント作成に失敗しました");
@@ -67,33 +67,33 @@ const Signup = () => {
     } catch (error) {
       toast.error("アカウント作成に失敗しました");
     }
-  }
+  };
 
   // サインアップ
   const { mutate: singUp, isLoading } = trpc.auth.singUp.useMutation({
     onSuccess: () => {
-      toast.success("アカウントを作成しました!")
+      toast.success("アカウントを作成しました!");
 
       // ログイン
       signIn("credentials", {
         email: form.getValues("email"),
         password: form.getValues("password"),
         callbackUrl: "/",
-      })
+      });
 
-      router.refresh()
+      router.refresh();
     },
     onError: (error) => {
-      toast.error("アカウント作成に失敗しました")
-      console.error(error)
+      toast.error("アカウント作成に失敗しました");
+      console.error(error);
     },
-  })
+  });
 
   // 送信
   const onSubmit: SubmitHandler<InputType> = (data) => {
     // サインアップ
-    singUp(data)
-  }
+    singUp(data);
+  };
 
   return (
     <div className="max-w-[400px] m-auto">
@@ -138,7 +138,8 @@ const Signup = () => {
                 <FormControl>
                   <Select
                     onValueChange={field.onChange}
-                    defaultValue={field.value}>
+                    defaultValue={field.value}
+                  >
                     <SelectTrigger className="w-[180px]">
                       <SelectValue placeholder="" />
                     </SelectTrigger>
@@ -198,7 +199,7 @@ const Signup = () => {
         </Link>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Signup
+export default Signup;

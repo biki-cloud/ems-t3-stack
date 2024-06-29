@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { useRouter } from "next/navigation"
-import { z } from "zod"
-import { useForm, SubmitHandler } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
+import { useRouter } from "next/navigation";
+import { z } from "zod";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
   FormControl,
@@ -11,12 +11,12 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { trpc } from "@/trpc/react"
-import { Loader2 } from "lucide-react"
-import toast from "react-hot-toast"
+} from "@/components/ui/form";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { trpc } from "@/trpc/react";
+import { Loader2 } from "lucide-react";
+import toast from "react-hot-toast";
 
 // 入力データの検証ルールを定義
 const schema = z
@@ -32,14 +32,14 @@ const schema = z
   .refine((data) => data.password === data.repeatedPassword, {
     message: "新しいパスワードと確認用パスワードが一致しません",
     path: ["repeatedPassword"],
-  })
+  });
 
 // 入力データの型を定義
-type InputType = z.infer<typeof schema>
+type InputType = z.infer<typeof schema>;
 
 // パスワード変更
 const Password = () => {
-  const router = useRouter()
+  const router = useRouter();
 
   // フォームの状態
   const form = useForm<InputType>({
@@ -51,21 +51,21 @@ const Password = () => {
       password: "",
       repeatedPassword: "",
     },
-  })
+  });
 
   // パスワード変更
   const { mutate: updatePassword, isLoading } =
     trpc.auth.updatePassword.useMutation({
       onSuccess: () => {
-        form.reset()
-        toast.success("パスワードを変更しました")
-        router.refresh()
+        form.reset();
+        toast.success("パスワードを変更しました");
+        router.refresh();
       },
       onError: (error) => {
-        toast.error(error.message)
-        console.error(error)
+        toast.error(error.message);
+        console.error(error);
       },
-    })
+    });
 
   // 送信
   const onSubmit: SubmitHandler<InputType> = (data) => {
@@ -73,8 +73,8 @@ const Password = () => {
     updatePassword({
       currentPassword: data.currentPassword,
       password: data.password,
-    })
-  }
+    });
+  };
 
   return (
     <div>
@@ -131,7 +131,7 @@ const Password = () => {
         </form>
       </Form>
     </div>
-  )
-}
+  );
+};
 
-export default Password
+export default Password;

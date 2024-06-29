@@ -1,12 +1,12 @@
-"use client"
+"use client";
 
-import { Event } from "@prisma/client"
-import { format } from "date-fns"
-import Image from "next/image"
-import Link from "next/link"
+import { Event } from "@prisma/client";
+import { format } from "date-fns";
+import Image from "next/image";
+import Link from "next/link";
 
 interface AuthorEventItemProps {
-  event: Event
+  event: Event;
 }
 
 // 投稿一覧のアイテム
@@ -14,7 +14,6 @@ const AuthorEventItem = ({ event: event }: AuthorEventItemProps) => {
   return (
     <div className="border rounded-md relative">
       <Link href={`/event/${event.id}`} className="flex-grow">
-
         <div className="aspect-[16/9] relative overflow-hidden rounded-t-md">
           <Image
             fill
@@ -34,7 +33,7 @@ const AuthorEventItem = ({ event: event }: AuthorEventItemProps) => {
         {format(new Date(event.updatedAt), "yyyy/MM/dd HH:mm")}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AuthorEventItem
+export default AuthorEventItem;

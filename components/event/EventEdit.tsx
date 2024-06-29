@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { z } from "zod"
-import { useForm, SubmitHandler } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { z } from "zod";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
   FormControl,
@@ -13,24 +13,24 @@ import {
   FormLabel,
   FormMessage,
   FormDescription,
-} from "@/components/ui/form"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Event } from "@prisma/client"
-import { trpc } from "@/trpc/react"
-import { Loader2 } from "lucide-react"
-import ImageUploading, { ImageListType } from "react-images-uploading"
-import Image from "next/image"
-import toast from "react-hot-toast"
+} from "@/components/ui/form";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Event } from "@prisma/client";
+import { trpc } from "@/trpc/react";
+import { Loader2 } from "lucide-react";
+import ImageUploading, { ImageListType } from "react-images-uploading";
+import Image from "next/image";
+import toast from "react-hot-toast";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import genreMapping from "../objects/mapping"
+} from "@/components/ui/dropdown-menu";
+import genreMapping from "../objects/mapping";
 
 // 入力データの検証ルールを定義
 const schema = z.object({
@@ -40,23 +40,23 @@ const schema = z.object({
   genre: z.string().refine((val) => Object.keys(genreMapping).includes(val), {
     message: "無効なジャンルです",
   }),
-})
+});
 
 // 入力データの型を定義
-type InputType = z.infer<typeof schema>
+type InputType = z.infer<typeof schema>;
 
 interface EventEditProps {
-  event: Event
+  event: Event;
 }
 
 // 投稿編集
 const EventEdit = ({ event: event }: EventEditProps) => {
-  const router = useRouter()
+  const router = useRouter();
   const [imageUpload, setImageUpload] = useState<ImageListType>([
     {
       dataURL: event.image || "/noImage.png",
     },
-  ])
+  ]);
 
   // フォームの状態
   const form = useForm<InputType>({
@@ -69,30 +69,30 @@ const EventEdit = ({ event: event }: EventEditProps) => {
       location: event.location || "",
       genre: event.genre || "",
     },
-  })
+  });
 
   // 投稿編集
   const { mutate: updateEdit, isLoading } = trpc.event.updateEvent.useMutation({
     onSuccess: () => {
-      toast.success("投稿を編集しました")
-      router.refresh()
-      router.push(`/event/${event.id}`)
+      toast.success("投稿を編集しました");
+      router.refresh();
+      router.push(`/event/${event.id}`);
     },
     onError: (error) => {
-      toast.error(error.message)
-      console.error(error)
+      toast.error(error.message);
+      console.error(error);
     },
-  })
+  });
 
   // 送信
   const onSubmit: SubmitHandler<InputType> = async (data) => {
-    let base64Image
+    let base64Image;
 
     if (
       imageUpload[0].dataURL &&
       imageUpload[0].dataURL.startsWith("data:image")
     ) {
-      base64Image = imageUpload[0].dataURL
+      base64Image = imageUpload[0].dataURL;
     }
 
     // 投稿編集
@@ -103,22 +103,22 @@ const EventEdit = ({ event: event }: EventEditProps) => {
       location: data.location,
       base64Image,
       genre: data.genre,
-    })
-  }
+    });
+  };
 
   // 画像アップロード
   const onChangeImage = (imageList: ImageListType) => {
-    const file = imageList[0]?.file
-    const maxFileSize = 5 * 1024 * 1024
+    const file = imageList[0]?.file;
+    const maxFileSize = 5 * 1024 * 1024;
 
     // ファイルサイズチェック
     if (file && file.size > maxFileSize) {
-      toast.error("ファイルサイズは5MBを超えることはできません")
-      return
+      toast.error("ファイルサイズは5MBを超えることはできません");
+      return;
     }
 
-    setImageUpload(imageList)
-  }
+    setImageUpload(imageList);
+  };
 
   return (
     <div>
@@ -219,11 +219,16 @@ const EventEdit = ({ event: event }: EventEditProps) => {
                 <FormControl>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                      <Button variant="outline">{genreMapping[field.value]}</Button>
+                      <Button variant="outline">
+                        {genreMapping[field.value]}
+                      </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
                       {Object.keys(genreMapping).map((genre) => (
-                        <DropdownMenuItem key={genre} onClick={() => field.onChange(genre)}>
+                        <DropdownMenuItem
+                          key={genre}
+                          onClick={() => field.onChange(genre)}
+                        >
                           {genreMapping[genre]}
                         </DropdownMenuItem>
                       ))}
@@ -242,7 +247,7 @@ const EventEdit = ({ event: event }: EventEditProps) => {
         </form>
       </Form>
     </div>
-  )
-}
+  );
+};
 
-export default EventEdit
+export default EventEdit;

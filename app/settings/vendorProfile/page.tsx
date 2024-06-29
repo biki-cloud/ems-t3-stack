@@ -1,15 +1,15 @@
-import { redirect } from "next/navigation"
-import { getAuthSession } from "@/lib/nextauth"
-import VendorProfileEdit from "@/components/vendor/VendorProfileEdit"
-import prisma from "@/lib/prisma"
+import { redirect } from "next/navigation";
+import { getAuthSession } from "@/lib/nextauth";
+import VendorProfileEdit from "@/components/vendor/VendorProfileEdit";
+import prisma from "@/lib/prisma";
 
 // プロフィール編集ページ
 const VendorProfileEditPage = async () => {
   // 認証情報取得
-  const user = await getAuthSession()
+  const user = await getAuthSession();
 
   if (!user) {
-    redirect("/login")
+    redirect("/login");
   }
 
   const vendor = await prisma.vendor.findUnique({
@@ -19,13 +19,13 @@ const VendorProfileEditPage = async () => {
     include: {
       user: true,
     },
-  })
+  });
 
   if (!vendor) {
-    redirect("/login")
+    redirect("/login");
   }
 
-  return <VendorProfileEdit vendor={vendor} />
-}
+  return <VendorProfileEdit vendor={vendor} />;
+};
 
-export default VendorProfileEditPage
+export default VendorProfileEditPage;
