@@ -8,7 +8,8 @@
 
 #### Setting Environment variable
 ```bash
-$ vercel env pull .env.local
+$ vercel login
+$ vercel env pull .env --environment development
 ```
 https://vercel.com/docs/cli
 
