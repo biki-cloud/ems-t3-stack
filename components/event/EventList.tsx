@@ -61,7 +61,7 @@ const EventList = ({ limit, offset }: props) => {
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />
-                <Button variant="default" onClick={handleSearch}><SearchIcon /></Button>
+                <Button id="event-search-button-id" variant="default" onClick={handleSearch}><SearchIcon /></Button>
 
             </div>
             <DropdownMenu>

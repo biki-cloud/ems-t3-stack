@@ -65,11 +65,10 @@ $ allure generate allure-results -o allure-report --clean && allure open allure-
 
 # TODO
 - ESlintを導入
-- 出店者検索
-- 消費者検索
 - イベントの並べ方はもう少しかっこよくできないか？
   - youtubeみたいな感じが良さそう, スマホとPCを真似る
-  - PCの場合のみサイドバー. サイドバーと同じ項目をスマホの場合は右上のユーザ欄に入れるか
+- 出店者検索
+- 消費者検索
 ## プレリリースまでやること
 - 自前でsupabaseのバックアップ機能を作成 
 - 開発用と本番用のDBを用意
