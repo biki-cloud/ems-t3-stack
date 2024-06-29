@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+        with:
+          ref: ${{ github.head_ref }}
       - name: npm install
         run: npm install
       - name: eslint review
@@ -23,6 +25,10 @@ jobs:
         run: npm run lint:eslint
       - name: lint-fixのエラーを自動修正
         run: npm run fix
+      - uses: stefanzweifel/git-auto-commit-action@v3.0.0
+        with:
+          commit_message: Apply Prettier Change
+          ref: ${{ github.head_ref }}
       # - name: 修正されたファイルをpushする
       #   run: |
       #     git remote set-url origin https://github-actions:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}
@@ -35,16 +41,16 @@ jobs:
       #     fi
       #   env:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Push changes if existing modified files
-        id: push-changes
-        run: |
-          git config --global user.email "bot@example.com"
-          git config --global user.name "bot"
-          git remote set-url origin https://x-access-token:${{secrets.GITHUB_TOKEN}}@github.com/${{github.repository}}
-          git diff --quiet --exit-code || git commit -am "Automated changes"
-          if [ $? -eq 0 ]; then
-            echo "No changes to commit"
-          else
-            git push
-          fi
+      # - name: Push changes if existing modified files
+      #   id: push-changes
+      #   run: |
+      #     git config --global user.email "bot@example.com"
+      #     git config --global user.name "bot"
+      #     git remote set-url origin https://x-access-token:${{secrets.GITHUB_TOKEN}}@github.com/${{github.repository}}
+      #     git diff --quiet --exit-code || git commit -am "Automated changes"
+      #     if [ $? -eq 0 ]; then
+      #       echo "No changes to commit"
+      #     else
+      #       git push
+      #     fi
 
