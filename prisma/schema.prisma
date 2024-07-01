@@ -12,7 +12,7 @@ datasource db {
 generator erd {
   provider = "prisma-erd-generator"
   theme = "forest"
-  output = "../docs/ERD.md"
+  output = "../docs/ER-diagram.md"
   includeRelationFromFields = true
 }
 

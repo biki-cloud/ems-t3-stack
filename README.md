@@ -6,14 +6,22 @@
 
 ### Prepare development
 
-#### Setting DB
-
-Not implement(maybe supabase docker container)
-
 #### Setting Environment variable
+```bash
+$ vercel login
+$ vercel env pull .env --environment development
+```
+https://vercel.com/docs/cli
 
-1. copy .sample.env to .env
-2. set each environment variable
+#### Setting DB
+```bash
+# start supabase locally
+$ supabase start
+
+# db init and insert
+$ npm run db-dev
+```
+https://supabase.com/docs/guides/cli/local-development
 
 ### Run
 
@@ -32,13 +40,6 @@ $ npx playwright test --reporter=allure-playwright
 
 # check test result with allure
 $ allure generate allure-results -o allure-report --clean && allure open allure-report
-```
-
-### DB
-
-```bash
-# db reset
-$ npm run db-dev
 ```
 
 ## Technical Stack

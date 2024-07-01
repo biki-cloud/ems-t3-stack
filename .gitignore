@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+.vscode
 
 # testing
 /coverage
@@ -42,3 +43,6 @@ next-env.d.ts
 # playwright
 /allure-results/
 /allure-report/
+
+# environment
+.env.local
