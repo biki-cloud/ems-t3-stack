@@ -1,15 +1,12 @@
 ## System Diagram
-[System diagram](./system-diagram.md)
+![](./system-diagram.drawio.svg)
 
 ## Sequence Diagram
 ![](./sequence-diagram.md)
-<!-- [Secquence diagram](./sequence-diagram.md) -->
 
 ## ER Diagram
 [ER diagram](./ER-diagram.md)
 
 ## Branch Stragegy
-[Branch strategy](./branch-strategy.md)
+![](./branch-strategy.drawio.svg)
 
-
-![](./development-flow.drawio.svg)
