@@ -18,7 +18,7 @@ https://vercel.com/docs/cli
 $ supabase start
 
 # db init and insert
-$ npm run db-dev
+$ npm run db-local
 ```
 https://supabase.com/docs/guides/cli/local-development
 
