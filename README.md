@@ -8,8 +8,7 @@
 
 #### Setting Environment variable
 ```bash
-$ vercel login
-$ vercel env pull .env --environment development
+$ npm run apply-local-env
 ```
 https://vercel.com/docs/cli
 
