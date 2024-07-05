@@ -4,7 +4,6 @@
 
 ## Sequence Diagram
 
-
 [Sequence diagram](./sequence-diagram.md)
 
 ## ER Diagram
