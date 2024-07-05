@@ -30,6 +30,7 @@ test.describe("Search Event", () => {
       await page.getByText("セルゲーム開催します！！"),
     ).toBeVisible();
     await expect(await page.getByText("ビルス様と修行！！")).toBeHidden();
+    await expect(await page.getByText("ビルス様と修行！！")).toBeHidden();
 
     // イベント名をクリックして詳細を表示
     await page.getByRole("link", { name: "セルゲーム開催します！！" }).click();
