@@ -34,12 +34,11 @@ see http://localhost:3000
 ### Test
 
 ```bash
-# execute test
-$ npx playwright test --reporter=allure-playwright
-
-# check test result with allure
-$ allure generate allure-results -o allure-report --clean && allure open allure-report
+$ npm run e2e-test
 ```
+
+## Documents
+[Documents](./docs/README.md)
 
 ## Technical Stack
 
