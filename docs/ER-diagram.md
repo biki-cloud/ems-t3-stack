@@ -3,11 +3,11 @@ erDiagram
 
   "Session" {
     String id "🗝️"
-    String sessionToken 
-    String userId 
-    DateTime expires 
+    String sessionToken
+    String userId
+    DateTime expires
     }
-  
+
 
   "User" {
     String id "🗝️"
@@ -16,98 +16,98 @@ erDiagram
     String name "❓"
     String introduction "❓"
     String image "❓"
-    Boolean isAdmin 
-    String role 
+    Boolean isAdmin
+    String role
     String hashedPassword "❓"
-    DateTime createdAt 
-    DateTime updatedAt 
+    DateTime createdAt
+    DateTime updatedAt
     }
-  
+
 
   "PasswordResetToken" {
     String id "🗝️"
-    String token 
-    DateTime createdAt 
-    DateTime expiry 
-    String userId 
+    String token
+    DateTime createdAt
+    DateTime expiry
+    String userId
     }
-  
+
 
   "VerificationToken" {
-    String identifier 
-    String token 
-    DateTime expires 
+    String identifier
+    String token
+    DateTime expires
     }
-  
+
 
   "Event" {
     String id "🗝️"
-    String userId 
-    String title 
-    String content 
-    String location 
+    String userId
+    String title
+    String content
+    String location
     String image "❓"
-    String genre 
-    DateTime createdAt 
-    DateTime updatedAt 
+    String genre
+    DateTime createdAt
+    DateTime updatedAt
     }
-  
+
 
   "Comment" {
     String id "🗝️"
-    String userId 
-    String eventId 
-    String content 
-    DateTime createdAt 
-    DateTime updatedAt 
+    String userId
+    String eventId
+    String content
+    DateTime createdAt
+    DateTime updatedAt
     }
-  
+
 
   "CommentLike" {
     String id "🗝️"
-    String userId 
-    String commentId 
-    DateTime createdAt 
-    DateTime updatedAt 
+    String userId
+    String commentId
+    DateTime createdAt
+    DateTime updatedAt
     }
-  
+
 
   "Organizer" {
     String id "🗝️"
-    String userId 
-    String organizationName 
-    DateTime createdAt 
-    DateTime updatedAt 
+    String userId
+    String organizationName
+    DateTime createdAt
+    DateTime updatedAt
     }
-  
+
 
   "Vendor" {
     String id "🗝️"
-    String userId 
-    String vendorName 
-    DateTime createdAt 
-    DateTime updatedAt 
+    String userId
+    String vendorName
+    DateTime createdAt
+    DateTime updatedAt
     }
-  
+
 
   "Customer" {
     String id "🗝️"
-    String userId 
-    String customerName 
-    DateTime createdAt 
-    DateTime updatedAt 
+    String userId
+    String customerName
+    DateTime createdAt
+    DateTime updatedAt
     }
-  
+
 
   "EventParticipationRequest" {
     String id "🗝️"
-    String vendorId 
-    String eventId 
-    String status 
-    DateTime createdAt 
-    DateTime updatedAt 
+    String vendorId
+    String eventId
+    String status
+    DateTime createdAt
+    DateTime updatedAt
     }
-  
+
     "Session" o|--|| "User" : "user"
     "User" o{--}o "Session" : "sessions"
     "User" o{--}o "PasswordResetToken" : "PasswordResetToken"
