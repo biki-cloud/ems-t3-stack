@@ -21,11 +21,13 @@ jobs:
       - name: Set BASE_URL for production
         if: ${{ github.event.deployment_status.environment == 'Production' }}
         run: echo "BASE_URL=https://www.sunnybe.online" >> $GITHUB_ENV
-      - name: Set branch name as an environment variable
-        run: echo "BRANCH_NAME=${GITHUB_REF##*/}" >> $GITHUB_ENV
+      - name: Print branch name
+        env:
+          BRANCH_NAME: ${{github.head_ref}}
+        run: echo $BRANCH_NAME
       - name: Set BASE_URL for preview
         if: ${{ github.event.deployment_status.environment == 'Preview' }}
-        run: echo "BASE_URL=https://ems-t3-stack-git-${{ env.BRANCH_NAME }}-biki-clouds-projects.vercel.app" >> $GITHUB_ENV
+        # run: echo "BASE_URL=https://ems-t3-stack-git-${{ env.BRANCH_NAME }}-biki-clouds-projects.vercel.app" >> $GITHUB_ENV
         # run: echo "BASE_URL=${{ github.event.deployment_status.environment_url }}" >> $GITHUB_ENV
       - name: Run tests
         run: npx playwright test
