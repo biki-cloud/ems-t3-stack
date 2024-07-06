@@ -13,7 +13,9 @@ jobs:
       - name: Install dependencies
         run: npm ci && npx playwright install --with-deps
       - name: echo environments
-        run: echo "xx"
+        run: |
+          git show -s --pretty=%D HEAD | tr -s ',' '\n' | sed 's/^ //' | grep -e 'origin/' | head -1 | sed 's/\origin\///g'
+          
         env:
           ENVIRONMENT_URL: ${{ github.event.deployment_status.environment_url }}
           URL2: ${{ github.event.deployment_status.target_url }}
