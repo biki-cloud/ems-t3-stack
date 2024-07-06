@@ -1,20 +1,20 @@
 export function getBaseUrl() {
-  console.log(
-    "process.env.NEXT_PUBLIC_VERCEL_ENV",
-    process.env.NEXT_PUBLIC_VERCEL_ENV,
-  );
-  console.log(
-    "process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL",
-    process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL,
-  );
-  console.log(
-    "process.env.NEXT_PUBLIC_VERCEL_URL",
-    process.env.NEXT_PUBLIC_VERCEL_URL,
-  );
-  console.log(
-    "process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL",
-    process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL,
-  );
+  // console.log(
+  //   "process.env.NEXT_PUBLIC_VERCEL_ENV",
+  //   process.env.NEXT_PUBLIC_VERCEL_ENV,
+  // );
+  // console.log(
+  //   "process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL",
+  //   process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL,
+  // );
+  // console.log(
+  //   "process.env.NEXT_PUBLIC_VERCEL_URL",
+  //   process.env.NEXT_PUBLIC_VERCEL_URL,
+  // );
+  // console.log(
+  //   "process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL",
+  //   process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL,
+  // );
   let url = "";
   if (process.env.NEXT_PUBLIC_VERCEL_ENV === "preview") {
     // devブランチから作成したURLの場合: https://ems-t3-stack-git-dev-biki-clouds-projects.vercel.app
@@ -28,6 +28,6 @@ export function getBaseUrl() {
     // ローカルの場合は、ローカルのURLを返す
     url = "http://localhost:3000";
   }
-  console.log("selected url: " + url);
+  // console.log("selected url: " + url);
   return url;
 }
