@@ -18,16 +18,10 @@ jobs:
           ENVIRONMENT_URL: ${{ github.event.deployment_status.environment_url }}
           URL2: ${{ github.event.deployment_status.target_url }}
           ENV2: ${{ github.event.deployment_status.environment }}
+          ENV3: ${{ github.event.deployment_status.deployment.ref }}
       - name: Set BASE_URL for production
         if: ${{ github.event.deployment_status.environment == 'Production' }}
         run: echo "BASE_URL=https://www.sunnybe.online" >> $GITHUB_ENV
-      - name: Print branch name
-        run: |
-          echo '1' $GITHUB_REF
-          echo '2' ${{ github.ref }}
-          echo '3' ${{ github.ref_name }}
-          echo '4' ${{ github.head_ref }}
-          echo '5' ${{ github.base_ref }}
       - name: Set BASE_URL for preview
         if: ${{ github.event.deployment_status.environment == 'Preview' }}
         # run: echo "BASE_URL=https://ems-t3-stack-git-${{ env.BRANCH_NAME }}-biki-clouds-projects.vercel.app" >> $GITHUB_ENV
