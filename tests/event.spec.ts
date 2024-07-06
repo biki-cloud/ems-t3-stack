@@ -1,7 +1,5 @@
 import { test, expect } from "@playwright/test";
 
-const BASE_URL = process.env.BASE_URL;
-
 test.beforeEach(async ({ page }) => {
   await page.goto("/");
   await page.waitForTimeout(3000); // 5秒待機

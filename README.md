@@ -7,12 +7,15 @@
 ### Prepare development
 
 #### Setting Environment variable
+
 ```bash
 $ npm run apply-local-env
 ```
+
 https://vercel.com/docs/cli
 
 #### Setting DB
+
 ```bash
 # start supabase locally
 $ supabase start
@@ -20,6 +23,7 @@ $ supabase start
 # db init and insert
 $ npm run db-local
 ```
+
 https://supabase.com/docs/guides/cli/local-development
 
 ### Run
@@ -34,12 +38,12 @@ see http://localhost:3000
 ### Test
 
 ```bash
-# execute test
-$ npx playwright test --reporter=allure-playwright
-
-# check test result with allure
-$ allure generate allure-results -o allure-report --clean && allure open allure-report
+$ npm run e2e-test
 ```
+
+## Documents
+
+[Documents](./docs/README.md)
 
 ## Technical Stack
 

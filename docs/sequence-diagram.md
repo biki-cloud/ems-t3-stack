@@ -1,4 +1,3 @@
-作成中
 ```mermaid
 sequenceDiagram
     participant イベント主催者
