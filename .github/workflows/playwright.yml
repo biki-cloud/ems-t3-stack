@@ -19,6 +19,8 @@ jobs:
           URL2: ${{ github.event.deployment_status.target_url }}
           ENV2: ${{ github.event.deployment_status.environment }}
           ENV3: ${{ github.event.deployment_status.deployment.ref }}
+      - name: Set branch name # this is workaround to get the branch name.
+        run: echo "CHECKLY_TEST_REPO_BRANCH=$(git show -s --pretty=%D HEAD | tr -s ',' '\n' | sed 's/^ //' | grep -e 'origin/' | head -1 | sed 's/\origin\///g')" >> $GITHUB_ENV 
       - name: Set BASE_URL for production
         if: ${{ github.event.deployment_status.environment == 'Production' }}
         run: echo "BASE_URL=https://www.sunnybe.online" >> $GITHUB_ENV
