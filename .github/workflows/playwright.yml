@@ -1,8 +1,8 @@
 name: Playwright Tests
 
 on:
-  # deployment_status:
-  pull_request:
+  deployment_status:
+  # pull_request:
 
 jobs:
   run-e2es:
