@@ -13,35 +13,26 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          ref: '${{ github.event.deployment_status.deployment.ref }}' 
-      # - uses: actions/checkout@v2
-      - name: Install dependencies
-        run: npm ci && npx playwright install --with-deps
-      - name: echo environments
+          ref: '${{ github.event.deployment_status.deployment.ref }}'
+      - name: Get branch name
         run: |
-          git show -s
-          echo "=-------------"
-          git show -s --pretty=%D HEAD
-          echo "=-------------"
-          git show -s --pretty=%D HEAD | tr -s ',' '\n' | sed 's/^ //' | grep -e 'origin/' | head -1 | sed 's/\origin\///g'
-          echo "=-------------"
-          
+          echo "BRANCH_NAME=$(git show -s --pretty=%D HEAD | tr -s ',' '\n' | sed 's/^ //' | grep -e 'origin/' | head -1 | sed 's/\origin\///g')" >> $GITHUB_ENV
         env:
           ENVIRONMENT_URL: ${{ github.event.deployment_status.environment_url }}
           URL2: ${{ github.event.deployment_status.target_url }}
           ENV2: ${{ github.event.deployment_status.environment }}
           ENV3: ${{ github.event.deployment_status.deployment.ref }}
-      - name: Set branch name # this is workaround to get the branch name.
-        run: echo "CHECKLY_TEST_REPO_BRANCH=$(git show -s --pretty=%D HEAD | tr -s ',' '\n' | sed 's/^ //' | grep -e 'origin/' | head -1 | sed 's/\origin\///g')" >> $GITHUB_ENV 
       - name: Set BASE_URL for production
         if: ${{ github.event.deployment_status.environment == 'Production' }}
         run: echo "BASE_URL=https://www.sunnybe.online" >> $GITHUB_ENV
       - name: Set BASE_URL for preview
         if: ${{ github.event.deployment_status.environment == 'Preview' }}
-        # run: echo "BASE_URL=https://ems-t3-stack-git-${{ env.BRANCH_NAME }}-biki-clouds-projects.vercel.app" >> $GITHUB_ENV
         run: |
-          echo "BASE_URL=${{ github.event.deployment_status.environment_url }}" >> $GITHUB_ENV
-          echo ${{ env.CHECKLY_TEST_REPO_BRANCH }}
+          echo "BASE_URL=https://ems-t3-stack-git-${{ env.BRANCH_NAME }}-biki-clouds-projects.vercel.app" >> $GITHUB_ENV
+          # echo "BASE_URL=${{ github.event.deployment_status.environment_url }}" >> $GITHUB_ENV
+          # echo ${{ env.CHECKLY_TEST_REPO_BRANCH }}
+      - name: Install dependencies
+        run: npm ci && npx playwright install --with-deps
       - name: Run tests
         run: npx playwright test
         env:
