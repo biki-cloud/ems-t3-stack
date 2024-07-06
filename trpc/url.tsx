@@ -28,6 +28,6 @@ export function getBaseUrl() {
     // ローカルの場合は、ローカルのURLを返す
     url = "http://localhost:3000";
   }
-  // console.log("selected url: " + url);
+  console.log("selected url: " + url);
   return url;
 }
