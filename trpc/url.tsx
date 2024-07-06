@@ -17,7 +17,7 @@ export function getBaseUrl() {
   );
   let url = "";
   if (process.env.NEXT_PUBLIC_VERCEL_ENV === "preview") {
-    url = `https://${NEXT_PUBLIC_VERCEL_BRANCH_URL}`;
+    url = `https://${process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL}`;
     // url = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
   } else if (process.env.NEXT_PUBLIC_VERCEL_ENV === "production") {
     // 独自ドメイン
