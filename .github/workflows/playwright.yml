@@ -15,6 +15,7 @@ jobs:
       - name: echo environments
         run: |
           git show -s
+          git show -s --pretty=%D HEAD | tr -s ',' '\n' | sed 's/^ //'
           git show -s --pretty=%D HEAD | tr -s ',' '\n' | sed 's/^ //' | grep -e 'origin/' | head -1 | sed 's/\origin\///g'
           
         env:
