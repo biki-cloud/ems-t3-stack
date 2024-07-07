@@ -41,10 +41,6 @@ see http://localhost:3000
 $ npm run e2e-test
 ```
 
-## Documents
-
-[Documents](./docs/README.md)
-
 ## Technical Stack
 
 ### Architecture
@@ -80,3 +76,53 @@ $ npm run e2e-test
 ### E2E
 
 <a href="https://playwright.dev/" target="_blank"><img src="https://img.shields.io/badge/Playwright-45ba4b?style=for-the-badge&logo=Playwright&logoColor=white"></a>
+
+## System Diagram
+
+![](./docs/system-diagram.drawio.svg)
+
+## イベントフロー
+
+```mermaid
+sequenceDiagram
+    participant organizer as イベント主催者(organizer)
+    participant service as イベントマッチングサービス
+    participant vendor as イベント出店者(vendor)
+    participant customer as イベント参加者(customer)
+
+    organizer->>service: イベント作成
+
+    vendor->>service: イベントへ参加リクエスト送信
+
+    organizer->>service: イベント出店者からの参加リクエストを承認/拒否
+
+    customer->>service: イベント参照
+```
+
+## System Flow
+
+```mermaid
+sequenceDiagram
+    actor user as user
+    participant front as front_page<br>(app/xxx/page.tsx)
+    participant component as component<br>(components/xxx/xxx.tsx)
+    participant backend as trpc backend api<br>(trpc/server/routers/xxx.ts)
+    participant db as db
+
+    user->>front: web access
+    front->>component: create component
+    component->>backend: call trpc api
+    backend->>db: get info / insert info
+    db->>backend: return db result
+    backend->>component: return api result
+    component->>front: return component
+    front->>user: return web page
+```
+
+## ER Diagram
+
+[ER diagram](./ER-diagram.md)
+
+## Branch Stragegy
+
+![](./branch-strategy.drawio.svg)
