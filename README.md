@@ -119,10 +119,32 @@ sequenceDiagram
     front->>user: return web page
 ```
 
-## ER Diagram
+## Development Flow
 
-[ER diagram](./ER-diagram.md)
+```mermaid
+sequenceDiagram
+    actor developer as developer
+    participant localProject as Local project
+    participant localHost as http://localhost:3000
+    participant Github as Github
+    actor reviewer as Pull request reviewer
+
+    developer->>localProject: server start command<br>$ npm run dev
+    localProject->>localHost: start server
+    developer->>localHost: check site
+    developer->>developer: code change
+    developer->>localHost: check site
+    developer->>Github: create Pull Request
+    reviewer->>Github: review Pull Request
+    developer->>localProject: fix review info
+    developer->>Github: fixed code push
+    reviewer->>Github: OK! review done. <br>Pull Request merge to main branch or other dev branch
+```
 
 ## Branch Stragegy
 
 ![](./docs/branch-strategy.drawio.svg)
+
+## ER Diagram
+
+[ER diagram](./ER-diagram.md)
