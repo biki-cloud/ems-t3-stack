@@ -125,4 +125,4 @@ sequenceDiagram
 
 ## Branch Stragegy
 
-![](./branch-strategy.drawio.svg)
+![](./docs/branch-strategy.drawio.svg)
