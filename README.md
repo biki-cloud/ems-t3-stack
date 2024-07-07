@@ -132,7 +132,7 @@ sequenceDiagram
     developer->>localProject: server start command<br>$ npm run dev
     localProject->>localHost: start server
     developer->>localHost: check site
-    developer->>developer: code change
+    developer->>localProject: code change
     developer->>localHost: check site
     developer->>Github: create Pull Request
     reviewer->>Github: review Pull Request
